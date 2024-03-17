@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "project_backroom:block/level_0_yellow_carpet"
+  }
+}

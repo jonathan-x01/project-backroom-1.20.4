@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "project-backroom",
+	"version": "${version}",
+	"name": "Project Backroom",
+	"description": "To clip or to not to clip, that's question when you installed this mod.",
+	"authors": [
+		"Jonathan X"
+	],
+	"contact": {
+		"homepage": "https://www.youtube.com/channel/UCuf4cQ7-dPuy3-4XrU1B1aw",
+		"sources": "https://github.com/FabricMC/fabric-example-mod",
+		"email": "business@jonathanuniverse.com"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/project-backroom/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"projectbackroom.jonathanx.ProjectBackroom"
+		],
+		"client": [
+			"projectbackroom.jonathanx.ProjectBackroomClient"
+		],
+		"fabric-datagen": [
+			"projectbackroom.jonathanx.ProjectBackroomDataGenerator"
+		]
+	},
+	"mixins": [
+		"project-backroom.mixins.json",
+		{
+			"config": "project-backroom.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
