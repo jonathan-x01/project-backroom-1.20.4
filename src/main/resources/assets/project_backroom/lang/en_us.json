@@ -1,9 +1,27 @@
 {
+  "itemgroup.project_backroom.backroom_blocks": "Backroom Blocks",
+  "itemgroup.project_backroom.backroom_items": "Backroom Items",
+
   "block.project_backroom.level_0_wallpaper": "Level 0 Wallpaper",
   "block.project_backroom.level_0_yellow_carpet": "Level 0 Yellow Carpet",
   "block.project_backroom.level_0_dropceiling": "Level 0 Dropceiling",
-  "block.project_backroom.level_0_led_dropceiling": "Level 0 LED Dropceiling",
+  "block.project_backroom.level_0_fluorescent_dropceiling": "Level 0 Fluorescent Dropceiling",
+
+  "block.project_backroom.pipes_1": "Straight Pipes",
+  "block.project_backroom.pipes_2": "Straight Pipes (2 Layers)",
+  "block.project_backroom.pipes_3": "Straight Pipes (2 Layers | Vertical L)",
+  "block.project_backroom.pipes_4": "Straight Pipes (2 Layers | Horizontal L)",
+  "block.project_backroom.large_pipe_1": "Large Wall Pipe",
+  "block.project_backroom.large_pipe_2": "Large Wall Pipe (Wall Connector)",
+
+  "block.project_backroom.broken_bricks_1": "Broken Bricks (Variety 1)",
+
+  "block.project_backroom.white_bricks": "White Bricks",
+  "block.project_backroom.corrupted_block": "Corrupted Block",
 
   "sounds.project_backroom.soggy_steps": "Soggy Steps",
-  "sounds.project_backroom.buzzing_lights": "Buzzing Lights"
+  "sounds.project_backroom.buzzing_lights": "Buzzing Lights",
+
+  "item.project_backroom.original_almond_water": "Original Almond Water",
+  "item.project_backroom.liquid_pain": "Liquid Pain"
 }

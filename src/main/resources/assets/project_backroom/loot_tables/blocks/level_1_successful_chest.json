@@ -8,11 +8,6 @@
           "type": "minecraft:item",
           "name": "project_backroom:level_0_wallpaper"
         }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
       ]
     }
   ]

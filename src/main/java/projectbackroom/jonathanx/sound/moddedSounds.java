@@ -9,6 +9,7 @@ import projectbackroom.jonathanx.ProjectBackroom;
 
 public class moddedSounds {
     public static final SoundEvent SOGGY_STEPS = registerSound("soggy_steps");
+    public static final SoundEvent BUZZING_LIGHTS = registerSound("buzzing_lights");
 
     public static SoundEvent registerSound(String name){
         Identifier ID = new Identifier(ProjectBackroom.MOD_ID,name);

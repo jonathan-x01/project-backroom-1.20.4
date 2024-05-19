@@ -13,6 +13,8 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.blocks.moddedBlocks;
+import projectbackroom.jonathanx.items.moddedItems;
+import projectbackroom.jonathanx.potions.moddedPotions;
 import projectbackroom.jonathanx.sound.moddedSounds;
 
 public class ProjectBackroom implements ModInitializer {
@@ -29,5 +31,6 @@ public class ProjectBackroom implements ModInitializer {
 
 		moddedBlocks.registerModdedBlocks();
 		moddedSounds.registerModdedSounds();
+		moddedItems.registerModdedItems();
 	}
 }

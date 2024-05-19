@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "project_backroom:block/large_pipe_2", "y": 180},
+    "facing=east": { "model": "project_backroom:block/large_pipe_2", "y":  90},
+    "facing=south": { "model": "project_backroom:block/large_pipe_2", "y": 180},
+    "facing=west": { "model": "project_backroom:block/large_pipe_2", "y":  90}
+  }
+}
