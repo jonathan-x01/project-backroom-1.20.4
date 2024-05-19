@@ -35,13 +35,14 @@ public class moddedBlocks {
     );
 
     // Level 2 Blocks
-    public static final Block PIPES_1 = registerBlock("pipes_1", new pipes(AbstractBlock.Settings.create()));
-    public static final Block PIPES_2 = registerBlock("pipes_2", new pipes(AbstractBlock.Settings.create()));
-    public static final Block PIPES_3 = registerBlock("pipes_3", new pipes(AbstractBlock.Settings.create()));
-    public static final Block PIPES_4 = registerBlock("pipes_4", new pipes(AbstractBlock.Settings.create()));
-    public static final Block LARGE_PIPE_1 = registerBlock("large_pipe_1", new pipes(AbstractBlock.Settings.create()));
-    public static final Block LARGE_PIPE_2 = registerBlock("large_pipe_2", new pipes(AbstractBlock.Settings.create()));
-    public static final Block BROKEN_BRICKS_1 = registerBlock("broken_bricks_1", new Block(FabricBlockSettings.create()));
+    public static final Block PIPES_1 = registerBlock("pipes_1", new pipes(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block PIPES_2 = registerBlock("pipes_2", new pipes(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block PIPES_3 = registerBlock("pipes_3", new pipes(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block PIPES_4 = registerBlock("pipes_4", new pipes(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block LARGE_PIPE_1 = registerBlock("large_pipe_1", new pipes(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block LARGE_PIPE_2 = registerBlock("large_pipe_2", new pipes(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block LARGE_PIPE_3 = registerBlock("large_pipe_3", new pipes(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block BROKEN_BRICKS_1 = registerBlock("broken_bricks_1", new Block(FabricBlockSettings.create().nonOpaque()));
 
     // Universal Blocks
     public static final Block WHITE_BRICKS = registerBlock("white_bricks", new Block(FabricBlockSettings.create()));
@@ -62,6 +63,7 @@ public class moddedBlocks {
                 entries.add(PIPES_4);
                 entries.add(LARGE_PIPE_1);
                 entries.add(LARGE_PIPE_2);
+                entries.add(LARGE_PIPE_3);
                 entries.add(BROKEN_BRICKS_1);
             }))
             .build();

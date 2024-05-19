@@ -1,7 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "project_backroom:block/pipes"
+		"2": "project_backroom:block/pipes",
+		"particle": "project_backroom:block/pipes"
 	},
 	"elements": [
 		{
@@ -96,6 +97,13 @@
 			}
 		}
 	],
+	"display": {
+		"gui": {
+			"rotation": [22.6, 131, 0],
+			"translation": [-1.5, 0, 0],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	},
 	"groups": [
 		{
 			"name": "Pipe",

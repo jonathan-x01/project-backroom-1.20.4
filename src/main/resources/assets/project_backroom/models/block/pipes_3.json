@@ -339,6 +339,13 @@
 			}
 		}
 	],
+	"display": {
+		"gui": {
+			"rotation": [26.5, 56, 0],
+			"translation": [0, 2.25, 0],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	},
 	"groups": [
 		{
 			"name": "Pipe",
