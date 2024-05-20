@@ -42,6 +42,8 @@ public class moddedBlocks {
     public static final Block LARGE_PIPE_1 = registerBlock("large_pipe_1", new pipes(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block LARGE_PIPE_2 = registerBlock("large_pipe_2", new pipes(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block LARGE_PIPE_3 = registerBlock("large_pipe_3", new pipes(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block LARGE_PIPE_4 = registerBlock("large_pipe_4", new pipes(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block LARGE_PIPE_5 = registerBlock("large_pipe_5", new pipes(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block BROKEN_BRICKS_1 = registerBlock("broken_bricks_1", new Block(FabricBlockSettings.create().nonOpaque()));
 
     // Universal Blocks
@@ -64,6 +66,8 @@ public class moddedBlocks {
                 entries.add(LARGE_PIPE_1);
                 entries.add(LARGE_PIPE_2);
                 entries.add(LARGE_PIPE_3);
+                entries.add(LARGE_PIPE_4);
+                entries.add(LARGE_PIPE_5);
                 entries.add(BROKEN_BRICKS_1);
             }))
             .build();

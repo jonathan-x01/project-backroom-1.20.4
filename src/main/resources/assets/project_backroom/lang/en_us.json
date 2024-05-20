@@ -13,7 +13,9 @@
   "block.project_backroom.pipes_4": "Straight Pipes (2 Layers | Horizontal L)",
   "block.project_backroom.large_pipe_1": "Large Wall Pipe (Wall Connector)",
   "block.project_backroom.large_pipe_2": "Large Wall Pipe",
-  "block.project_backroom.large_pipe_3": "Large Wall Pipe (Corner)",
+  "block.project_backroom.large_pipe_3": "Large Wall Pipe (Corner #1)",
+  "block.project_backroom.large_pipe_4": "Large Wall Pipe (Corner #2)",
+  "block.project_backroom.large_pipe_5": "Large Wall Pipe (Short Corner)",
 
   "block.project_backroom.broken_bricks_1": "Broken Bricks (Variety 1)",
 
