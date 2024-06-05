@@ -3,11 +3,10 @@ package projectbackroom.jonathanx.sound;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
 
-public class moddedSounds {
+public class ModdedSounds {
     public static final SoundEvent SOGGY_STEPS = registerSound("soggy_steps");
     public static final SoundEvent BUZZING_LIGHTS = registerSound("buzzing_lights");
 

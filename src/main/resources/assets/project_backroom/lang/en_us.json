@@ -2,10 +2,10 @@
   "itemgroup.project_backroom.backroom_blocks": "Backroom Blocks",
   "itemgroup.project_backroom.backroom_items": "Backroom Items",
 
-  "block.project_backroom.level_0_wallpaper": "Level 0 Wallpaper",
-  "block.project_backroom.level_0_yellow_carpet": "Level 0 Yellow Carpet",
-  "block.project_backroom.level_0_dropceiling": "Level 0 Dropceiling",
-  "block.project_backroom.level_0_fluorescent_dropceiling": "Level 0 Fluorescent Dropceiling",
+  "block.project_backroom.level_0_wallpaper": "Wallpaper (Level 0)",
+  "block.project_backroom.level_0_yellow_carpet": "Yellow Carpet (Level 0)",
+  "block.project_backroom.level_0_dropceiling": "Dropceiling (Level 0)",
+  "block.project_backroom.level_0_fluorescent_dropceiling": "Fluorescent Dropceiling (Level 0)",
 
   "block.project_backroom.pipes_1": "Straight Pipes",
   "block.project_backroom.pipes_2": "Straight Pipes (2 Layers)",
@@ -13,11 +13,13 @@
   "block.project_backroom.pipes_4": "Straight Pipes (2 Layers | Horizontal L)",
   "block.project_backroom.large_pipe_1": "Large Wall Pipe (Wall Connector)",
   "block.project_backroom.large_pipe_2": "Large Wall Pipe",
-  "block.project_backroom.large_pipe_3": "Large Wall Pipe (Corner #1)",
-  "block.project_backroom.large_pipe_4": "Large Wall Pipe (Corner #2)",
-  "block.project_backroom.large_pipe_5": "Large Wall Pipe (Short Corner)",
+  "block.project_backroom.large_pipe_3": "Large Wall Pipe Corner",
+  "block.project_backroom.vertical_pipe": "Vertical Pipe",
+  "block.project_backroom.vertical_pipe_connected": "Vertical Pipe (Connected)",
 
-  "block.project_backroom.broken_bricks_1": "Broken Bricks (Variety 1)",
+  "block.project_backroom.broken_bricks": "Broken Bricks",
+
+  "block.project_backroom.wall_light": "Wall Light",
 
   "block.project_backroom.white_bricks": "White Bricks",
   "block.project_backroom.corrupted_block": "Corrupted Block",
@@ -26,5 +28,6 @@
   "sounds.project_backroom.buzzing_lights": "Buzzing Lights",
 
   "item.project_backroom.original_almond_water": "Original Almond Water",
-  "item.project_backroom.liquid_pain": "Liquid Pain"
+  "item.project_backroom.liquid_pain": "Liquid Pain",
+  "item.project_backroom.contaminated_water": "Contaminated Water"
 }

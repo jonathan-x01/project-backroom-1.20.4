@@ -1,8 +1,11 @@
 package projectbackroom.jonathanx.items;
 
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.GlassBottleItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.UseAction;
@@ -21,6 +24,7 @@ public class LiquidPain extends Item {
 
     @Override
     public UseAction getUseAction(ItemStack itemStack){
+
         return UseAction.DRINK;
     }
 }

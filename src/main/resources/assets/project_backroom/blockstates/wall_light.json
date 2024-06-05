@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "project_backroom:block/wall_light", "y": 90},
+    "facing=east": { "model": "project_backroom:block/wall_light", "y": 180},
+    "facing=south": { "model": "project_backroom:block/wall_light", "y": 270},
+    "facing=west": { "model": "project_backroom:block/wall_light"}
+  }
+}
