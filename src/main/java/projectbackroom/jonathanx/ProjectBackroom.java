@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.blocks.ModdedBlocks;
+import projectbackroom.jonathanx.entity.effect.ModdedStatusEffects;
 import projectbackroom.jonathanx.itemGroups.ModdedItemGroups;
 import projectbackroom.jonathanx.items.ModdedItems;
 import projectbackroom.jonathanx.particle.ModdedParticleTypes;
@@ -22,6 +23,7 @@ public class ProjectBackroom implements ModInitializer {
 		ModdedSounds.registerModdedSounds();
 		ModdedItems.registerModdedItems();
 		ModdedParticleTypes.registerParticles();
+		ModdedStatusEffects.registerModdedStatusEffects();
 
 		ModdedItemGroups.buildAll();
 	}

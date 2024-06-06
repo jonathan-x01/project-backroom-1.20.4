@@ -39,8 +39,8 @@ public class ModdedBlocks {
     public static final Block PIPES_2 = registerBlock("pipes_2", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block PIPES_3 = registerBlock("pipes_3", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block PIPES_4 = registerBlock("pipes_4", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block VERTICAL_PIPE = registerBlock("vertical_pipe", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block VERTICAL_PIPE_CONNECTED = registerBlock("vertical_pipe_connected", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block VERTICAL_PIPE = registerBlock("vertical_pipe", new VerticalPipe(AbstractBlock.Settings.create().nonOpaque()));
+    public static final Block VERTICAL_PIPE_CONNECTED = registerBlock("vertical_pipe_connected", new VerticalPipe(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block LARGE_PIPE_1 = registerBlock("large_pipe_1", new LargePipeBlock(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block LARGE_PIPE_2 = registerBlock("large_pipe_2", new LargePipeBlock(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block LARGE_PIPE_3 = registerBlock("large_pipe_3", new LargePipeBlock(AbstractBlock.Settings.create().nonOpaque()));
