@@ -1,6 +1,7 @@
 package projectbackroom.jonathanx.items;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -15,6 +16,13 @@ public class AlmondWaterItem extends Item {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (user.hasStatusEffect(ModdedStatusEffects.INSANITY)){
             user.removeStatusEffect(ModdedStatusEffects.INSANITY);
+        }
+
+        if (user instanceof PlayerEntity){
+            PlayerEntity entity = (PlayerEntity) user;
+            if (!entity.isCreative()){
+                stack.decrement(1);
+            }
         }
         return super.finishUsing(stack, world, user);
     }

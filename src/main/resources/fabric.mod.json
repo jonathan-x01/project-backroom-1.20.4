@@ -3,13 +3,13 @@
 	"id": "project-backroom",
 	"version": "${version}",
 	"name": "Project Backroom",
-	"description": "To clip or to not to clip, that's question when you installed this mod.",
+	"description": "To clip or to not to clip, that's the question when you installed this mod.",
 	"authors": [
 		"Jonathan X"
 	],
 	"contact": {
 		"homepage": "https://www.youtube.com/channel/UCuf4cQ7-dPuy3-4XrU1B1aw",
-		"sources": "https://github.com/FabricMC/fabric-example-mod",
+		"sources": "https://github.com/jonathan-x01/project-backroom-1.20.4",
 		"email": "business@jonathanuniverse.com"
 	},
 	"license": "CC0-1.0",
