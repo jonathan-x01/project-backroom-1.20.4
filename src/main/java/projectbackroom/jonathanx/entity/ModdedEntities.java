@@ -1,5 +1,6 @@
 package projectbackroom.jonathanx.entity;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
@@ -19,5 +20,6 @@ public class ModdedEntities {
 
     public static void registerModdedEntities(){
         ProjectBackroom.LOGGER.info("Registering modded entities");
+        FabricDefaultAttributeRegistry.register(ModdedEntities.FACELINGS, FacelingEntity.createFacelingAttribute());
     }
 }

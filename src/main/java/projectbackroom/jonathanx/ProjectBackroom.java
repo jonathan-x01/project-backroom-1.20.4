@@ -2,12 +2,10 @@ package projectbackroom.jonathanx;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.blocks.ModdedBlocks;
 import projectbackroom.jonathanx.entity.ModdedEntities;
-import projectbackroom.jonathanx.entity.custom.FacelingEntity;
 import projectbackroom.jonathanx.entity.effect.ModdedStatusEffects;
 import projectbackroom.jonathanx.itemGroups.ModdedItemGroups;
 import projectbackroom.jonathanx.items.ModdedItems;
@@ -28,8 +26,6 @@ public class ProjectBackroom implements ModInitializer {
 		ModdedParticleTypes.registerParticles();
 		ModdedStatusEffects.registerModdedStatusEffects();
 		ModdedEntities.registerModdedEntities();
-
-		FabricDefaultAttributeRegistry.register(ModdedEntities.FACELINGS, FacelingEntity.createFacelingAttribute());
 
 		ModdedItemGroups.buildAll();
 	}

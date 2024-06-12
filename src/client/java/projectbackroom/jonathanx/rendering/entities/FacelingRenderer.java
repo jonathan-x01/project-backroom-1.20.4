@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.entity.client;
+package projectbackroom.jonathanx.rendering.entities;
 
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -6,13 +6,15 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.rendering.entities.models.FacelingModel;
+import projectbackroom.jonathanx.ModModelLayers;
 import projectbackroom.jonathanx.entity.custom.FacelingEntity;
 
 public class FacelingRenderer extends MobEntityRenderer<FacelingEntity, FacelingModel<FacelingEntity>> {
     public static final Identifier TEXTURE = new Identifier(ProjectBackroom.MOD_ID,"textures/entity/faceling.png");
 
     public FacelingRenderer(EntityRendererFactory.Context context) {
-        super(context, new FacelingModel<>(context.getPart(ModModelLayers.FACELING)), 1f);
+        super(context, new FacelingModel<>(context.getPart(ModModelLayers.FACELING)), 0.5f);
     }
 
     @Override

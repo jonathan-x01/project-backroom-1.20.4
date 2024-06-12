@@ -1,5 +1,7 @@
 package projectbackroom.jonathanx.entity.custom;
 
+import net.minecraft.entity.AnimationState;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -8,17 +10,20 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.Angerable;
-import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import projectbackroom.jonathanx.ProjectBackroom;
 
 import java.util.Random;
 import java.util.UUID;
 
 public class FacelingEntity extends HostileEntity implements Angerable {
+
+    public static final AnimationState idleAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
 
     private static final TrackedData<String> TYPE = DataTracker.registerData(FacelingEntity.class, TrackedDataHandlerRegistry.STRING);
     private static final TrackedData<Boolean> PROVOKED = DataTracker.registerData(FacelingEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -29,12 +34,35 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         SCARED
     }
 
-    public static DefaultAttributeContainer.Builder createFacelingAttribute(){
+    private void setupAnimationStates(){
+        if (this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationState.start(this.age);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+    }
 
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.getWorld().isClient()){
+            setupAnimationStates();
+        }
+    }
+
+    public static DefaultAttributeContainer.Builder createFacelingAttribute(){
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH,30)
                 .add(EntityAttributes.GENERIC_MAX_ABSORPTION, 2)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,1);
+    }
+
+    @Override
+    protected void updateLimbs(float posDelta) {
+        float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
+        this.limbAnimator.updateLimbs(f, 0.2f);
     }
 
     @Override
