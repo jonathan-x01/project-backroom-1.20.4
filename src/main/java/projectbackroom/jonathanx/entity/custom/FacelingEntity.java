@@ -1,22 +1,23 @@
 package projectbackroom.jonathanx.entity.custom;
 
-import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.Angerable;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.ProjectBackroom;
 
+import java.util.EnumSet;
 import java.util.Random;
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     private static final TrackedData<String> TYPE = DataTracker.registerData(FacelingEntity.class, TrackedDataHandlerRegistry.STRING);
     private static final TrackedData<Boolean> PROVOKED = DataTracker.registerData(FacelingEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> IS_CHILD = DataTracker.registerData(FacelingEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
     public enum FacelingType {
         FRIENDLY,
         AGGRESSIVE,
@@ -56,7 +58,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH,30)
                 .add(EntityAttributes.GENERIC_MAX_ABSORPTION, 2)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,1);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.2);
     }
 
     @Override
@@ -69,9 +71,11 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     protected void initGoals() {
         GoalSelector goal = this.goalSelector;
         goal.add(0, new SwimGoal(this));
-        goal.add(1, new WanderAroundFarGoal(this,10));
-        goal.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 4f));
-        goal.add(3, new LookAroundGoal(this));
+        goal.add(1, new avoidPlayersWhenScaredGoal<>(this, PlayerEntity.class,6.0f, 1.0, 2.2));
+        goal.add(2, new attackPlayersGoal(this,1.5f));
+        goal.add(5, new WanderAroundFarGoal(this, 1.0f));
+        goal.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 4f));
+        goal.add(5, new LookAroundGoal(this));
     }
 
     public FacelingEntity(EntityType<? extends HostileEntity> entityType, World world) {
@@ -80,7 +84,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
 
     @Override
     public boolean canBeLeashedBy(PlayerEntity player) {
-        return super.canBeLeashedBy(player);
+        return getFacelingType().equals(FacelingType.FRIENDLY);
     }
 
     @Override
@@ -125,11 +129,110 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         return random.nextDouble() < 0.5f;
     }
 
+    public FacelingType getFacelingType(){
+        return FacelingType.valueOf(this.dataTracker.get(TYPE));
+    }
+
+    public void setFacelingType(String type){
+        this.dataTracker.set(TYPE, type);
+    }
+
+    public void setFacelingType(FacelingType type){
+        this.dataTracker.set(TYPE, String.valueOf(type));
+    }
+
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(TYPE, String.valueOf(getRandomType()));
         this.dataTracker.startTracking(PROVOKED,false);
         this.dataTracker.startTracking(IS_CHILD,randomIsChild());
+    }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        Entity entity = source.getAttacker();
+        if (getFacelingType().equals(FacelingType.FRIENDLY)){
+            setFacelingType(FacelingType.AGGRESSIVE);
+        } else if (getFacelingType().equals(FacelingType.SCARED)){
+            this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,30,3,false,false));
+        }
+        return super.damage(source, amount);
+    }
+
+    class avoidPlayersWhenScaredGoal<T extends LivingEntity>
+    extends FleeEntityGoal<T> {
+        private final FacelingEntity faceling;
+
+        public avoidPlayersWhenScaredGoal(FacelingEntity mob, Class<T> fleeFromType, float distance, double slowSpeed, double fastSpeed) {
+            super(mob, fleeFromType, distance, slowSpeed, fastSpeed);
+            this.faceling = mob;
+        }
+
+        @Override
+        public boolean canStart() {
+            if (super.canStart() && this.targetEntity instanceof PlayerEntity){
+                return faceling.getFacelingType().equals(FacelingType.SCARED);
+            }
+            return false;
+        }
+    }
+
+    class attackPlayersGoal
+        extends Goal
+    {
+        private final FacelingEntity faceling;
+        private final double speed;
+        private final double followRange;
+
+        public attackPlayersGoal(FacelingEntity faceling, double speed){
+            this.faceling = faceling;
+            this.speed = speed;
+            this.followRange = faceling.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE);
+            this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
+        }
+
+        @Override
+        public boolean canStart() {
+            return this.faceling.getFacelingType().equals(FacelingType.AGGRESSIVE);
+        }
+
+        @Override
+        public void start() {
+            PlayerEntity targetPlayer = this.faceling.getWorld().getClosestPlayer(faceling, this.followRange);
+            if (targetPlayer != null && !targetPlayer.isCreative()) {
+                this.faceling.getNavigation().startMovingTo(targetPlayer, this.speed);
+            }
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            PlayerEntity targetPlayer = this.faceling.getWorld().getClosestPlayer(this.faceling, this.followRange);
+            return targetPlayer != null && !targetPlayer.isCreative() && this.faceling.getFacelingType().equals(FacelingType.AGGRESSIVE) && this.faceling.squaredDistanceTo(targetPlayer) < this.followRange * this.followRange;
+        }
+
+        @Override
+        public void stop() {
+            this.faceling.getNavigation().stop();
+        }
+
+        @Override
+        public void tick() {
+            PlayerEntity targetPlayer = this.faceling.getWorld().getClosestPlayer(this.faceling, this.followRange);
+            if (targetPlayer != null) {
+                this.faceling.getLookControl().lookAt(targetPlayer, 30.0F, 30.0F);
+                double distanceToPlayer = this.faceling.squaredDistanceTo(targetPlayer);
+
+                // Check if the entity is close enough to attack
+                if (distanceToPlayer > this.faceling.getWidth() * this.faceling.getWidth() + 1) { // Ensure the entity gets really close
+                    this.faceling.getNavigation().startMovingTo(targetPlayer, this.speed);
+                } else {
+                    this.faceling.tryAttack(targetPlayer); // Attempt to attack
+                    this.faceling.getNavigation().stop();
+                }
+            } else {
+                this.faceling.getNavigation().stop();
+            }
+        }
     }
 }
