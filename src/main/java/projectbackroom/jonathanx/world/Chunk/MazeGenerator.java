@@ -3,6 +3,7 @@ package projectbackroom.jonathanx.world.Chunk;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ChunkRegion;
@@ -99,7 +100,7 @@ public class MazeGenerator extends ChunkGenerator {
 
     @Override
     public CompletableFuture<Chunk> populateNoise(Executor executor, Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
-        return null;
+        return CompletableFuture.completedFuture(chunk);
     }
 
     @Override
@@ -119,7 +120,7 @@ public class MazeGenerator extends ChunkGenerator {
 
     @Override
     public VerticalBlockSample getColumnSample(int x, int z, HeightLimitView world, NoiseConfig noiseConfig) {
-        return null;
+        return new VerticalBlockSample(world.getBottomY(),new BlockState[0]);
     }
 
     @Override
