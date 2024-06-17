@@ -1,6 +1,7 @@
-package projectbackroom.jonathanx.worldgen.chunkGenerators;
+package projectbackroom.jonathanx.world.Chunk;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -14,26 +15,46 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.Blender;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.noise.NoiseConfig;
+import projectbackroom.jonathanx.blocks.ModdedBlocks;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public class MazeGenerator extends ChunkGenerator {
-    private final Block floorBlock;
-    private final Block wallBlock;
+    public static final Codec<MazeGenerator> CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    BiomeSource.CODEC.fieldOf("biome_source").forGetter(MazeGenerator::getBiomeSource),
+                    Codec.INT.fieldOf("sea_level").forGetter(MazeGenerator::getSeaLevel),
+                    Codec.INT.fieldOf("world_height").forGetter(MazeGenerator::getWorldHeight)
+            ).apply(instance, MazeGenerator::new)
+    );
 
-    public MazeGenerator(BiomeSource biomeSource, Block floorBlock, Block wallBlock) {
+    private final Block floorBlock = ModdedBlocks.LEVEL_0_YELLOW_CARPET;
+    private final Block wallBlock = ModdedBlocks.LEVEL_0_WALLPAPER;
+    private final int seaLevel;
+    private final int worldHeight;
+
+    public MazeGenerator(BiomeSource biomeSource, int seaLevel, int worldHeight) {
         super(biomeSource);
-        this.floorBlock = floorBlock;
-        this.wallBlock = wallBlock;
+        this.seaLevel = seaLevel;
+        this.worldHeight = worldHeight;
+    }
+
+    public Block getFloorBlock(){
+        return floorBlock;
+    }
+
+    public Block getWallBlock(){
+        return wallBlock;
     }
 
     @Override
     protected Codec<? extends ChunkGenerator> getCodec() {
-        return null;
+        return CODEC;
     }
 
     @Override
@@ -73,7 +94,7 @@ public class MazeGenerator extends ChunkGenerator {
 
     @Override
     public int getWorldHeight() {
-        return 0;
+        return this.worldHeight;
     }
 
     @Override
@@ -83,7 +104,7 @@ public class MazeGenerator extends ChunkGenerator {
 
     @Override
     public int getSeaLevel() {
-        return 0;
+        return this.seaLevel;
     }
 
     @Override
