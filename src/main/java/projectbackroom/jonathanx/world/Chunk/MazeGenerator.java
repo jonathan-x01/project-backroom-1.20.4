@@ -20,8 +20,10 @@ import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import projectbackroom.jonathanx.blocks.ModdedBlocks;
+import projectbackroom.jonathanx.blocks.level0FluorescentDropceiling;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
@@ -30,19 +32,24 @@ public class MazeGenerator extends ChunkGenerator {
             instance.group(
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter(MazeGenerator::getBiomeSource),
                     Codec.INT.fieldOf("sea_level").forGetter(MazeGenerator::getSeaLevel),
-                    Codec.INT.fieldOf("world_height").forGetter(MazeGenerator::getWorldHeight)
+                    Codec.INT.fieldOf("world_height").forGetter(MazeGenerator::getWorldHeight),
+                    Codec.INT.fieldOf("light_dist").forGetter(MazeGenerator::getLightDist)
             ).apply(instance, MazeGenerator::new)
     );
 
     private final Block floorBlock = ModdedBlocks.LEVEL_0_YELLOW_CARPET;
     private final Block wallBlock = ModdedBlocks.LEVEL_0_WALLPAPER;
+    private  final Block ceilingBlock = ModdedBlocks.LEVEL_0_DROPCEILING;
+    private final Block ceilingLight = ModdedBlocks.LEVEL_0_LIGHT;
     private final int seaLevel;
     private final int worldHeight;
+    private final int lightDist;
 
-    public MazeGenerator(BiomeSource biomeSource, int seaLevel, int worldHeight) {
+    public MazeGenerator(BiomeSource biomeSource, int seaLevel, int worldHeight, int lightDist) {
         super(biomeSource);
         this.seaLevel = seaLevel;
         this.worldHeight = worldHeight;
+        this.lightDist = lightDist;
     }
 
     public Block getFloorBlock(){
@@ -51,6 +58,18 @@ public class MazeGenerator extends ChunkGenerator {
 
     public Block getWallBlock(){
         return wallBlock;
+    }
+
+    public Block getCeilingBlock(){
+        return  ceilingBlock;
+    }
+
+    public Block getCeilingLight(){
+        return ceilingLight;
+    }
+
+    public int getLightDist(){
+        return  lightDist;
     }
 
     @Override
@@ -63,26 +82,45 @@ public class MazeGenerator extends ChunkGenerator {
 
     }
 
+    public double getRandomPercentage(){
+        Random random = new Random();
+        return random.nextDouble();
+    }
+
     @Override
     public void buildSurface(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk) {
         ChunkPos chunkPos = chunk.getPos();
         BlockPos.Mutable mutable = new BlockPos.Mutable();
+
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 int worldX = chunkPos.getStartX() + x;
                 int worldZ = chunkPos.getStartZ() + z;
 
-                // Set floor block
-                for (int y = 0; y < 64; y++) {  // Example: floor up to height 64
+                // Create the floor
+                for (int y = 0; y < 1; y++) {
                     mutable.set(worldX, y, worldZ);
-                    chunk.setBlockState(mutable, this.floorBlock.getDefaultState(), false);
+                    chunk.setBlockState(mutable, getFloorBlock().getDefaultState(), false);
                 }
 
-                // Set wall block above the floor
-                for (int y = 64; y < 128; y++) {  // Example: wall from height 64 to 128
+                // Create the randomized wall
+                if (getRandomPercentage() < 0.15){
+                    for (int y = 1; y < 5; y++) {
+                        mutable.set(worldX, y, worldZ);
+                        chunk.setBlockState(mutable, getWallBlock().getDefaultState(), false);
+                    }
+                }
+
+                // Sets the ceiling
+                for (int y = 5; y < 6; y++){
                     mutable.set(worldX, y, worldZ);
-                    chunk.setBlockState(mutable, this.wallBlock.getDefaultState(), false);
+                    if (x % getLightDist() == 0 && z % getLightDist() == 0){
+                        BlockState state = getCeilingLight().getDefaultState().with(level0FluorescentDropceiling.LIGHTING, level0FluorescentDropceiling.getRandomLighting());
+                        chunk.setBlockState(mutable, state, false);
+                    } else {
+                        chunk.setBlockState(mutable, getCeilingBlock().getDefaultState(), false);
+                    }
                 }
             }
         }

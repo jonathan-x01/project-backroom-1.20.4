@@ -12,6 +12,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -154,6 +155,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         Entity entity = source.getAttacker();
         if (getFacelingType().equals(FacelingType.FRIENDLY)){
             setFacelingType(FacelingType.AGGRESSIVE);
+            this.getWorld().addParticle(ParticleTypes.ANGRY_VILLAGER,this.getX(),this.getY(),this.getZ(),1,1,1);
         } else if (getFacelingType().equals(FacelingType.SCARED)){
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,30,3,false,false));
         }
@@ -161,7 +163,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     }
 
     class avoidPlayersWhenScaredGoal<T extends LivingEntity>
-    extends FleeEntityGoal<T> {
+            extends FleeEntityGoal<T> {
         private final FacelingEntity faceling;
 
         public avoidPlayersWhenScaredGoal(FacelingEntity mob, Class<T> fleeFromType, float distance, double slowSpeed, double fastSpeed) {
@@ -179,7 +181,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     }
 
     class attackPlayersGoal
-        extends Goal
+            extends Goal
     {
         private final FacelingEntity faceling;
         private final double speed;

@@ -39,14 +39,21 @@ public class level0FluorescentDropceiling extends Block {
         setDefaultState(getDefaultState().with(BUZZING_VOLUME,1));
     }
 
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        super.onPlaced(world, pos, state, placer, itemStack);
+    public static int getRandomLighting(){
         /// Applies a random value to lighting
         // Creates a new random object for lighting
         Random randomLighting = new Random();
         // Sets the random range between min and max.
-        int nextLighting = randomLighting.nextInt((LIGHTING_MAX - LIGHTING_MIN) + 1) + LIGHTING_MIN;
+        return randomLighting.nextInt((LIGHTING_MAX - LIGHTING_MIN) + 1) + LIGHTING_MIN;
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack);
+
+        // This will get a random lighting value;
+        int nextLighting = getRandomLighting();
+
         // Applies the random value to the placed block's block state.
         world.setBlockState(pos, state.with(LIGHTING, nextLighting));
 

@@ -2,9 +2,9 @@
   "type": "minecraft:overworld",
   "generator": {
     "type": "project_backroom:maze_generator",
-    "custom_block": "minecraft:dirt",
     "sea_level": 0,
     "world_height": 384,
+    "light_dist": 4,
     "biome_source": {
       "type": "minecraft:fixed",
       "biome": "minecraft:plains"
