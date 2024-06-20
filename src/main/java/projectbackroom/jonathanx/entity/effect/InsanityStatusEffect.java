@@ -17,7 +17,7 @@ import projectbackroom.jonathanx.ProjectBackroom;
 import java.util.Random;
 
 public class InsanityStatusEffect extends StatusEffect {
-    protected InsanityStatusEffect() {
+    public InsanityStatusEffect() {
         super(StatusEffectCategory.HARMFUL, 0x192151);
     }
 

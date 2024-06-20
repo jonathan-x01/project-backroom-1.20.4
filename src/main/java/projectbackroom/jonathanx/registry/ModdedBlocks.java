@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.blocks;
+package projectbackroom.jonathanx.registry;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -12,12 +12,18 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.itemGroups.ModdedItemGroups;
-import projectbackroom.jonathanx.sound.ModdedSounds;
+import projectbackroom.jonathanx.blocks.*;
+import projectbackroom.jonathanx.blocks.level0Blocks.FluorescentDropceiling;
+import projectbackroom.jonathanx.blocks.level0Blocks.Wallpaper;
+import projectbackroom.jonathanx.blocks.level0Blocks.YellowCarpet;
+import projectbackroom.jonathanx.blocks.level2Blocks.LargePipeBlock;
+import projectbackroom.jonathanx.blocks.level2Blocks.PipeBlock;
+import projectbackroom.jonathanx.blocks.level2Blocks.VerticalPipe;
+import projectbackroom.jonathanx.blocks.level2Blocks.WallLightBlock;
 
 public class ModdedBlocks {
-    public static final Block LEVEL_0_WALLPAPER = registerBlock("level_0_wallpaper",new Block(FabricBlockSettings.create().strength(3)));
-    public static final Block LEVEL_0_YELLOW_CARPET = registerBlock("level_0_yellow_carpet",new level0YellowCarpet(AbstractBlock.Settings.create().strength(0.7f).sounds(
+    public static final Block LEVEL_0_WALLPAPER = registerBlock("level_0_wallpaper",new Wallpaper(AbstractBlock.Settings.create().strength(3)));
+    public static final Block LEVEL_0_YELLOW_CARPET = registerBlock("level_0_yellow_carpet",new YellowCarpet(AbstractBlock.Settings.create().strength(0.7f).sounds(
             new BlockSoundGroup(
                     1f,
                     1f,
@@ -29,8 +35,9 @@ public class ModdedBlocks {
             )
     )));
     public static final Block LEVEL_0_DROPCEILING = registerBlock("level_0_dropceiling", new Block(FabricBlockSettings.create()));
-    public static final Block LEVEL_0_LIGHT = registerBlock("level_0_fluorescent_dropceiling", new level0FluorescentDropceiling(AbstractBlock.Settings.create()
-            .luminance((value) -> value.get(level0FluorescentDropceiling.LIGHTING)))
+    public static final Block LEVEL_0_LIGHT = registerBlock("level_0_fluorescent_dropceiling", new FluorescentDropceiling(AbstractBlock.Settings.create()
+            .sounds(BlockSoundGroup.GLASS)
+            .luminance((value) -> value.get(FluorescentDropceiling.LIGHTING)))
     );
 
     // Level 2 Blocks
@@ -44,24 +51,25 @@ public class ModdedBlocks {
     public static final Block LARGE_PIPE_1 = registerBlock("large_pipe_1", new LargePipeBlock(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block LARGE_PIPE_2 = registerBlock("large_pipe_2", new LargePipeBlock(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block LARGE_PIPE_3 = registerBlock("large_pipe_3", new LargePipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block WALL_LIGHT = registerBlock("wall_light", new WallLightBlock(AbstractBlock.Settings.create().nonOpaque().luminance(state -> 14).noCollision()));
+    public static final Block WALL_LIGHT = registerBlock("wall_light", new WallLightBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.GLASS).nonOpaque().luminance(state -> 14).noCollision()));
     // Universal Blocks
     public static final Block BROKEN_BRICKS = registerBlock("broken_bricks", new BrokenBricksBlock(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block WHITE_BRICKS = registerBlock("white_bricks", new Block(FabricBlockSettings.create()));
-    public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new Block(FabricBlockSettings.create().collidable(false)));
+    //public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new Block(FabricBlockSettings.create().collidable(false)));
+    public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new CorruptedBlock(AbstractBlock.Settings.create().noCollision().strength(-1.0f, 3600000.8F).dropsNothing()));
 
     public static Block registerBlock(String name, Block block){
         registerBlockItem(name,block);
-        return Registry.register(Registries.BLOCK, new Identifier(ProjectBackroom.MOD_ID,name),block);
+        return Registry.register(Registries.BLOCK, ProjectBackroom.id(name),block);
     }
 
     public static Item registerBlockItem(String name, Block block){
-        Item ITEM = Registry.register(Registries.ITEM, new Identifier(ProjectBackroom.MOD_ID,name), new BlockItem(block,new FabricItemSettings()));
+        Item ITEM = Registry.register(Registries.ITEM, ProjectBackroom.id(name), new BlockItem(block,new FabricItemSettings()));
         return ITEM;
     }
 
     public static void registerModdedBlocks(){
-        ProjectBackroom.LOGGER.info("Registering blocks for " + ProjectBackroom.MOD_ID);
+        ProjectBackroom.displayRegisteredSectors(ModdedBlocks.class);
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
             content.addBefore(Items.BRICKS,WHITE_BRICKS);
         });

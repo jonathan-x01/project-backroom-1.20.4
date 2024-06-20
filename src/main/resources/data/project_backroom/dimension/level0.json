@@ -3,11 +3,12 @@
   "generator": {
     "type": "project_backroom:maze_generator",
     "sea_level": 0,
+    "disable_mob_generation": true,
     "world_height": 384,
     "light_dist": 4,
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "minecraft:plains"
+      "biome": "project_backroom:level0"
     }
   }
 }

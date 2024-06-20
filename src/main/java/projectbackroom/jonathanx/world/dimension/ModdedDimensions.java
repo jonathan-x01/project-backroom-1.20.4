@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.world.Dimension;
+package projectbackroom.jonathanx.world.dimension;
 
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;

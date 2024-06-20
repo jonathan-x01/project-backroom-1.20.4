@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import projectbackroom.jonathanx.entity.effect.ModdedStatusEffects;
+import projectbackroom.jonathanx.registry.ModdedStatusEffects;
 
 public class AlmondWaterItem extends Item {
     public AlmondWaterItem(Settings settings) {

@@ -20,5 +20,11 @@
     "sounds": [
       "project_backroom:buzzing_lights"
     ]
+  },
+  "level0_ambience": {
+    "subtitle": "sounds.project_backroom.level0_ambience",
+    "sounds": [
+      "project_backrooms:level0_ambience_1"
+    ]
   }
 }

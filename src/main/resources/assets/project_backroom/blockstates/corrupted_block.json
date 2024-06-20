@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "minecraft:block/end_portal" }
+    "": { "model": "project_backroom:block/corrupted_block" }
   }
 }

@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.blocks;
+package projectbackroom.jonathanx.blocks.level0Blocks;
 
 
 import net.minecraft.block.Block;
@@ -12,12 +12,11 @@ import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.sound.ModdedSounds;
+import projectbackroom.jonathanx.registry.ModdedSounds;
 
 import java.util.Random;
 
-public class level0FluorescentDropceiling extends Block {
+public class FluorescentDropceiling extends Level0Block {
     public static int LIGHTING_MIN = 5;
     public static int LIGHTING_MAX = 15;
     public static int BUZZING_VOLUME_MIN = 1;
@@ -32,9 +31,8 @@ public class level0FluorescentDropceiling extends Block {
         builder.add(LIGHTING).add(BUZZING_VOLUME);
     }
 
-    public level0FluorescentDropceiling(Settings settings) {
+    public FluorescentDropceiling(Settings settings) {
         super(settings);
-        ProjectBackroom.LOGGER.info("LED Dropceiling init");
         setDefaultState(getDefaultState().with(LIGHTING, 5));
         setDefaultState(getDefaultState().with(BUZZING_VOLUME,1));
     }

@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.blocks;
+package projectbackroom.jonathanx.blocks.level2Blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

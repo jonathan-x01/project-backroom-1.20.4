@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.entity.effect;
+package projectbackroom.jonathanx.registry;
 
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -6,6 +6,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.entity.effect.InsanityStatusEffect;
 
 public class ModdedStatusEffects {
     public static final StatusEffect INSANITY = register("insanity", new InsanityStatusEffect());
@@ -15,6 +16,6 @@ public class ModdedStatusEffects {
     }
 
     public static void registerModdedStatusEffects(){
-        ProjectBackroom.LOGGER.info("Registered Status Effects");
+        ProjectBackroom.displayRegisteredSectors(ModdedStatusEffects.class);
     }
 }

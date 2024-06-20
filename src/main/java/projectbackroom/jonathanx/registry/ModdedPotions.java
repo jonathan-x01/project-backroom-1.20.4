@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.potions;
+package projectbackroom.jonathanx.registry;
 
 import net.minecraft.potion.Potion;
 import net.minecraft.registry.Registries;
@@ -15,6 +15,6 @@ public class ModdedPotions {
 
     public static void registerModdedPotions(){
         //ORIGINAL_ALMOND_WATER = registerPotion("original_almond_water",new Potion());
-        ProjectBackroom.LOGGER.info("Registered modded potions | " + ProjectBackroom.MOD_ID);
+        ProjectBackroom.displayRegisteredSectors(ModdedPotions.class);
     }
 }

@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.entity;
+package projectbackroom.jonathanx.registry;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -15,15 +15,15 @@ import projectbackroom.jonathanx.entity.custom.SmilerEntity;
 public class ModdedEntities {
 
     public static EntityType<FacelingEntity> FACELINGS = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(ProjectBackroom.MOD_ID, "faceling"),
+            ProjectBackroom.id("faceling"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, FacelingEntity::new).dimensions(EntityDimensions.fixed(1f,2f)).build());
 
     public static EntityType<SmilerEntity> SMILERS = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(ProjectBackroom.MOD_ID,"smilers"),
+            ProjectBackroom.id("smilers"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SmilerEntity::new).dimensions(EntityDimensions.fixed(1f,2f)).build());
 
     public static void registerModdedEntities(){
-        ProjectBackroom.LOGGER.info("Registering modded entities");
+        ProjectBackroom.displayRegisteredSectors(ModdedEntities.class);
         FabricDefaultAttributeRegistry.register(ModdedEntities.FACELINGS, FacelingEntity.createFacelingAttribute());
         FabricDefaultAttributeRegistry.register(ModdedEntities.SMILERS, SmilerEntity.createAttributes());
     }
