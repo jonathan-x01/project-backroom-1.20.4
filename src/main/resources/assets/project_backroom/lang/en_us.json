@@ -27,10 +27,13 @@
 
   "sounds.project_backroom.soggy_steps": "Soggy Steps",
   "sounds.project_backroom.buzzing_lights": "Buzzing Lights",
+  "sounds.project_backroom.level0_ambience": "Level 0 Ambience",
 
   "item.project_backroom.original_almond_water": "Original Almond Water",
   "item.project_backroom.liquid_pain": "Liquid Pain",
   "item.project_backroom.contaminated_bottle_water": "Contaminated Bottle Water",
 
-  "effect.project_backroom.insanity": "Insanity"
+  "effect.project_backroom.insanity": "Insanity",
+
+  "biome.project_backroom.level0": "Level 0"
 }

@@ -4,7 +4,7 @@
     "sounds": [
       "project_backroom:soggy_steps_0",
       "project_backroom:soggy_steps_1",
-      "project_backroom:soggy_Steps_2",
+      "project_backroom:soggy_steps_2",
       "project_backroom:soggy_steps_3",
       "project_backroom:soggy_steps_4",
       "project_backroom:soggy_steps_5",
@@ -24,7 +24,10 @@
   "level0_ambience": {
     "subtitle": "sounds.project_backroom.level0_ambience",
     "sounds": [
-      "project_backrooms:level0_ambience_1"
+      {
+        "name":"project_backroom:level0_ambience",
+        "stream": true
+      }
     ]
   }
 }
