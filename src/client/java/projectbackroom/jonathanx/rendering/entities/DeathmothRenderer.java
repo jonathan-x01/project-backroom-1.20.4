@@ -8,7 +8,6 @@ import projectbackroom.jonathanx.ModModelLayers;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.entity.custom.DeathmothEntity;
 import projectbackroom.jonathanx.rendering.entities.models.DeathmothModel;
-import projectbackroom.jonathanx.rendering.entities.models.HoundModel;
 
 public class DeathmothRenderer extends MobEntityRenderer<DeathmothEntity, DeathmothModel<DeathmothEntity>> {
     // 0 = male
@@ -28,7 +27,7 @@ public class DeathmothRenderer extends MobEntityRenderer<DeathmothEntity, Deathm
     protected void scale(DeathmothEntity entity, MatrixStack matrices, float amount) {
         float scale;
         if (gender == 0){
-            scale = 2.0f;
+            scale = 0.3f;
         } else {
             scale = 3.0f;
         }
