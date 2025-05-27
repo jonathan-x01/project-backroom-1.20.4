@@ -40,7 +40,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     private void setupAnimationStates(){
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 80;
-            this.idleAnimationState.start(this.age);
+            idleAnimationState.start(this.age);
         } else {
             --this.idleAnimationTimeout;
         }
@@ -54,7 +54,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         }
     }
 
-    public static DefaultAttributeContainer.Builder createFacelingAttribute(){
+    public static DefaultAttributeContainer.Builder createAttribute(){
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH,30)
                 .add(EntityAttributes.GENERIC_MAX_ABSORPTION, 2)
@@ -72,11 +72,15 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     protected void initGoals() {
         GoalSelector goal = this.goalSelector;
         goal.add(0, new SwimGoal(this));
-        goal.add(1, new avoidPlayersWhenScaredGoal<>(this, PlayerEntity.class,6.0f, 1.0, 2.2));
-        goal.add(2, new attackPlayersGoal(this,1.5f));
+        goal.add(1, new AvoidPlayersWhenScaredGoal<>(this, PlayerEntity.class, 6.0f, 1.0, 2.2));
         goal.add(5, new WanderAroundFarGoal(this, 1.0f));
-        goal.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 4f));
+        goal.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
         goal.add(5, new LookAroundGoal(this));
+        this.initCustomGoals();
+    }
+
+    protected void initCustomGoals(){
+        this.targetSelector.add(2, new AttackPlayersGoal(this, 1.5f));
     }
 
     public FacelingEntity(EntityType<? extends HostileEntity> entityType, World world) {
@@ -162,11 +166,11 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         return super.damage(source, amount);
     }
 
-    class avoidPlayersWhenScaredGoal<T extends LivingEntity>
+    static class AvoidPlayersWhenScaredGoal<T extends LivingEntity>
             extends FleeEntityGoal<T> {
         private final FacelingEntity faceling;
 
-        public avoidPlayersWhenScaredGoal(FacelingEntity mob, Class<T> fleeFromType, float distance, double slowSpeed, double fastSpeed) {
+        public AvoidPlayersWhenScaredGoal(FacelingEntity mob, Class<T> fleeFromType, float distance, double slowSpeed, double fastSpeed) {
             super(mob, fleeFromType, distance, slowSpeed, fastSpeed);
             this.faceling = mob;
         }
@@ -180,14 +184,14 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         }
     }
 
-    class attackPlayersGoal
+    static class AttackPlayersGoal
             extends Goal
     {
         private final FacelingEntity faceling;
         private final double speed;
         private final double followRange;
 
-        public attackPlayersGoal(FacelingEntity faceling, double speed){
+        public AttackPlayersGoal(FacelingEntity faceling, double speed){
             this.faceling = faceling;
             this.speed = speed;
             this.followRange = faceling.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE);

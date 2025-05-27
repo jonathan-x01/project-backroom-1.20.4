@@ -6,16 +6,20 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.blocks.entity.CorruptedBlockEntity;
 import projectbackroom.jonathanx.registry.ModdedBlocks;
 import projectbackroom.jonathanx.state.property.DestinationProperty;
 
@@ -41,9 +45,36 @@ public class CorruptedBlock extends Block implements BlockEntityProvider {
         }
     }
 
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        super.randomTick(state, world, pos, random);
+        ProjectBackroom.debug("Random Tick");
+
+        BlockEntity current = world.getBlockEntity(pos);
+        if (current instanceof CorruptedBlockEntity corruptedBlockEntity){
+            Identifier previousBlockKey = corruptedBlockEntity.getPreviousBlock();
+            if (previousBlockKey != null){
+                Block previousBlock = Registries.BLOCK.get(previousBlockKey);
+                world.setBlockState(pos, previousBlock.getDefaultState());
+            }
+        }
+    }
+
+    @Override
+    public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        super.scheduledTick(state, world, pos, random);
+        ProjectBackroom.debug("Schedule Tick");
+        randomTick(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+        return true;
+    }
+
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return null;
+        return new CorruptedBlockEntity(pos, state);
     }
 }

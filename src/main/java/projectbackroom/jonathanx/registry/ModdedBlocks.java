@@ -16,10 +16,7 @@ import projectbackroom.jonathanx.blocks.*;
 import projectbackroom.jonathanx.blocks.level0Blocks.FluorescentDropceiling;
 import projectbackroom.jonathanx.blocks.level0Blocks.Wallpaper;
 import projectbackroom.jonathanx.blocks.level0Blocks.YellowCarpet;
-import projectbackroom.jonathanx.blocks.level2Blocks.LargePipeBlock;
-import projectbackroom.jonathanx.blocks.level2Blocks.PipeBlock;
-import projectbackroom.jonathanx.blocks.level2Blocks.VerticalPipe;
-import projectbackroom.jonathanx.blocks.level2Blocks.WallLightBlock;
+import projectbackroom.jonathanx.blocks.level2Blocks.*;
 
 public class ModdedBlocks {
     public static final Block LEVEL_0_WALLPAPER = registerBlock("level_0_wallpaper",new Wallpaper(AbstractBlock.Settings.create().strength(3)));
@@ -56,8 +53,15 @@ public class ModdedBlocks {
     public static final Block BROKEN_BRICKS = registerBlock("broken_bricks", new BrokenBricksBlock(AbstractBlock.Settings.create().nonOpaque()));
     public static final Block WHITE_BRICKS = registerBlock("white_bricks", new Block(FabricBlockSettings.create()));
     //public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new Block(FabricBlockSettings.create().collidable(false)));
+    public static final Block BIOLOGICAL_PIPE = registerBlock("biological_pipe", new BiologicalPipeBlock(AbstractBlock.Settings.create().slipperiness(0.98f)));
     public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new CorruptedBlock(AbstractBlock.Settings.create().noCollision().strength(-1.0f, 3600000.8F).dropsNothing()));
 
+    /**
+     * Registers a block with the Project Backrooms mod.
+     * @param name The name of the block.
+     * @param block The properties of the block.
+     * @return The block registration.
+     */
     public static Block registerBlock(String name, Block block){
         registerBlockItem(name,block);
         return Registry.register(Registries.BLOCK, ProjectBackroom.id(name),block);
@@ -70,9 +74,9 @@ public class ModdedBlocks {
 
     public static void registerModdedBlocks(){
         ProjectBackroom.displayRegisteredSectors(ModdedBlocks.class);
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
+        /*ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
             content.addBefore(Items.BRICKS,WHITE_BRICKS);
-        });
+        });*/
         ModdedItemGroups.getItemGroup("backroom_blocks")
                 .entries(((displayContext, entries) -> {
                     entries.add(WHITE_BRICKS);
@@ -92,6 +96,7 @@ public class ModdedBlocks {
                     entries.add(VERTICAL_PIPE_CONNECTED);
                     entries.add(BROKEN_BRICKS);
                     entries.add(WALL_LIGHT);
+                    entries.add(BIOLOGICAL_PIPE);
                 }));
     }
 }

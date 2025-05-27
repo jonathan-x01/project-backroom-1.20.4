@@ -9,7 +9,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.entity.custom.DeathmothEntity;
 import projectbackroom.jonathanx.entity.custom.FacelingEntity;
+import projectbackroom.jonathanx.entity.custom.HoundEntity;
 import projectbackroom.jonathanx.entity.custom.SmilerEntity;
 
 public class ModdedEntities {
@@ -22,9 +24,21 @@ public class ModdedEntities {
             ProjectBackroom.id("smilers"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SmilerEntity::new).dimensions(EntityDimensions.fixed(1f,2f)).build());
 
+    public static EntityType<HoundEntity> HOUND = Registry.register(Registries.ENTITY_TYPE,
+            ProjectBackroom.id("hound"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, HoundEntity::new).dimensions(EntityDimensions.fixed(2f,1f)).build());
+
+    public static EntityType<DeathmothEntity> DEATHMOTH = Registry.register(Registries.ENTITY_TYPE,
+            ProjectBackroom.id("deathmoth"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, DeathmothEntity::new).dimensions(EntityDimensions.fixed(1f,2f)).build());
+
     public static void registerModdedEntities(){
         ProjectBackroom.displayRegisteredSectors(ModdedEntities.class);
-        FabricDefaultAttributeRegistry.register(ModdedEntities.FACELINGS, FacelingEntity.createFacelingAttribute());
+
+        FabricDefaultAttributeRegistry.register(ModdedEntities.FACELINGS, FacelingEntity.createAttribute());
+
         FabricDefaultAttributeRegistry.register(ModdedEntities.SMILERS, SmilerEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(ModdedEntities.HOUND, HoundEntity.createAttribute());
+        FabricDefaultAttributeRegistry.register(ModdedEntities.DEATHMOTH, DeathmothEntity.createHostileAttributes());
     }
 }

@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "project_backroom:maintenance_tunnels",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 683475532,
+    "spacing": 10,
+    "separation": 5
+  }
+}

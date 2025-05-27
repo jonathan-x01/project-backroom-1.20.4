@@ -27,14 +27,14 @@ import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public class MazeGenerator extends ChunkGenerator {
-    public static final Codec<MazeGenerator> CODEC = RecordCodecBuilder.create(instance ->
+public class PointMazeGenerator extends ChunkGenerator {
+    public static final Codec<PointMazeGenerator> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    BiomeSource.CODEC.fieldOf("biome_source").forGetter(MazeGenerator::getBiomeSource),
-                    Codec.INT.fieldOf("sea_level").forGetter(MazeGenerator::getSeaLevel),
-                    Codec.INT.fieldOf("world_height").forGetter(MazeGenerator::getWorldHeight),
-                    Codec.INT.fieldOf("light_dist").forGetter(MazeGenerator::getLightDist)
-            ).apply(instance, MazeGenerator::new)
+                    BiomeSource.CODEC.fieldOf("biome_source").forGetter(PointMazeGenerator::getBiomeSource),
+                    Codec.INT.fieldOf("sea_level").forGetter(PointMazeGenerator::getSeaLevel),
+                    Codec.INT.fieldOf("world_height").forGetter(PointMazeGenerator::getWorldHeight),
+                    Codec.INT.fieldOf("light_dist").forGetter(PointMazeGenerator::getLightDist)
+            ).apply(instance, PointMazeGenerator::new)
     );
 
     private final Block floorBlock = ModdedBlocks.LEVEL_0_YELLOW_CARPET;
@@ -46,7 +46,7 @@ public class MazeGenerator extends ChunkGenerator {
     private final int lightDist;
     private final int wallHeight = 5;
 
-    public MazeGenerator(BiomeSource biomeSource, int seaLevel, int worldHeight, int lightDist) {
+    public PointMazeGenerator(BiomeSource biomeSource, int seaLevel, int worldHeight, int lightDist) {
         super(biomeSource);
         this.seaLevel = seaLevel;
         this.worldHeight = worldHeight;
@@ -137,6 +137,11 @@ public class MazeGenerator extends ChunkGenerator {
     }
 
     @Override
+    public void populateEntities(ChunkRegion region) {
+
+    }
+
+    @Override
     public void buildSurface(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk) {
         ChunkPos chunkPos = chunk.getPos();
         BlockPos.Mutable mutable = new BlockPos.Mutable();
@@ -177,11 +182,6 @@ public class MazeGenerator extends ChunkGenerator {
                 }
             }
         }
-    }
-
-    @Override
-    public void populateEntities(ChunkRegion region) {
-
     }
 
     @Override

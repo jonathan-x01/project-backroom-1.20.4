@@ -2,36 +2,30 @@ package projectbackroom.jonathanx;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
-import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.entity.damage.DamageTypes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.EnderPearlItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.registry.*;
 import projectbackroom.jonathanx.registry.ModdedStatusEffects;
-import projectbackroom.jonathanx.world.chunk.MazeGenerator;
+import projectbackroom.jonathanx.world.chunk.InfiniteJigsaw;
+import projectbackroom.jonathanx.world.chunk.PointMazeGenerator;
 
 public class ProjectBackroom implements ModInitializer {
 	public static String MOD_ID = "project_backroom";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	private static void initChunkGeneration(){
-		Registry.register(Registries.CHUNK_GENERATOR, id("maze_generator"), MazeGenerator.CODEC);
+		Registry.register(Registries.CHUNK_GENERATOR, id("point_maze_generator"), PointMazeGenerator.CODEC);
+		Registry.register(Registries.CHUNK_GENERATOR, id("infinite_jigsaw"), InfiniteJigsaw.CODEC);
 	}
 
 	@Override
 	public void onInitialize() {
 		ModdedItemGroups.registerModdedItemGroups();
 
+		ModdedBlockEntities.initalize();
 		ModdedBlocks.registerModdedBlocks();
 		ModdedSounds.registerModdedSounds();
 		ModdedItems.registerModdedItems();
@@ -48,12 +42,20 @@ public class ProjectBackroom implements ModInitializer {
 		return new Identifier(MOD_ID, path);
 	}
 
-	public static void debug(String msg){
+	/**
+	 * Outputs a debug message to the Minecraft log for debugging purposes.
+	 * @param msg The message to include in the debug message.
+	 */
+	public static void debug(Object msg){
 		LOGGER.warn("{DEBUG | " + MOD_ID + "}");
 		LOGGER.info("Message : " + msg);
 		LOGGER.info("-- DEBUG END --");
 	}
 
+	/**
+	 * Displays a message to the Minecraft log to list sectors that was loaded from the mod.
+	 * @param c The class that has loaded.
+	 */
 	public static void displayRegisteredSectors(Class c){
 		LOGGER.info("{ LOADED | " + MOD_ID + " } " + c.getSimpleName());
 	}
