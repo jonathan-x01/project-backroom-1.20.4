@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.world.nodegen;
+package projectbackroom.jonathanx.world.component;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ChunkRegion;
@@ -6,7 +6,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.noise.NoiseConfig;
 
-public class NodeGen {
+public class ComponentGen {
     public static int SEED;
     private ChunkRegion region;
     private StructureAccessor structures;
@@ -14,7 +14,7 @@ public class NodeGen {
     private Chunk chunk;
     private BlockPos.Mutable mutable;
 
-    public NodeGen(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk){
+    public ComponentGen(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk){
         this.region = region;
         this.structures = structures;
         this.noiseConfig = noiseConfig;

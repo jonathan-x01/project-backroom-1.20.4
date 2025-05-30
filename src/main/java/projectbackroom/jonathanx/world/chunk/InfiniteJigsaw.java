@@ -4,14 +4,24 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.JigsawBlockEntity;
 import net.minecraft.block.entity.StructureBlockBlockEntity;
+import net.minecraft.block.enums.Orientation;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.structure.StructureTemplate;
 import net.minecraft.structure.StructureTemplateManager;
+import net.minecraft.structure.pool.EmptyPoolElement;
+import net.minecraft.structure.pool.StructurePool;
+import net.minecraft.structure.pool.StructurePoolElement;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
@@ -24,7 +34,7 @@ import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import projectbackroom.jonathanx.ProjectBackroom;
 
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
@@ -97,30 +107,183 @@ public class InfiniteJigsaw extends ChunkGenerator {
         }
     }
 
+    private final Map<ChunkPos, List<BlockPos>> pendingJigsaws = new HashMap<>();
+
+    private void queueDeferredJigsaw(ChunkPos chunk, BlockPos jigsawPos) {
+        pendingJigsaws.computeIfAbsent(chunk, k -> new ArrayList<>()).add(jigsawPos);
+    }
+
+    private List<BlockPos> findJigsawBlocksInArea(StructureWorldAccess world, BlockPos origin, StructureTemplate template) {
+        List<BlockPos> jigsawBlocks = new ArrayList<>();
+        Vec3i size = template.getSize();
+        BlockPos end = origin.add(size.getX(), size.getY(), size.getZ());
+
+        Box box = new Box(
+                new Vec3d(origin.getX(), origin.getY(), origin.getZ()),
+                new Vec3d(end.getX(), end.getY(), end.getZ())
+        );
+
+        BlockPos.stream(box).forEach(pos -> {
+            if (world.getBlockState(pos).getBlock() instanceof JigsawBlock) {
+                jigsawBlocks.add(pos.toImmutable());
+            }
+        });
+
+        return jigsawBlocks;
+    }
+
+    private void generateConnectedStructure(StructureWorldAccess world, StructureTemplateManager templates, BlockPos jigsawPos) {
+        /*String msg = "Generate connected structure at: " + jigsawPos;
+        System.out.println(msg);
+        ProjectBackroom.debug(msg);
+        // TODO: Implement based on jigsaw block NBT
+        BlockState state = world.getBlockState(jigsawPos);
+        if (!(state.getBlock() instanceof JigsawBlock)) return;
+
+        BlockEntity blockEntity = world.getBlockEntity(jigsawPos);
+        if (!(blockEntity instanceof JigsawBlockEntity jigsaw)) return;
+
+        Identifier poolId = ((JigsawBlockEntity) blockEntity).getPool().getRegistry();
+        Identifier targetName = ((JigsawBlockEntity) blockEntity).getTarget();
+
+        Registry<StructurePool> poolRegistry = world.getRegistryManager().get(RegistryKeys.TEMPLATE_POOL);
+        StructurePool pool = poolRegistry.get(poolId);
+        if (pool == null) return;
+
+        // Pick a random element from the pool
+        StructurePoolElement element = pool.getRandomElement(world.getRandom());
+        if (element == null || element == EmptyPoolElement.INSTANCE) return;
+
+        Orientation orientation = state.get(JigsawBlock.ORIENTATION);
+        BlockRotation rotation = switch (orientation) {
+            case NORTH_UP -> BlockRotation.NONE;
+            case EAST_UP -> BlockRotation.COUNTERCLOCKWISE_90;
+            case SOUTH_UP -> BlockRotation.CLOCKWISE_180;
+            case WEST_UP -> BlockRotation.CLOCKWISE_90;
+            default -> BlockRotation.NONE;
+        };
+
+        // Calculate rotation and placement
+        BlockRotation rotation = BlockRotation.NONE;
+        BlockPos offset = jigsawPos.subtract(BlockPos.ORIGIN.offset(orientation));
+
+        // Align with jigsaw connection
+        Direction facing = JigsawBlock.getFacing(state);
+        BlockPos connectionOffset = BlockPos.ORIGIN.offset(facing);
+
+        // Calculate final position to place the structure
+        BlockPos placementPos = jigsawPos.subtract(connectionOffset);
+
+        // Set bounding box for safety (entire chunk or just structure size)
+        BlockBox box = BlockBox.create(placementPos, placementPos.add(offset));
+
+        // Place the element
+        element.generate(
+                templates,
+                world,
+                null, // structureAccessor, can be null
+                this,
+                placementPos,
+                placementPos,
+                rotation,
+                box,
+                world.getRandom(),
+                false
+        );*/
+    }
+
     @Override
     public void generateFeatures(StructureWorldAccess world, Chunk chunk, StructureAccessor structureAccessor) {
-        MinecraftServer mcWorld = world.getServer();
-        if (mcWorld != null){
-            this.setStructureManager(mcWorld.getStructureTemplateManager());
-        } else {
-            throw new IllegalStateException("mcWorld not set!");
+        ChunkPos chunkPos = chunk.getPos();
+        BlockPos origin = chunkPos.getStartPos().add(8, 50, 8); // center of chunk, y = 50
+
+        Identifier startStructure = new Identifier(this.targetPool);
+
+        StructureTemplateManager templateManager = Objects.requireNonNull(world.getServer()).getStructureTemplateManager();
+
+        /*templateManager.streamTemplates()
+                .filter(template -> "project_backroom".equals(template.getNamespace()))
+                .forEach(template -> {
+            ProjectBackroom.debug("Loaded template: " + template.getPath());
+        });*/
+
+        Optional<StructureTemplate> optional = templateManager.getTemplate(startStructure);
+        if (optional.isEmpty()) {
+            ProjectBackroom.debug("Structure not found: " + startStructure);
+            return;
+        }
+        StructureTemplate structureTemplate = optional.get();
+
+        StructurePlacementData placementData = new StructurePlacementData()
+                .setIgnoreEntities(true)
+                .setRotation(BlockRotation.NONE)
+                .setMirror(BlockMirror.NONE);
+
+        structureTemplate.place(world, origin, origin, placementData, world.getRandom(), 2);
+
+        List<BlockPos> jigsaws = findJigsawBlocksInArea(world, origin, structureTemplate);
+
+        for (BlockPos jigsawPos : jigsaws){
+            ChunkPos jigsawChunk = new ChunkPos(jigsawPos);
+            if (jigsawChunk.equals(chunkPos)){
+                generateConnectedStructure(world, templateManager, jigsawPos);
+            } else {
+                queueDeferredJigsaw(jigsawChunk, jigsawPos);
+            }
         }
 
-        if (structureManager == null){
-            throw new IllegalStateException("StructureTemplateManager not set!");
-        }
+    }
+
+    /*public void backup(){
+        ProjectBackroom.debug("Hello");
+        MinecraftServer mcWorld = world.getServer();
+        Identifier poolId = new Identifier(this.targetPool);
+        if (mcWorld == null) return;
+        ProjectBackroom.debug("World!");
+
+        this.setStructureManager(mcWorld.getStructureTemplateManager());
+        if (structureManager == null) return;
+        ProjectBackroom.debug("Minecraft");
+
+        Registry<StructurePool> poolRegistry = world.getRegistryManager().get(RegistryKeys.TEMPLATE_POOL);
+        StructurePool startPool = poolRegistry.get(poolId);
+        if (startPool == null) return;
+        ProjectBackroom.debug("Rocks");
+
+        RegistryKey<StructurePool> poolKey = RegistryKey.of(RegistryKeys.TEMPLATE_POOL, poolId);
+        RegistryEntry<StructurePool> entry = poolRegistry.getEntry(poolKey).orElse(null);
+
+        StructurePoolElement element = startPool.getRandomElement(world.getRandom());
+        if (element == null || element == EmptyPoolElement.INSTANCE) return;
+
+        StructureTemplate.StructureBlockInfo anchor = element.getStructureBlockInfos(
+                structureManager, BlockPos.ORIGIN, BlockRotation.NONE, world.getRandom()
+        ).stream().findFirst().orElse(null);
 
         BlockPos startPos = chunk.getPos().getStartPos();
 
-        placeStructure(world, startPos, new Identifier(this.name));
-        //placeStructure(world, startPos.add(16, 0, 0), new Identifier("yournamespace", "2genericpillar2"));
-        //placeStructure(world, startPos.add(32, 0, 0), new Identifier("yournamespace", "2genericpillar3"));
-    }
+        Vec3i first = new Vec3i(startPos.getX(), startPos.getY(), startPos.getZ());
+        Vec3i second = new Vec3i(startPos.getX() + 15, 255, startPos.getZ() + 15);
+        BlockBox box = BlockBox.create(first, second);
+
+        element.generate(
+                structureManager,
+                world,
+                structureAccessor,
+                this,
+                startPos,
+                startPos,
+                BlockRotation.NONE,
+                box,
+                world.getRandom(),
+                false
+        );
+    }*/
 
     @Override
     public void buildSurface(ChunkRegion region, StructureAccessor structures, NoiseConfig noiseConfig, Chunk chunk) {
         //BlockPos pos = chunk.getPos().getStartPos();
-
+        ProjectBackroom.debug("Building surface");
 
     }
 

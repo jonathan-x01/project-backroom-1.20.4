@@ -3,7 +3,7 @@
   "generator": {
     "type": "project_backroom:infinite_jigsaw",
     "jigsaw_name": "project_backroom:start",
-    "target_pool": "project_backroom:level1/maintenance_tunnel",
+    "target_pool": "project_backroom:level1/maintenance_tunnel/straight",
     "disable_mob_generation": true,
     "biome_source": {
       "type": "minecraft:fixed",

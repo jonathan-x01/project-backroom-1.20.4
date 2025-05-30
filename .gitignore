@@ -42,3 +42,5 @@ replay_*.log
 
 # models
 bbmodels/
+
+src/main/java/projectbackroom/jonathanx/world/components/

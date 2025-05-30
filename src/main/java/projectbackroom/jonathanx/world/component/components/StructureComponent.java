@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.world.nodegen;
+package projectbackroom.jonathanx.world.component.components;
 
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructurePlacementData;
@@ -8,15 +8,16 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.world.component.ComponentGen;
 
-public class StructureNode {
-    protected NodeGen node;
+public class StructureComponent {
+    protected ComponentGen node;
     protected StructureTemplateManager structureManager;
     protected ChunkPos chunkPos;
     private StructureTemplate structure;
     private ServerWorld serverWorld;
 
-    public StructureNode(NodeGen node, Identifier structureId){
+    public StructureComponent(ComponentGen node, Identifier structureId){
         this.node = node;
         this.serverWorld = this.node.getRegion().toServerWorld();
         this.structureManager = this.serverWorld.getStructureTemplateManager();
