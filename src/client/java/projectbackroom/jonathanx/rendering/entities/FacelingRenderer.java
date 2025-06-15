@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.rendering.entities.models.FacelingModel;
 import projectbackroom.jonathanx.ModModelLayers;
-import projectbackroom.jonathanx.entity.custom.FacelingEntity;
+import projectbackroom.jonathanx.entity.neutral.FacelingEntity;
 
 public class FacelingRenderer extends MobEntityRenderer<FacelingEntity, FacelingModel<FacelingEntity>> {
     public static final Identifier TEXTURE = new Identifier(ProjectBackroom.MOD_ID,"textures/entity/faceling.png");

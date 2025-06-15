@@ -9,7 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.registry.*;
 import projectbackroom.jonathanx.registry.ModdedStatusEffects;
-import projectbackroom.jonathanx.world.chunk.InfiniteJigsaw;
+import projectbackroom.jonathanx.world.chunk.Level1Generation;
+import projectbackroom.jonathanx.world.chunk.WFCChunkGenerator;
 import projectbackroom.jonathanx.world.chunk.PointMazeGenerator;
 
 public class ProjectBackroom implements ModInitializer {
@@ -18,7 +19,8 @@ public class ProjectBackroom implements ModInitializer {
 
 	private static void initChunkGeneration(){
 		Registry.register(Registries.CHUNK_GENERATOR, id("point_maze_generator"), PointMazeGenerator.CODEC);
-		Registry.register(Registries.CHUNK_GENERATOR, id("infinite_jigsaw"), InfiniteJigsaw.CODEC);
+		Registry.register(Registries.CHUNK_GENERATOR, id("infinite_jigsaw"), WFCChunkGenerator.CODEC);
+		Registry.register(Registries.CHUNK_GENERATOR, id("level1"), Level1Generation.CODEC);
 	}
 
 	@Override
@@ -50,6 +52,10 @@ public class ProjectBackroom implements ModInitializer {
 		LOGGER.warn("{DEBUG | " + MOD_ID + "}");
 		LOGGER.info("Message : " + msg);
 		LOGGER.info("-- DEBUG END --");
+	}
+
+	public static void error(String msg){
+		LOGGER.error("{ ERROR | " + MOD_ID + " } " + msg);
 	}
 
 	/**

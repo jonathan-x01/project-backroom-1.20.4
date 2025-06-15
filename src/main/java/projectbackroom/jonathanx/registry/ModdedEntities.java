@@ -7,12 +7,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.entity.custom.DeathmothEntity;
-import projectbackroom.jonathanx.entity.custom.FacelingEntity;
-import projectbackroom.jonathanx.entity.custom.HoundEntity;
-import projectbackroom.jonathanx.entity.custom.SmilerEntity;
+import projectbackroom.jonathanx.entity.hostile.DeathmothEntity;
+import projectbackroom.jonathanx.entity.neutral.FacelingEntity;
+import projectbackroom.jonathanx.entity.hostile.HoundEntity;
+import projectbackroom.jonathanx.entity.hostile.SmilerEntity;
 
 public class ModdedEntities {
 

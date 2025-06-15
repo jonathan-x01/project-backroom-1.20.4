@@ -17,10 +17,10 @@ public class ModdedItems {
     public static Item CONTAMINATED_WATER = registerFood("contaminated_bottle_water", new ContaminatedBottleWater(new Item.Settings().maxCount(1).food(new FoodComponent.Builder().hunger(1).alwaysEdible().build())));
 
     // Spawn Eggs
-    public static Item SMILER_SPAWN_EGG = registerSpawnEgg("smiler", ModdedEntities.SMILERS, 3, 4, new Item.Settings());
-    public static Item HOUND_SPAWN_EGG = registerSpawnEgg("hound", ModdedEntities.HOUND, 4, 6, new Item.Settings());
-    public static Item DEATHMOTHS_SPAWN_EGG = registerSpawnEgg("deathmoth", ModdedEntities.DEATHMOTH, 6, 4, new Item.Settings());
-    public static Item FACELINGS_SPAWN_EGG = registerSpawnEgg("faceling", ModdedEntities.FACELINGS, 1, 3, new Item.Settings());
+    public static Item SMILER_SPAWN_EGG = registerSpawnEgg("smiler", ModdedEntities.SMILERS, 0, 16777215, new Item.Settings());
+    public static Item HOUND_SPAWN_EGG = registerSpawnEgg("hound", ModdedEntities.HOUND, 56063, 44543, new Item.Settings());
+    public static Item DEATHMOTHS_SPAWN_EGG = registerSpawnEgg("deathmoth", ModdedEntities.DEATHMOTH, 56063, 44543, new Item.Settings());
+    public static Item FACELINGS_SPAWN_EGG = registerSpawnEgg("faceling", ModdedEntities.FACELINGS, 962222, 11107684, new Item.Settings());
 
     public static Item registerFood(String name, Item item){
         return register(name, item);

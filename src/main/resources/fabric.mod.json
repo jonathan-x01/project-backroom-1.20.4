@@ -20,7 +20,7 @@
 			"projectbackroom.jonathanx.ProjectBackroom"
 		],
 		"client": [
-          "projectbackroom.jonathanx.ProjectBackroomClientLeftover",
+			"projectbackroom.jonathanx.ProjectBackroomClientLeftover",
 			"projectbackroom.jonathanx.ModModelLayers"
 		],
 		"fabric-datagen": [

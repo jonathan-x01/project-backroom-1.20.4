@@ -9,8 +9,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
-import projectbackroom.jonathanx.entity.custom.DeathmothEntity;
-import projectbackroom.jonathanx.entity.custom.FacelingEntity;
+import projectbackroom.jonathanx.entity.hostile.DeathmothEntity;
 
 public class DeathmothModel<T extends DeathmothEntity> extends SinglePartEntityModel<T> {
 	private final ModelPart body;

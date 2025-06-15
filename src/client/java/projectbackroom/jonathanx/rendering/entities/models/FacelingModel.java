@@ -10,7 +10,7 @@ import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import projectbackroom.jonathanx.rendering.entities.animations.FacelingAnimations;
-import projectbackroom.jonathanx.entity.custom.FacelingEntity;
+import projectbackroom.jonathanx.entity.neutral.FacelingEntity;
 
 public class FacelingModel<T extends FacelingEntity> extends SinglePartEntityModel<T> {
 	private final ModelPart faceling;

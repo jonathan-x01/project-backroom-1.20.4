@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import projectbackroom.jonathanx.ModModelLayers;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.entity.custom.SmilerEntity;
+import projectbackroom.jonathanx.entity.hostile.SmilerEntity;
 import projectbackroom.jonathanx.rendering.entities.models.SmilerModel;
 
 public class SmilerRenderer extends MobEntityRenderer<SmilerEntity, SmilerModel<SmilerEntity>> {

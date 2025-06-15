@@ -5,7 +5,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ModModelLayers;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.entity.custom.HoundEntity;
+import projectbackroom.jonathanx.entity.hostile.HoundEntity;
 import projectbackroom.jonathanx.rendering.entities.models.HoundModel;
 
 public class HoundRenderer extends MobEntityRenderer<HoundEntity, HoundModel<HoundEntity>> {

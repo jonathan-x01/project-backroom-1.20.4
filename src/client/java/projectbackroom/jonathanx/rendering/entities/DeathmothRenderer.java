@@ -6,7 +6,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ModModelLayers;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.entity.custom.DeathmothEntity;
+import projectbackroom.jonathanx.entity.hostile.DeathmothEntity;
 import projectbackroom.jonathanx.rendering.entities.models.DeathmothModel;
 
 public class DeathmothRenderer extends MobEntityRenderer<DeathmothEntity, DeathmothModel<DeathmothEntity>> {

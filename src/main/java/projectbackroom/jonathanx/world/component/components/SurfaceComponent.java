@@ -23,13 +23,13 @@ public class SurfaceComponent extends Component {
     }
 
     public void apply(WorldGenContext context) {
-        BlockPos origin = context.origin;
+        BlockPos origin = context.origin();
 
         for (int x = 0; x < this.width; x++){
             for (int z = 0; z < this.length; z++){
                 BlockPos pos = origin.add(x, this.height, z);
 
-                context.world.setBlockState(pos, this.block, 3);
+                context.world().setBlockState(pos, this.block, 3);
                 /*int worldX = chunkPos.getStartX() + x;
                 int worldZ = chunkPos.getStartZ() + z;
 

@@ -1,7 +1,6 @@
 package projectbackroom.jonathanx.registry;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -13,10 +12,10 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.blocks.*;
-import projectbackroom.jonathanx.blocks.level0Blocks.FluorescentDropceiling;
-import projectbackroom.jonathanx.blocks.level0Blocks.Wallpaper;
-import projectbackroom.jonathanx.blocks.level0Blocks.YellowCarpet;
-import projectbackroom.jonathanx.blocks.level2Blocks.*;
+import projectbackroom.jonathanx.blocks.level0.FluorescentDropceiling;
+import projectbackroom.jonathanx.blocks.level0.Wallpaper;
+import projectbackroom.jonathanx.blocks.level0.YellowCarpet;
+import projectbackroom.jonathanx.blocks.level2.*;
 
 public class ModdedBlocks {
     public static final Block LEVEL_0_WALLPAPER = registerBlock("level_0_wallpaper",new Wallpaper(AbstractBlock.Settings.create().strength(3)));

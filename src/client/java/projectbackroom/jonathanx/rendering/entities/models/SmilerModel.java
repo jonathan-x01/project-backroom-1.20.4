@@ -8,7 +8,7 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import projectbackroom.jonathanx.entity.custom.SmilerEntity;
+import projectbackroom.jonathanx.entity.hostile.SmilerEntity;
 import projectbackroom.jonathanx.rendering.entities.animations.SmilerAnimations;
 
 public class SmilerModel<T extends SmilerEntity> extends SinglePartEntityModel<T> {

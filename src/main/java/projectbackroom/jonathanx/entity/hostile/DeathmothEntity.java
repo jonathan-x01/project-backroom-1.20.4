@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.entity.custom;
+package projectbackroom.jonathanx.entity.hostile;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;

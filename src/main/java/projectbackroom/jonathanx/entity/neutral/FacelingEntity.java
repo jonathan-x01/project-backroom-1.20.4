@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.entity.custom;
+package projectbackroom.jonathanx.entity.neutral;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;

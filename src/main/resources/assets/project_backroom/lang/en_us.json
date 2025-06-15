@@ -1,6 +1,7 @@
 {
   "itemgroup.project_backroom.backroom_blocks": "Backroom Blocks",
   "itemgroup.project_backroom.backroom_items": "Backroom Items",
+  "itemgroup.project_backroom.backroom_spawn_eggs": "Spawn Eggs",
 
   "block.project_backroom.level_0_wallpaper": "Wallpaper (Level 0)",
   "block.project_backroom.level_0_yellow_carpet": "Yellow Carpet (Level 0)",
@@ -33,6 +34,11 @@
   "item.project_backroom.original_almond_water": "Original Almond Water",
   "item.project_backroom.liquid_pain": "Liquid Pain",
   "item.project_backroom.contaminated_bottle_water": "Contaminated Bottle Water",
+
+  "item.project_backroom.smiler_spawn_egg": "Smiler Spawn Egg",
+  "item.project_backroom.hound_spawn_egg": "Hound Spawn Egg",
+  "item.project_backroom.faceling_spawn_egg": "Faceling Spawn Egg",
+  "item.project_backroom.deathmoth_spawn_egg": "Deathmoth Spawn Egg",
 
   "effect.project_backroom.insanity": "Insanity",
 

@@ -9,7 +9,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
-import projectbackroom.jonathanx.entity.custom.HoundEntity;
+import projectbackroom.jonathanx.entity.hostile.HoundEntity;
 import projectbackroom.jonathanx.rendering.entities.animations.HoundAnimations;
 
 public class HoundModel<T extends HoundEntity> extends SinglePartEntityModel<T> {

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:overworld",
   "generator": {
-    "type": "project_backroom:infinite_jigsaw",
+    "type": "project_backroom:level1",
     "jigsaw_name": "project_backroom:start",
     "target_pool": "project_backroom:level1/maintenance_tunnel/straight",
     "disable_mob_generation": true,
