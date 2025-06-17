@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/acacia_planks"
+      "model": "project_backroom:block/almond_tree_planks"
     }
   }
 }

@@ -1,15 +1,15 @@
 {
   "variants": {
     "axis=x": {
-      "model": "minecraft:block/acacia_log_horizontal",
+      "model": "project_backroom:block/almond_tree_log_horizontal",
       "x": 90,
       "y": 90
     },
     "axis=y": {
-      "model": "minecraft:block/acacia_log"
+      "model": "project_backroom:block/almond_tree_log"
     },
     "axis=z": {
-      "model": "minecraft:block/acacia_log_horizontal",
+      "model": "project_backroom:block/almond_tree_log_horizontal",
       "x": 90
     }
   }

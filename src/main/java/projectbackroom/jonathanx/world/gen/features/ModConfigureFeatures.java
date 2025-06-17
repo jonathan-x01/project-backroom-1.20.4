@@ -21,7 +21,7 @@ public class ModConfigureFeatures {
                 Feature.TREE, new TreeFeatureConfig.Builder(
                     BlockStateProvider.of(ModBlocks.ALMOND_TREE_LOG),
                     new StraightTrunkPlacer(5,4,3),
-                    BlockStateProvider.of(ModBlocks.LEVEL_0_DROPCEILING),
+                    BlockStateProvider.of(ModBlocks.ALMOND_TREE_LEAVES),
                     new BlobFoliagePlacer(ConstantIntProvider.create(1), ConstantIntProvider.create(3), 2),
                     new TwoLayersFeatureSize(1,0,2)
                 ).build()

@@ -38,11 +38,6 @@ public class ModItems {
     public static void registerModdedItems(){
         ProjectBackroom.displayRegisteredSectors(ModItems.class);
 
-        ModItemGroups.getItemGroup("backroom_flora")
-                .entries((displayContext, entries) -> {
-                    entries.add(ALMOND);
-                });
-
         ModItemGroups.getItemGroup("backroom_items")
                 .entries(((displayContext, entries) -> {
                     entries.add(ORIGINAL_ALMOND_WATER);

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "project_backroom:almond_tree_planks.json"
+          "name": "project_backroom:almond_tree_planks"
         }
       ],
       "rolls": 1.0
