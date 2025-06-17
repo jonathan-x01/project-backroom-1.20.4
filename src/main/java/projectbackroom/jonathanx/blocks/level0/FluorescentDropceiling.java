@@ -13,8 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.registry.ModdedSounds;
+import projectbackroom.jonathanx.registry.ModSounds;
 
 public class FluorescentDropceiling extends Level0Block {
     public static int LIGHTING_MIN = 5;
@@ -63,7 +62,7 @@ public class FluorescentDropceiling extends Level0Block {
 
         // Applies the random value to the placed block's block state.
         world.setBlockState(pos, randomState);
-        world.playSoundAtBlockCenter(pos, ModdedSounds.BUZZING_LIGHTS, SoundCategory.AMBIENT, nextBuzzingVolume / 0.25f, 1f, true);
+        world.playSoundAtBlockCenter(pos, ModSounds.BUZZING_LIGHTS, SoundCategory.AMBIENT, nextBuzzingVolume / 0.25f, 1f, true);
     }
 
     @Override

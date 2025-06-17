@@ -2,17 +2,15 @@ package projectbackroom.jonathanx.blocks.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.registry.ModdedBlockEntities;
+import projectbackroom.jonathanx.registry.ModBlockEntities;
 
 public class CorruptedBlockEntity extends BlockEntity {
     private Identifier previousBlock;
     public CorruptedBlockEntity(BlockPos pos, BlockState state) {
-        super(ModdedBlockEntities.CORRUPTED_BLOCK_ENTITY, pos, state);
+        super(ModBlockEntities.CORRUPTED_BLOCK_ENTITY, pos, state);
     }
 
     public Identifier getPreviousBlock(){

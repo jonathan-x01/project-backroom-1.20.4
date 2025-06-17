@@ -5,14 +5,10 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -20,7 +16,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.blocks.entity.CorruptedBlockEntity;
-import projectbackroom.jonathanx.registry.ModdedBlocks;
 import projectbackroom.jonathanx.state.property.DestinationProperty;
 
 public class CorruptedBlock extends Block implements BlockEntityProvider {

@@ -8,10 +8,10 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.registry.*;
-import projectbackroom.jonathanx.registry.ModdedStatusEffects;
-import projectbackroom.jonathanx.world.chunk.Level1Generation;
-import projectbackroom.jonathanx.world.chunk.WFCChunkGenerator;
-import projectbackroom.jonathanx.world.chunk.PointMazeGenerator;
+import projectbackroom.jonathanx.registry.ModStatusEffects;
+import projectbackroom.jonathanx.world.gen.chunk.Level1Generation;
+import projectbackroom.jonathanx.world.gen.chunk.WFCChunkGenerator;
+import projectbackroom.jonathanx.world.gen.chunk.PointMazeGenerator;
 
 public class ProjectBackroom implements ModInitializer {
 	public static String MOD_ID = "project_backroom";
@@ -25,19 +25,19 @@ public class ProjectBackroom implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModdedItemGroups.registerModdedItemGroups();
+		ModItemGroups.registerModdedItemGroups();
 
-		ModdedBlockEntities.initalize();
-		ModdedBlocks.registerModdedBlocks();
-		ModdedSounds.registerModdedSounds();
-		ModdedItems.registerModdedItems();
-		ModdedParticleTypes.registerParticles();
-		ModdedStatusEffects.registerModdedStatusEffects();
-		ModdedEntities.registerModdedEntities();
+		ModBlockEntities.initalize();
+		ModBlocks.registerModdedBlocks();
+		ModSounds.registerModdedSounds();
+		ModItems.registerModdedItems();
+		ModParticleTypes.registerParticles();
+		ModStatusEffects.registerModdedStatusEffects();
+		ModEntities.registerModdedEntities();
 
 		initChunkGeneration();
 
-		ModdedItemGroups.buildAll();
+		ModItemGroups.buildAll();
 	}
 
 	public static Identifier id(String path){

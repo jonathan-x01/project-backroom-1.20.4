@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "project_backroom:block/almond_tree_sapling"
+  }
+}
