@@ -28,11 +28,18 @@ repositories {
 
 loom {
     splitEnvironmentSourceSets()
+	accessWidenerPath = file("src/main/resources/project-backroom.accesswidener")
 
 	mods {
 		"project-backroom" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
+		}
+	}
+
+	runs {
+		client {
+			programArgs "--quickPlay", "singleplayer", "Fresh"
 		}
 	}
 

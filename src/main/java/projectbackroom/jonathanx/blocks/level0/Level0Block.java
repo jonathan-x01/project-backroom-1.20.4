@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.blocks.CorruptedBlock;
 import projectbackroom.jonathanx.blocks.entity.CorruptedBlockEntity;
-import projectbackroom.jonathanx.registry.ModBlocks;
+import projectbackroom.jonathanx.blocks.BackroomBlocks;
 import projectbackroom.jonathanx.state.util.Destination;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public abstract class Level0Block extends Block {
     @Override
     public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
         if (!player.isCreative() && shouldBeReplacedByCorruption()){
-            world.setBlockState(pos, ModBlocks.CORRUPTED_BLOCK.getDefaultState().with(CorruptedBlock.DESTINATION,getRandomDestination()));
+            world.setBlockState(pos, BackroomBlocks.CORRUPTED_BLOCK.getDefaultState().with(CorruptedBlock.DESTINATION,getRandomDestination()));
             BlockEntity newBlockEntity = world.getBlockEntity(pos);
             if (newBlockEntity instanceof CorruptedBlockEntity corruptedBlockEntity){
                 corruptedBlockEntity.setPreviousBlock(Registries.BLOCK.getId(state.getBlock()));

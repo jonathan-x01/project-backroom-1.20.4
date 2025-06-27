@@ -12,7 +12,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
-import projectbackroom.jonathanx.registry.ModBlocks;
+import projectbackroom.jonathanx.blocks.BackroomBlocks;
 import projectbackroom.jonathanx.registry.ModEntities;
 import projectbackroom.jonathanx.rendering.entities.DeathmothRenderer;
 import projectbackroom.jonathanx.rendering.entities.FacelingRenderer;
@@ -44,8 +44,8 @@ public class ModModelLayers implements ClientModInitializer {
         register(ModEntities.HOUND, HoundRenderer::new, ModModelLayers.HOUND, HoundModel::getTexturedModelData);
         register(ModEntities.DEATHMOTH, DeathmothRenderer::new, ModModelLayers.DEATHMOTH, DeathmothModel::getTexturedModelData);
 
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ALMOND_TREE_LEAVES, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ALMOND_TREE_SAPLING, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BackroomBlocks.ALMOND_TREE_LEAVES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BackroomBlocks.ALMOND_TREE_SAPLING, RenderLayer.getCutout());
     }
 
     public <E extends Entity> void register(EntityType<? extends E> entityType, EntityRendererFactory<E> entityRendererFactory, EntityModelLayer modelLayer, EntityModelLayerRegistry.TexturedModelDataProvider provider){

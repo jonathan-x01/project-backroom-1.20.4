@@ -20,7 +20,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import projectbackroom.jonathanx.blocks.level0.FluorescentDropceiling;
-import projectbackroom.jonathanx.registry.ModBlocks;
+import projectbackroom.jonathanx.blocks.BackroomBlocks;
 
 import java.util.List;
 import java.util.Random;
@@ -37,10 +37,10 @@ public class PointMazeGenerator extends ChunkGenerator {
             ).apply(instance, PointMazeGenerator::new)
     );
 
-    private final Block floorBlock = ModBlocks.LEVEL_0_YELLOW_CARPET;
-    private final Block wallBlock = ModBlocks.LEVEL_0_WALLPAPER;
-    private  final Block ceilingBlock = ModBlocks.LEVEL_0_DROPCEILING;
-    private final Block ceilingLight = ModBlocks.LEVEL_0_LIGHT;
+    private final Block floorBlock = BackroomBlocks.LEVEL_0_YELLOW_CARPET;
+    private final Block wallBlock = BackroomBlocks.LEVEL_0_WALLPAPER;
+    private  final Block ceilingBlock = BackroomBlocks.LEVEL_0_DROPCEILING;
+    private final Block ceilingLight = BackroomBlocks.LEVEL_0_LIGHT;
     private final int seaLevel;
     private final int worldHeight;
     private final int lightDist;

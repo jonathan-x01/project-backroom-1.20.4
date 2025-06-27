@@ -11,7 +11,7 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.registry.ModBlocks;
+import projectbackroom.jonathanx.blocks.BackroomBlocks;
 
 public class ModConfigureFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> ALMOND_TREE_KEY = registerKey("almond_tree");
@@ -19,9 +19,9 @@ public class ModConfigureFeatures {
         ProjectBackroom.displayRegisteredSectors(ModConfigureFeatures.class);
         context.register(ALMOND_TREE_KEY, new ConfiguredFeature<>(
                 Feature.TREE, new TreeFeatureConfig.Builder(
-                    BlockStateProvider.of(ModBlocks.ALMOND_TREE_LOG),
+                    BlockStateProvider.of(BackroomBlocks.ALMOND_TREE_LOG),
                     new StraightTrunkPlacer(5,4,3),
-                    BlockStateProvider.of(ModBlocks.ALMOND_TREE_LEAVES),
+                    BlockStateProvider.of(BackroomBlocks.ALMOND_TREE_LEAVES),
                     new BlobFoliagePlacer(ConstantIntProvider.create(1), ConstantIntProvider.create(3), 2),
                     new TwoLayersFeatureSize(1,0,2)
                 ).build()

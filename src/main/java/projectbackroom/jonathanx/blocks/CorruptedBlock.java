@@ -43,7 +43,6 @@ public class CorruptedBlock extends Block implements BlockEntityProvider {
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         super.randomTick(state, world, pos, random);
-        ProjectBackroom.debug("Random Tick");
 
         BlockEntity current = world.getBlockEntity(pos);
         if (current instanceof CorruptedBlockEntity corruptedBlockEntity){
@@ -58,7 +57,6 @@ public class CorruptedBlock extends Block implements BlockEntityProvider {
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         super.scheduledTick(state, world, pos, random);
-        ProjectBackroom.debug("Schedule Tick");
         randomTick(state, world, pos, random);
     }
 

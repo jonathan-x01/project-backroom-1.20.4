@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.registry.ModBlocks;
+import projectbackroom.jonathanx.blocks.BackroomBlocks;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class ModPlacedFeature  {
 
         register(context, ALMOND_TREE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfigureFeatures.ALMOND_TREE_KEY),
                 VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(2, 0.1f, 2),
-                        ModBlocks.ALMOND_TREE_SAPLING));
+                        BackroomBlocks.ALMOND_TREE_SAPLING));
     }
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {

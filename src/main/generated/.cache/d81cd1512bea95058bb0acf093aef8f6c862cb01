@@ -1,8 +1,8 @@
-// 1.20.4	2025-06-17T18:29:25.4671168	Project Backroom/Block Loot Tables
+// 1.20.4	2025-06-27T11:06:23.8317968	Project Backroom/Block Loot Tables
+784fa6aa75437101a46f3a64ea0236298f063ca9 data\project_backroom\loot_tables\blocks\almond_tree_leaves.json
 16def859a7136490790d3ad2e77ec2c85b46515d data\project_backroom\loot_tables\blocks\white_bricks.json
 a3290c77c36f44380f541b0f921b9de45640a397 data\project_backroom\loot_tables\blocks\broken_bricks.json
 7e2c48d3541f8fd82dc82e1650c27d80ad5cc807 data\project_backroom\loot_tables\blocks\almond_tree_planks.json
 432b9bb4acec13d4ab84dbe78d973dd91c037a23 data\project_backroom\loot_tables\blocks\almond_tree_log.json
-05deac75b0d9ec8f136dfb4fa0132a5c5c3887a2 data\project_backroom\loot_tables\blocks\almond_tree_sapling.json
-5602afa3d598e030447d504097ffe7d21e738e1e data\project_backroom\loot_tables\blocks\almond_tree_leaves.json
 876c1a9df05b49e74e4e3d0544bbcdc66766e816 data\project_backroom\loot_tables\blocks\wall_light.json
+05deac75b0d9ec8f136dfb4fa0132a5c5c3887a2 data\project_backroom\loot_tables\blocks\almond_tree_sapling.json

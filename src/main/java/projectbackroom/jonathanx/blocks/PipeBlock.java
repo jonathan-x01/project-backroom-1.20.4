@@ -1,33 +1,53 @@
-package projectbackroom.jonathanx.blocks.level2;
+package projectbackroom.jonathanx.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.ProjectBackroomDataGenerator;
+import projectbackroom.jonathanx.blocks.entity.PipeBlockEntity;
+import projectbackroom.jonathanx.fluid.BackroomFluids;
 
 import java.text.DecimalFormat;
 import java.util.Random;
 
-public class PipeBlock extends Block implements Waterloggable {
+public class PipeBlock extends Block implements Waterloggable, BlockEntityProvider {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty LEAKING = BooleanProperty.of("leaking");
 
     public PipeBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof PipeBlockEntity pipeBlockEntity){
+            if (pipeBlockEntity.getFluidContainer() == Fluids.EMPTY) {
+                pipeBlockEntity.setFluidContainer(BackroomFluids.ALMOND_WATER);
+            }
+        }
     }
 
     @Nullable
@@ -40,7 +60,10 @@ public class PipeBlock extends Block implements Waterloggable {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING).add(LEAKING).add(WATERLOGGED);
+        builder
+                .add(FACING)
+                .add(LEAKING)
+                .add(WATERLOGGED);
     }
 
     public double getRandomPosition(double min, double max){
@@ -68,14 +91,26 @@ public class PipeBlock extends Block implements Waterloggable {
         double maxX = shape.getMax(Direction.Axis.X);
         double minZ = shape.getMin(Direction.Axis.Z);
         double maxZ = shape.getMax(Direction.Axis.Z);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
         if (chance < 0.2f){
             boolean leaking = state.get(LEAKING);
-            double x = pos.getX() + getRandomPosition(minX, maxX);
-            double y = pos.getY();
-            double z = pos.getZ() + getRandomPosition(minZ, maxZ);
             if (leaking){
-                world.addParticle(ParticleTypes.DRIPPING_WATER, x, y, z, 0.0f, 0.0f, 0.0f);
+                if (blockEntity instanceof PipeBlockEntity pipeBlockEntity){
+                    double x = pos.getX() + getRandomPosition(minX, maxX);
+                    double y = pos.getY();
+                    double z = pos.getZ() + getRandomPosition(minZ, maxZ);
+                    Fluid fluid = pipeBlockEntity.getFluidContainer();
+                    if (!fluid.matchesType(Fluids.EMPTY)){
+                        world.addParticle(pipeBlockEntity.getFluidContainer().getParticle(), x, y, z, 0.0f, 0.0f, 0.0f);
+                    }
+                }
             }
         }
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new PipeBlockEntity(pos, state);
     }
 }

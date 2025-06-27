@@ -5,12 +5,11 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import projectbackroom.jonathanx.registry.ModBlockEntities;
 
 public class CorruptedBlockEntity extends BlockEntity {
     private Identifier previousBlock;
     public CorruptedBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.CORRUPTED_BLOCK_ENTITY, pos, state);
+        super(BackroomBlockEntities.CORRUPTED_BLOCK_ENTITY, pos, state);
     }
 
     public Identifier getPreviousBlock(){

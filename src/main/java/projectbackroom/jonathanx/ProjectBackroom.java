@@ -2,11 +2,18 @@ package projectbackroom.jonathanx;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import org.apache.http.annotation.Obsolete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.blocks.entity.BackroomBlockEntities;
+import projectbackroom.jonathanx.fluid.BackroomFluids;
+import projectbackroom.jonathanx.items.BackroomItems;
+import projectbackroom.jonathanx.particle.BackroomParticleTypes;
 import projectbackroom.jonathanx.registry.*;
 import projectbackroom.jonathanx.registry.ModStatusEffects;
 import projectbackroom.jonathanx.world.gen.chunk.Level1Generation;
@@ -27,33 +34,73 @@ public class ProjectBackroom implements ModInitializer {
 	public void onInitialize() {
 		ModItemGroups.registerModdedItemGroups();
 
-		ModBlockEntities.initalize();
-		ModBlocks.registerModdedBlocks();
+		BackroomFluids.registerFluid();
+		BackroomBlockEntities.initialize();
+		BackroomBlocks.registerModdedBlocks();
 		ModSounds.registerModdedSounds();
-		ModItems.registerModdedItems();
-		ModParticleTypes.registerParticles();
+		BackroomItems.registerModdedItems();
 		ModStatusEffects.registerModdedStatusEffects();
 		ModEntities.registerModdedEntities();
+		BackroomParticleTypes.registerParticles();
 
 		initChunkGeneration();
 
 		ModItemGroups.buildAll();
+
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(BackroomItems.ALMOND, 0.6f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(BackroomItems.ALMOND_SEED, 0.5f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(BackroomItems.ALMOND_HUSK, 0.4f);
 	}
 
 	public static Identifier id(String path){
 		return new Identifier(MOD_ID, path);
 	}
 
+	public static final String ANSI_BLUE    = "\u001B[34m";
+	public static final String ANSI_YELLOW  = "\u001B[33m";
+	public static final String ANSI_CYAN    = "\u001B[36m";
+	public static final String ANSI_MAGENTO = "\u001B[35m";
+	public static final String ANSI_GREEN   = "\u001B[32m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_RESET   = "\u001B[0m";
+
 	/**
 	 * Outputs a debug message to the Minecraft log for debugging purposes.
 	 * @param msg The message to include in the debug message.
 	 */
 	public static void debug(Object msg){
-		LOGGER.warn("{DEBUG | " + MOD_ID + "}");
-		LOGGER.info("Message : " + msg);
-		LOGGER.info("-- DEBUG END --");
+		StackTraceElement caller = Thread.currentThread().getStackTrace()[2];
+		String loc = caller.getClassName() + "." + caller.getMethodName() + "()" + ANSI_MAGENTO + " [Line " + caller.getLineNumber() + "]";
+		LOGGER.warn(ANSI_YELLOW + "{DEBUG | " + ANSI_CYAN + MOD_ID + ANSI_YELLOW + " | " + ANSI_BLUE + loc + ANSI_YELLOW + "}");
+		String message = "%sMessage : %s%s";
+		if (msg == null){
+			LOGGER.error(String.format(message, ANSI_RED, "", msg));
+		} else {
+			LOGGER.info(String.format(message, ANSI_GREEN, ANSI_RESET, msg));
+		}
+		LOGGER.warn(ANSI_YELLOW + "-- DEBUG END --");
 	}
 
+	/**
+	 * Outputs multiple lines of messages.
+	 * @param msg The list of messages to display.
+	 */
+	public static void debug(Object... msg){
+		StackTraceElement caller = Thread.currentThread().getStackTrace()[2];
+		String loc = caller.getClassName() + "." + caller.getMethodName() + "() [Line " + caller.getLineNumber() + "]";
+		LOGGER.warn(ANSI_YELLOW + "{DEBUG | " + ANSI_CYAN + MOD_ID + ANSI_YELLOW + " | " + ANSI_BLUE + loc + ANSI_YELLOW + "}");
+		for (int i = 0; i < msg.length; i++){
+			String message = "%sMessage %s(Line %g)%s : %s";
+			if (msg[i] == null){
+				LOGGER.error(String.format(message, ANSI_RED, ANSI_MAGENTO, i, ANSI_RED, msg[i]));
+			} else {
+				LOGGER.info(String.format(message, ANSI_GREEN, ANSI_MAGENTO, i, ANSI_RESET, msg[i]));
+			}
+		}
+		LOGGER.warn(ANSI_YELLOW + "-- DEBUG END --");
+	}
+
+	@Obsolete
 	public static void error(String msg){
 		LOGGER.error("{ ERROR | " + MOD_ID + " } " + msg);
 	}
@@ -63,6 +110,6 @@ public class ProjectBackroom implements ModInitializer {
 	 * @param c The class that has loaded.
 	 */
 	public static void displayRegisteredSectors(Class c){
-		LOGGER.info("{ LOADED | " + MOD_ID + " } " + c.getSimpleName());
+		LOGGER.info(ANSI_GREEN + "{ LOADED | " + ANSI_CYAN + MOD_ID + ANSI_GREEN + " } " + ANSI_BLUE + c.getSimpleName());
 	}
 }

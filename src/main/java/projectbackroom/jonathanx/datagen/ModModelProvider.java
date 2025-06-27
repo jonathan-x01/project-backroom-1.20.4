@@ -4,7 +4,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
-import projectbackroom.jonathanx.registry.ModBlocks;
+import net.minecraft.data.client.TexturedModel;
+import projectbackroom.jonathanx.blocks.BackroomBlocks;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -13,8 +14,8 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ALMOND_TREE_LEAVES);
-        blockStateModelGenerator.registerTintableCross(ModBlocks.ALMOND_TREE_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerSingleton(BackroomBlocks.ALMOND_TREE_LEAVES, TexturedModel.LEAVES);
+        blockStateModelGenerator.registerTintableCross(BackroomBlocks.ALMOND_TREE_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
     }
 
     @Override

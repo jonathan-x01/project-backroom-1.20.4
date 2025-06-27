@@ -40,7 +40,7 @@ public class FluorescentDropceiling extends Level0Block {
         setDefaultState(getDefaultState().with(LIGHTING, 5));
         setDefaultState(getDefaultState().with(DEFAULT_LIGHTING, 5));
         setDefaultState(getDefaultState().with(BUZZING_VOLUME,1));
-        setDefaultState(getDefaultState().with(FLICKERING, true));
+        setDefaultState(getDefaultState().with(FLICKERING, false));
     }
 
     public static int getRandomLighting(){

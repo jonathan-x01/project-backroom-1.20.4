@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.registry;
+package projectbackroom.jonathanx.blocks;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -10,14 +10,20 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.blocks.*;
 import projectbackroom.jonathanx.blocks.level0.FluorescentDropceiling;
 import projectbackroom.jonathanx.blocks.level0.Wallpaper;
 import projectbackroom.jonathanx.blocks.level0.YellowCarpet;
 import projectbackroom.jonathanx.blocks.level2.*;
+import projectbackroom.jonathanx.fluid.BackroomFluids;
+import projectbackroom.jonathanx.registry.ModItemGroups;
+import projectbackroom.jonathanx.registry.ModSounds;
 import projectbackroom.jonathanx.world.gen.tree.ModSaplingGenerator;
 
-public class ModBlocks {
+import java.util.ArrayList;
+import java.util.List;
+
+public class BackroomBlocks {
+    public static List<Block> pipeBlocks = new ArrayList<>();
     public static final Block LEVEL_0_WALLPAPER = registerBlock("level_0_wallpaper",new Wallpaper(AbstractBlock.Settings.create().strength(3)));
     public static final Block LEVEL_0_YELLOW_CARPET = registerBlock("level_0_yellow_carpet",new YellowCarpet(AbstractBlock.Settings.create().strength(0.7f).sounds(
             new BlockSoundGroup(
@@ -55,11 +61,14 @@ public class ModBlocks {
     public static final Block BIOLOGICAL_PIPE = registerBlock("biological_pipe", new BiologicalPipeBlock(AbstractBlock.Settings.create().slipperiness(0.98f)));
     public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new CorruptedBlock(AbstractBlock.Settings.create().noCollision().strength(-1.0f, 3600000.8F).dropsNothing()));
 
+    // Trees
     public static final Block ALMOND_TREE_SAPLING = registerBlock("almond_tree_sapling", new SaplingBlock(ModSaplingGenerator.ALMOND_TREE, FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)));
-
     public static final Block ALMOND_TREE_LOG = registerBlock("almond_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
     public static final Block ALMOND_TREE_PLANKS = registerBlock("almond_tree_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(4f)));
-    public static final Block ALMOND_TREE_LEAVES = registerBlock("almond_tree_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).strength(4f).nonOpaque()));
+    public static final Block ALMOND_TREE_LEAVES = registerBlock("almond_tree_leaves", Blocks.createLeavesBlock(BlockSoundGroup.GRASS));
+
+    // Water
+    public static Block ALMOND_WATER_FLUID;
 
     /**
      * Registers a block with the Project Backrooms mod.
@@ -68,6 +77,9 @@ public class ModBlocks {
      * @return The block registration.
      */
     public static Block registerBlock(String name, Block block){
+        if (block instanceof PipeBlock){
+            pipeBlocks.add(block);
+        }
         registerBlockItem(name,block);
         return Registry.register(Registries.BLOCK, ProjectBackroom.id(name),block);
     }
@@ -78,7 +90,10 @@ public class ModBlocks {
     }
 
     public static void registerModdedBlocks(){
-        ProjectBackroom.displayRegisteredSectors(ModBlocks.class);
+        ProjectBackroom.displayRegisteredSectors(BackroomBlocks.class);
+
+        ALMOND_WATER_FLUID = registerBlock("almond_water_fluid", new FluidBlock(BackroomFluids.ALMOND_WATER, FabricBlockSettings.copyOf(Blocks.WATER).mapColor(MapColor.WHITE)));
+
         /*ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
             content.addBefore(Items.BRICKS,WHITE_BRICKS);
         });*/

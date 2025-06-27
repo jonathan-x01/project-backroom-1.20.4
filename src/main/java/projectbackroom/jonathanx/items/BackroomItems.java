@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.registry;
+package projectbackroom.jonathanx.items;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityType;
@@ -7,15 +7,16 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.items.ContaminatedBottleWater;
-import projectbackroom.jonathanx.items.LiquidPain;
-import projectbackroom.jonathanx.items.OriginalAlmondWater;
+import projectbackroom.jonathanx.registry.ModEntities;
+import projectbackroom.jonathanx.registry.ModItemGroups;
 
-public class ModItems {
+public class BackroomItems {
     public static Item ORIGINAL_ALMOND_WATER = registerFood("original_almond_water",new OriginalAlmondWater(new Item.Settings().food(new FoodComponent.Builder().alwaysEdible().build())));
     public static Item LIQUID_PAIN = registerFood("liquid_pain",new LiquidPain(new Item.Settings().food(new FoodComponent.Builder().alwaysEdible().build())));
     public static Item CONTAMINATED_WATER = registerFood("contaminated_bottle_water", new ContaminatedBottleWater(new Item.Settings().maxCount(1).food(new FoodComponent.Builder().hunger(1).alwaysEdible().build())));
-    public static Item ALMOND = register("almond", new Item(new FabricItemSettings()));
+    public static Item ALMOND_SEED = registerFood("almond_seed", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).build())));
+    public static Item ALMOND_HUSK = register("almond_husk", new Item(new FabricItemSettings()));
+    public static Item ALMOND = register("almond", new Item(new FabricItemSettings().recipeRemainder(ALMOND_HUSK)));
 
     // Spawn Eggs
     public static Item SMILER_SPAWN_EGG = registerSpawnEgg("smiler", ModEntities.SMILERS, 0, 16777215, new Item.Settings());
@@ -36,13 +37,16 @@ public class ModItems {
     }
 
     public static void registerModdedItems(){
-        ProjectBackroom.displayRegisteredSectors(ModItems.class);
+        ProjectBackroom.displayRegisteredSectors(BackroomItems.class);
 
         ModItemGroups.getItemGroup("backroom_items")
                 .entries(((displayContext, entries) -> {
                     entries.add(ORIGINAL_ALMOND_WATER);
                     entries.add(LIQUID_PAIN);
                     entries.add(CONTAMINATED_WATER);
+                    entries.add(ALMOND);
+                    entries.add(ALMOND_HUSK);
+                    entries.add(ALMOND_SEED);
                 }));
 
         ModItemGroups.getItemGroup("backroom_spawn_eggs")

@@ -28,7 +28,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
 
     private static final TrackedData<String> TYPE = DataTracker.registerData(FacelingEntity.class, TrackedDataHandlerRegistry.STRING);
     private static final TrackedData<Boolean> PROVOKED = DataTracker.registerData(FacelingEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Boolean> IS_CHILD = DataTracker.registerData(FacelingEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> BABY = DataTracker.registerData(FacelingEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public FacelingEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -47,8 +47,8 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         GoalSelector goal = this.goalSelector;
         goal.add(0, new SwimGoal(this));
         goal.add(1, new AvoidPlayersWhenScaredGoal<>(this, PlayerEntity.class, 6.0f, 1.0, 2.2));
-        goal.add(5, new WanderAroundFarGoal(this, 1.0f));
-        goal.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
+        goal.add(2, new WanderAroundFarGoal(this, 1.0f));
+        goal.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 6f));
         goal.add(5, new LookAroundGoal(this));
 
         this.targetSelector.add(2, new AttackPlayersGoal(this, 1.5f));
@@ -57,9 +57,9 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        this.dataTracker.startTracking(TYPE, String.valueOf(getRandomState()));
+        this.dataTracker.startTracking(BABY,randomIsChild());
+        this.dataTracker.startTracking(TYPE, String.valueOf(getAState()));
         this.dataTracker.startTracking(PROVOKED,false);
-        this.dataTracker.startTracking(IS_CHILD,randomIsChild());
     }
 
     @Override
@@ -94,12 +94,28 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     }
 
     @Override
+    public boolean isBaby() {
+        return this.dataTracker.get(BABY);
+    }
+
+    public void addScaredSpeed(){
+        this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,30,3,false,false));
+    }
+
+    @Override
     public boolean damage(DamageSource source, float amount) {
-        if (getFacelingState().equals(EntityBehaviourState.FRIENDLY)){
-            setFacelingState(EntityBehaviourState.AGGRESSIVE);
-            this.getWorld().addParticle(ParticleTypes.ANGRY_VILLAGER,this.getX(),this.getY(),this.getZ(),1,1,1);
-        } else if (getFacelingState().equals(EntityBehaviourState.SCARED)){
-            this.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED,30,3,false,false));
+        if (this.isBaby()){
+            if (getFacelingState().equals(EntityBehaviourState.FRIENDLY)){
+                setFacelingState(EntityBehaviourState.SCARED);
+            }
+            addScaredSpeed();
+        } else {
+            if (getFacelingState().equals(EntityBehaviourState.FRIENDLY)){
+                setFacelingState(EntityBehaviourState.AGGRESSIVE);
+                this.getWorld().addParticle(ParticleTypes.ANGRY_VILLAGER,this.getX(),this.getY(),this.getZ(),1,1,1);
+            } else if (getFacelingState().equals(EntityBehaviourState.SCARED)){
+                addScaredSpeed();
+            }
         }
         return super.damage(source, amount);
     }
@@ -109,15 +125,23 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         return random.nextDouble() < 0.5f;
     }
 
-    private static EntityBehaviourState getRandomState(){
+    private EntityBehaviourState getAState(){
         Random random = new Random();
         double percentage = random.nextDouble();
-        if (percentage < 0.2){
-            return EntityBehaviourState.FRIENDLY;
-        } else if (percentage < 0.8){
-            return EntityBehaviourState.SCARED;
+        if (isBaby()){
+            if (percentage < 0.2){
+                return EntityBehaviourState.FRIENDLY;
+            } else {
+                return EntityBehaviourState.SCARED;
+            }
+        } else {
+            if (percentage < 0.2){
+                return EntityBehaviourState.FRIENDLY;
+            } else if (percentage < 0.8){
+                return EntityBehaviourState.SCARED;
+            }
+            return EntityBehaviourState.AGGRESSIVE;
         }
-        return EntityBehaviourState.AGGRESSIVE;
     }
 
     public EntityBehaviourState getFacelingState(){

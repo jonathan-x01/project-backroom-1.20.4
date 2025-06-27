@@ -1,0 +1,17 @@
+accessWidener v2 named
+
+# Block Leak Particles
+accessible class net/minecraft/client/particle/BlockLeakParticle
+accessible method net/minecraft/client/particle/BlockLeakParticle <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;)V
+accessible method net/minecraft/client/particle/BlockLeakParticle$Dripping <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;Lnet/minecraft/particle/ParticleEffect;)V
+accessible method net/minecraft/client/particle/BlockLeakParticle$ContinuousFalling <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;Lnet/minecraft/particle/ParticleEffect;)V
+accessible method net/minecraft/client/particle/BlockLeakParticle$DrippingLava <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;Lnet/minecraft/particle/ParticleEffect;)V
+accessible method net/minecraft/client/particle/BlockLeakParticle$Landing <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;)V
+accessible method net/minecraft/client/particle/BlockLeakParticle$FallingHoney <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;Lnet/minecraft/particle/ParticleEffect;)V
+accessible method net/minecraft/client/particle/BlockLeakParticle$Falling <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;)V
+accessible method net/minecraft/client/particle/BlockLeakParticle$Falling <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;I)V
+
+accessible field net/minecraft/client/particle/Particle gravityStrength F
+accessible field net/minecraft/client/particle/Particle maxAge I
+
+accessible method net/minecraft/fluid/Fluid getParticle ()Lnet/minecraft/particle/ParticleEffect;

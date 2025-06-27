@@ -6,6 +6,7 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import projectbackroom.jonathanx.blocks.PipeBlock;
 
 public class VerticalPipe extends PipeBlock {
     public static final VoxelShape SHAPE_WEST = Block.createCuboidShape(9.0, 0.0, 4.0, 16.0, 16.0, 12.0);
