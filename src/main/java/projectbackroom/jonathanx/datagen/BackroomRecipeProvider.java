@@ -20,7 +20,5 @@ public class BackroomRecipeProvider extends FabricRecipeProvider {
                 .input(BackroomItems.ALMOND)
                 .criterion("has_almond", conditionsFromItem(BackroomItems.ALMOND))
                 .offerTo(exporter);
-
-        BrewingRecipeRegistry.craft(new ItemStack(BackroomItems.ALMOND_SEED), new ItemStack(BackroomItems.ORIGINAL_ALMOND_WATER));
     }
 }

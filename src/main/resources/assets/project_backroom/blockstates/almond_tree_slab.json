@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "project_backroom:block/almond_tree_slab"
+    },
+    "type=double": {
+      "model": "project_backroom:block/almond_tree_planks"
+    },
+    "type=top": {
+      "model": "project_backroom:block/almond_tree_slab_top"
+    }
+  }
+}

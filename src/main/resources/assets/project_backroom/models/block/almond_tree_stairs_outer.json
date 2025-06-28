@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "project_backroom:block/almond_tree_planks",
+    "side": "project_backroom:block/almond_tree_planks",
+    "top": "project_backroom:block/almond_tree_planks"
+  }
+}

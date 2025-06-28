@@ -28,13 +28,11 @@ import java.util.Random;
 public class AlmondWaterFluid extends FlowableFluid {
     @Override
     public Fluid getFlowing() {
-        ProjectBackroom.debug(BackroomFluids.FLOWING_ALMOND_WATER);
         return BackroomFluids.FLOWING_ALMOND_WATER;
     }
 
     @Override
     public Fluid getStill() {
-        ProjectBackroom.debug(BackroomFluids.ALMOND_WATER);
         return BackroomFluids.ALMOND_WATER;
     }
 

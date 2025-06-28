@@ -18,6 +18,7 @@ public class ModBlockColors extends BlockColors {
             }
             return FoliageColors.getDefaultColor();
         }, BackroomBlocks.ALMOND_TREE_LEAVES);
+
         return modBlockColors;
     }
 }

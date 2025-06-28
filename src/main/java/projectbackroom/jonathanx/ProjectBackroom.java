@@ -2,7 +2,12 @@ package projectbackroom.jonathanx;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Potions;
+import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -47,9 +52,16 @@ public class ProjectBackroom implements ModInitializer {
 
 		ModItemGroups.buildAll();
 
+		FlammableBlockRegistry.getDefaultInstance().add(BackroomBlocks.ALMOND_TREE_LOG, 5, 5);
+		FlammableBlockRegistry.getDefaultInstance().add(BackroomBlocks.ALMOND_TREE_PLANKS, 5, 20);
+		FlammableBlockRegistry.getDefaultInstance().add(BackroomBlocks.ALMOND_TREE_LEAVES, 30, 60);
+
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(BackroomItems.ALMOND, 0.6f);
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(BackroomItems.ALMOND_SEED, 0.5f);
 		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(BackroomItems.ALMOND_HUSK, 0.4f);
+
+		BrewingRecipeRegistry.registerPotionRecipe(Potions.WATER, BackroomItems.ALMOND_SEED, BackroomPotions.HOMEMADE_ALMOND_WATER);
+		BrewingRecipeRegistry.craft(new ItemStack(BackroomItems.ALMOND_SEED), new ItemStack(BackroomItems.ORIGINAL_ALMOND_WATER));
 	}
 
 	public static Identifier id(String path){

@@ -61,13 +61,17 @@ public class BackroomBlocks {
     public static final Block BIOLOGICAL_PIPE = registerBlock("biological_pipe", new BiologicalPipeBlock(AbstractBlock.Settings.create().slipperiness(0.98f)));
     public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new CorruptedBlock(AbstractBlock.Settings.create().noCollision().strength(-1.0f, 3600000.8F).dropsNothing()));
 
-    // Trees
+    // Plants
     public static final Block ALMOND_TREE_SAPLING = registerBlock("almond_tree_sapling", new SaplingBlock(ModSaplingGenerator.ALMOND_TREE, FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)));
-    public static final Block ALMOND_TREE_LOG = registerBlock("almond_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
-    public static final Block ALMOND_TREE_PLANKS = registerBlock("almond_tree_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(4f)));
-    public static final Block ALMOND_TREE_LEAVES = registerBlock("almond_tree_leaves", Blocks.createLeavesBlock(BlockSoundGroup.GRASS));
 
-    // Water
+    // Tree Groups
+    public static final Block ALMOND_TREE_LOG = registerBlock("almond_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
+    public static final Block ALMOND_TREE_LEAVES = registerBlock("almond_tree_leaves", Blocks.createLeavesBlock(BlockSoundGroup.GRASS));
+    public static final Block ALMOND_TREE_PLANKS = registerBlock("almond_tree_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(4f)));
+    public static final Block ALMOND_TREE_SLAB = registerBlock("almond_tree_slab", new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(4f)));
+    public static final Block ALMOND_TREE_STAIRS = registerBlock("almond_tree_stairs", createStairsBlock(ALMOND_TREE_PLANKS));
+
+    // Fluid
     public static Block ALMOND_WATER_FLUID;
 
     /**
@@ -89,6 +93,10 @@ public class BackroomBlocks {
         return ITEM;
     }
 
+    private static Block createStairsBlock(Block base) {
+        return new StairsBlock(base.getDefaultState(), AbstractBlock.Settings.copy(base));
+    }
+
     public static void registerModdedBlocks(){
         ProjectBackroom.displayRegisteredSectors(BackroomBlocks.class);
 
@@ -100,9 +108,11 @@ public class BackroomBlocks {
         ModItemGroups.getItemGroup("backroom_flora")
                 .entries((displayContext, entries) -> {
                     entries.add(ALMOND_TREE_SAPLING);
-                    entries.add(ALMOND_TREE_LOG);
                     entries.add(ALMOND_TREE_LEAVES);
+                    entries.add(ALMOND_TREE_LOG);
                     entries.add(ALMOND_TREE_PLANKS);
+                    entries.add(ALMOND_TREE_STAIRS);
+                    entries.add(ALMOND_TREE_SLAB);
                 });
 
         ModItemGroups.getItemGroup("backroom_blocks")

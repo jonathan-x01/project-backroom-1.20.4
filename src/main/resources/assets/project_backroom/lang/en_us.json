@@ -8,6 +8,7 @@
   "block.project_backroom.almond_tree_log": "Almond Tree Log",
   "block.project_backroom.almond_tree_planks": "Almond Tree Planks",
   "block.project_backroom.almond_tree_leaves": "Almond Tree Leaves",
+  "block.project_backroom.almond_water_fluid": "Almond Water",
 
   "block.project_backroom.level_0_wallpaper": "Wallpaper (Level 0)",
   "block.project_backroom.level_0_yellow_carpet": "Yellow Carpet (Level 0)",
@@ -27,9 +28,7 @@
   "block.project_backroom.biological_pipe": "Biological Pipe",
 
   "block.project_backroom.broken_bricks": "Broken Bricks",
-
   "block.project_backroom.wall_light": "Wall Light",
-
   "block.project_backroom.white_bricks": "White Bricks",
   "block.project_backroom.corrupted_block": "Corrupted Block",
 
@@ -43,6 +42,8 @@
   "item.project_backroom.almond": "Almond",
   "item.project_backroom.almond_seed": "Almond Seed",
   "item.project_backroom.almond_husk": "Almond Husk",
+
+  "item.minecraft.potion.effect.homemade_almond_water": "Homemade Almond Water",
 
   "item.project_backroom.smiler_spawn_egg": "Smiler Spawn Egg",
   "item.project_backroom.hound_spawn_egg": "Hound Spawn Egg",
