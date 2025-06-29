@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 75,
+  "experience": 0.5,
+  "group": "rusty_shard",
+  "ingredient": {
+    "item": "project_backroom:rusty_shard"
+  },
+  "result": "minecraft:iron_nugget"
+}

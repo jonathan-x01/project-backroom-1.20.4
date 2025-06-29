@@ -5,7 +5,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
 import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
@@ -45,7 +44,7 @@ public class ProjectBackroom implements ModInitializer {
 		ModSounds.registerModdedSounds();
 		BackroomItems.registerModdedItems();
 		ModStatusEffects.registerModdedStatusEffects();
-		ModEntities.registerModdedEntities();
+		BackroomEntities.registerModdedEntities();
 		BackroomParticleTypes.registerParticles();
 
 		initChunkGeneration();
@@ -99,10 +98,10 @@ public class ProjectBackroom implements ModInitializer {
 	 */
 	public static void debug(Object... msg){
 		StackTraceElement caller = Thread.currentThread().getStackTrace()[2];
-		String loc = caller.getClassName() + "." + caller.getMethodName() + "() [Line " + caller.getLineNumber() + "]";
+		String loc = caller.getClassName() + "." + caller.getMethodName() + "() " + ANSI_MAGENTO + " [Line " + caller.getLineNumber() + "]" + ANSI_YELLOW;
 		LOGGER.warn(ANSI_YELLOW + "{DEBUG | " + ANSI_CYAN + MOD_ID + ANSI_YELLOW + " | " + ANSI_BLUE + loc + ANSI_YELLOW + "}");
 		for (int i = 0; i < msg.length; i++){
-			String message = "%sMessage %s(Line %g)%s : %s";
+			String message = "%sMessage %s(Line %d)%s : %s";
 			if (msg[i] == null){
 				LOGGER.error(String.format(message, ANSI_RED, ANSI_MAGENTO, i, ANSI_RED, msg[i]));
 			} else {

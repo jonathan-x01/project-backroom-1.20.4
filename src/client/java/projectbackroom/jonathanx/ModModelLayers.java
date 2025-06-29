@@ -13,7 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
-import projectbackroom.jonathanx.registry.ModEntities;
+import projectbackroom.jonathanx.registry.BackroomEntities;
 import projectbackroom.jonathanx.rendering.entities.DeathmothRenderer;
 import projectbackroom.jonathanx.rendering.entities.FacelingRenderer;
 import projectbackroom.jonathanx.rendering.entities.HoundRenderer;
@@ -39,10 +39,10 @@ public class ModModelLayers implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        register(ModEntities.FACELINGS, FacelingRenderer::new, ModModelLayers.FACELING, FacelingModel::getTexturedModelData);
-        register(ModEntities.SMILERS, SmilerRenderer::new, ModModelLayers.SMILER, SmilerModel::getTexturedModelData);
-        register(ModEntities.HOUND, HoundRenderer::new, ModModelLayers.HOUND, HoundModel::getTexturedModelData);
-        register(ModEntities.DEATHMOTH, DeathmothRenderer::new, ModModelLayers.DEATHMOTH, DeathmothModel::getTexturedModelData);
+        register(BackroomEntities.FACELINGS, FacelingRenderer::new, ModModelLayers.FACELING, FacelingModel::getTexturedModelData);
+        register(BackroomEntities.SMILERS, SmilerRenderer::new, ModModelLayers.SMILER, SmilerModel::getTexturedModelData);
+        register(BackroomEntities.HOUND, HoundRenderer::new, ModModelLayers.HOUND, HoundModel::getTexturedModelData);
+        register(BackroomEntities.DEATHMOTH, DeathmothRenderer::new, ModModelLayers.DEATHMOTH, DeathmothModel::getTexturedModelData);
 
         BlockRenderLayerMap.INSTANCE.putBlock(BackroomBlocks.ALMOND_TREE_LEAVES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BackroomBlocks.ALMOND_TREE_SAPLING, RenderLayer.getCutout());

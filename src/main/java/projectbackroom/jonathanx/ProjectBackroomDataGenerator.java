@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
 import projectbackroom.jonathanx.datagen.*;
-import projectbackroom.jonathanx.world.biome.level0.Level0Biome;
 import projectbackroom.jonathanx.world.gen.features.ModPlacedFeature;
 import projectbackroom.jonathanx.world.gen.features.ModConfigureFeatures;
 
@@ -14,10 +13,11 @@ public class ProjectBackroomDataGenerator implements DataGeneratorEntrypoint {
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
-		pack.addProvider(ModBlockTagProvider::new);
-		pack.addProvider(ModLootTableProvider::new);
-		pack.addProvider(ModModelProvider::new);
-		pack.addProvider(ModWorldGenerator::new);
+		pack.addProvider(BackroomBlockTagProvider::new);
+		pack.addProvider(BackroomItemTagProvider::new);
+		pack.addProvider(BackroomLootTableProvider::new);
+		pack.addProvider(BackroomModelProvider::new);
+		pack.addProvider(BackroomWorldGenerator::new);
 		pack.addProvider(BackroomRecipeProvider::new);
 	}
 

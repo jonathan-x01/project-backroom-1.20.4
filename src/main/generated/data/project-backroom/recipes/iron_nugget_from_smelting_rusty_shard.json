@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 150,
+  "experience": 0.5,
+  "group": "rusty_shard",
+  "ingredient": {
+    "item": "project_backroom:rusty_shard"
+  },
+  "result": "minecraft:iron_nugget"
+}

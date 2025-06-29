@@ -10,9 +10,9 @@ import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
 import projectbackroom.jonathanx.items.BackroomItems;
 
-public class ModLootTableProvider extends FabricBlockLootTableProvider {
+public class BackroomLootTableProvider extends FabricBlockLootTableProvider {
 
-    public ModLootTableProvider(FabricDataOutput dataOutput) {
+    public BackroomLootTableProvider(FabricDataOutput dataOutput) {
         super(dataOutput);
     }
 

@@ -1,6 +1,7 @@
 package projectbackroom.jonathanx.blocks;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
@@ -102,17 +103,18 @@ public class BackroomBlocks {
 
         ALMOND_WATER_FLUID = registerBlock("almond_water_fluid", new FluidBlock(BackroomFluids.ALMOND_WATER, FabricBlockSettings.copyOf(Blocks.WATER).mapColor(MapColor.WHITE)));
 
-        /*ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
             content.addBefore(Items.BRICKS,WHITE_BRICKS);
-        });*/
+            content.addBefore(Items.OAK_LOG, ALMOND_TREE_SLAB);
+            content.addBefore(ALMOND_TREE_SLAB, ALMOND_TREE_STAIRS);
+            content.addBefore(ALMOND_TREE_STAIRS, ALMOND_TREE_PLANKS);
+            content.addBefore(ALMOND_TREE_PLANKS, ALMOND_TREE_LOG);
+        });
+
         ModItemGroups.getItemGroup("backroom_flora")
                 .entries((displayContext, entries) -> {
                     entries.add(ALMOND_TREE_SAPLING);
                     entries.add(ALMOND_TREE_LEAVES);
-                    entries.add(ALMOND_TREE_LOG);
-                    entries.add(ALMOND_TREE_PLANKS);
-                    entries.add(ALMOND_TREE_STAIRS);
-                    entries.add(ALMOND_TREE_SLAB);
                 });
 
         ModItemGroups.getItemGroup("backroom_blocks")

@@ -7,8 +7,8 @@ import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.TexturedModel;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
 
-public class ModModelProvider extends FabricModelProvider {
-    public ModModelProvider(FabricDataOutput output) {
+public class BackroomModelProvider extends FabricModelProvider {
+    public BackroomModelProvider(FabricDataOutput output) {
         super(output);
     }
 
