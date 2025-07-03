@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "project_backroom:block/almond_tree_log",
+    "side": "project_backroom:block/almond_tree_log"
+  }
+}

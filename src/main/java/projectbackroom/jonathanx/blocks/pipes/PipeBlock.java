@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.blocks;
+package projectbackroom.jonathanx.blocks.pipes;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -8,23 +8,16 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
+import net.minecraft.state.property.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.ProjectBackroomDataGenerator;
 import projectbackroom.jonathanx.blocks.entity.PipeBlockEntity;
+import projectbackroom.jonathanx.blocks.state.pipeTypes.LargeHorizontalPipeTypes;
 import projectbackroom.jonathanx.fluid.BackroomFluids;
 
 import java.text.DecimalFormat;
@@ -32,11 +25,16 @@ import java.util.Random;
 
 public class PipeBlock extends Block implements Waterloggable, BlockEntityProvider {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty LEAKING = BooleanProperty.of("leaking");
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
     public PipeBlock(Settings settings) {
         super(settings);
+        if (this.getDefaultState().contains(ConnectorPipeBlock.CONNECTOR)){
+            this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(ConnectorPipeBlock.CONNECTOR, false));
+        } else {
+            this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false));
+        }
     }
 
     @Override
@@ -47,6 +45,9 @@ public class PipeBlock extends Block implements Waterloggable, BlockEntityProvid
             if (pipeBlockEntity.getFluidContainer() == Fluids.EMPTY) {
                 pipeBlockEntity.setFluidContainer(BackroomFluids.ALMOND_WATER);
             }
+
+            pipeBlockEntity.setPipeVariety(LargeHorizontalPipeTypes.STRAIGHT_PIPE);
+
         }
     }
 
@@ -55,15 +56,15 @@ public class PipeBlock extends Block implements Waterloggable, BlockEntityProvid
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         double chance = new Random().nextDouble();;
         boolean leakingDefault = chance < 0.2f;
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(LEAKING,leakingDefault).with(WATERLOGGED,false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(LEAKING,leakingDefault);
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder
+                .add(WATERLOGGED)
                 .add(FACING)
-                .add(LEAKING)
-                .add(WATERLOGGED);
+                .add(LEAKING);
     }
 
     public double getRandomPosition(double min, double max){

@@ -15,6 +15,10 @@ import projectbackroom.jonathanx.blocks.level0.FluorescentDropceiling;
 import projectbackroom.jonathanx.blocks.level0.Wallpaper;
 import projectbackroom.jonathanx.blocks.level0.YellowCarpet;
 import projectbackroom.jonathanx.blocks.level2.*;
+import projectbackroom.jonathanx.blocks.pipes.CeilingPipeBlock;
+import projectbackroom.jonathanx.blocks.pipes.LargeHorizontalPipeBlock;
+import projectbackroom.jonathanx.blocks.pipes.PipeBlock;
+import projectbackroom.jonathanx.blocks.pipes.VerticalPipeBlock;
 import projectbackroom.jonathanx.fluid.BackroomFluids;
 import projectbackroom.jonathanx.registry.ModItemGroups;
 import projectbackroom.jonathanx.registry.ModSounds;
@@ -25,52 +29,38 @@ import java.util.List;
 
 public class BackroomBlocks {
     public static List<Block> pipeBlocks = new ArrayList<>();
-    public static final Block LEVEL_0_WALLPAPER = registerBlock("level_0_wallpaper",new Wallpaper(AbstractBlock.Settings.create().strength(3)));
-    public static final Block LEVEL_0_YELLOW_CARPET = registerBlock("level_0_yellow_carpet",new YellowCarpet(AbstractBlock.Settings.create().strength(0.7f).sounds(
-            new BlockSoundGroup(
-                    1f,
-                    1f,
-                    SoundEvent.of(Identifier.tryParse("minecraft:block.wool.break")),
-                    ModSounds.SOGGY_STEPS,
-                    SoundEvent.of(Identifier.tryParse("minecraft:block.wool.place")),
-                    SoundEvent.of(Identifier.tryParse("minecraft:block.wool.hit")),
-                    SoundEvent.of(Identifier.tryParse("minecraft:block.wool.fall"))
-            )
-    )));
-    public static final Block LEVEL_0_DROPCEILING = registerBlock("level_0_dropceiling", new Block(FabricBlockSettings.create()));
-    public static final Block LEVEL_0_LIGHT = registerBlock("level_0_fluorescent_dropceiling", new FluorescentDropceiling(AbstractBlock.Settings.create()
-            .sounds(BlockSoundGroup.GLASS)
-            .luminance((value) -> value.get(FluorescentDropceiling.LIGHTING)))
-    );
+    public static final Block LEVEL_0_WALLPAPER;
+    public static final Block LEVEL_0_YELLOW_CARPET;
+    public static final Block LEVEL_0_DROPCEILING;
+    public static final Block LEVEL_0_LIGHT;
 
     // Level 2 Blocks
-    public static final Block PIPES_1 = registerBlock("pipes_1", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block PIPES_1_W_VERTICAL = registerBlock("pipes_1_w_vertical", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block PIPES_2 = registerBlock("pipes_2", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block PIPES_3 = registerBlock("pipes_3", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block PIPES_4 = registerBlock("pipes_4", new PipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block VERTICAL_PIPE = registerBlock("vertical_pipe", new VerticalPipe(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block VERTICAL_PIPE_CONNECTED = registerBlock("vertical_pipe_connected", new VerticalPipe(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block LARGE_PIPE_1 = registerBlock("large_pipe_1", new LargePipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block LARGE_PIPE_2 = registerBlock("large_pipe_2", new LargePipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block LARGE_PIPE_3 = registerBlock("large_pipe_3", new LargePipeBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block WALL_LIGHT = registerBlock("wall_light", new WallLightBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.GLASS).nonOpaque().luminance(state -> 14).noCollision()));
+    public static final Block LARGE_HORIZONTAL_PIPE;
+    public static final Block VERTICAL_PIPE;
+    public static final Block CEILING_PIPE;
+    public static final Block WALL_LIGHT;
     // Universal Blocks
-    public static final Block BROKEN_BRICKS = registerBlock("broken_bricks", new BrokenBricksBlock(AbstractBlock.Settings.create().nonOpaque()));
-    public static final Block WHITE_BRICKS = registerBlock("white_bricks", new Block(FabricBlockSettings.create()));
-    //public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new Block(FabricBlockSettings.create().collidable(false)));
-    public static final Block BIOLOGICAL_PIPE = registerBlock("biological_pipe", new BiologicalPipeBlock(AbstractBlock.Settings.create().slipperiness(0.98f)));
-    public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new CorruptedBlock(AbstractBlock.Settings.create().noCollision().strength(-1.0f, 3600000.8F).dropsNothing()));
+    public static final Block BROKEN_BRICKS;
+    public static final Block WHITE_BRICKS;
+    public static final Block BIOLOGICAL_PIPE;
+    public static final Block CORRUPTED_BLOCK;
 
     // Plants
-    public static final Block ALMOND_TREE_SAPLING = registerBlock("almond_tree_sapling", new SaplingBlock(ModSaplingGenerator.ALMOND_TREE, FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)));
+    public static final Block ALMOND_TREE_SAPLING;
 
     // Tree Groups
-    public static final Block ALMOND_TREE_LOG = registerBlock("almond_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
-    public static final Block ALMOND_TREE_LEAVES = registerBlock("almond_tree_leaves", Blocks.createLeavesBlock(BlockSoundGroup.GRASS));
-    public static final Block ALMOND_TREE_PLANKS = registerBlock("almond_tree_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(4f)));
-    public static final Block ALMOND_TREE_SLAB = registerBlock("almond_tree_slab", new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(4f)));
-    public static final Block ALMOND_TREE_STAIRS = registerBlock("almond_tree_stairs", createStairsBlock(ALMOND_TREE_PLANKS));
+    public static final Block ALMOND_TREE_LOG;
+    public static final Block ALMOND_TREE_WOOD;
+    public static final Block ALMOND_TREE_LEAVES;
+    public static final Block ALMOND_TREE_PLANKS;
+    public static final Block ALMOND_TREE_SLAB;
+    public static final Block ALMOND_TREE_STAIRS;
+    public static final Block ALMOND_TREE_DOOR;
+    public static final Block ALMOND_TREE_TRAPDOOR;
+    public static final Block ALMOND_TREE_FENCE;
+    public static final Block ALMOND_TREE_FENCE_GATE;
+    public static final Block ALMOND_TREE_BUTTON;
+    public static final Block ALMOND_TREE_PRESSURE_PLATE;
 
     // Fluid
     public static Block ALMOND_WATER_FLUID;
@@ -102,13 +92,19 @@ public class BackroomBlocks {
         ProjectBackroom.displayRegisteredSectors(BackroomBlocks.class);
 
         ALMOND_WATER_FLUID = registerBlock("almond_water_fluid", new FluidBlock(BackroomFluids.ALMOND_WATER, FabricBlockSettings.copyOf(Blocks.WATER).mapColor(MapColor.WHITE)));
-
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
             content.addBefore(Items.BRICKS,WHITE_BRICKS);
-            content.addBefore(Items.OAK_LOG, ALMOND_TREE_SLAB);
+            content.addBefore(Items.OAK_LOG, ALMOND_TREE_BUTTON);
+            content.addBefore(ALMOND_TREE_BUTTON, ALMOND_TREE_PRESSURE_PLATE);
+            content.addBefore(ALMOND_TREE_PRESSURE_PLATE, ALMOND_TREE_TRAPDOOR);
+            content.addBefore(ALMOND_TREE_TRAPDOOR, ALMOND_TREE_DOOR);
+            content.addBefore(ALMOND_TREE_DOOR, ALMOND_TREE_FENCE_GATE);
+            content.addBefore(ALMOND_TREE_FENCE_GATE, ALMOND_TREE_FENCE);
+            content.addBefore(ALMOND_TREE_FENCE, ALMOND_TREE_SLAB);
             content.addBefore(ALMOND_TREE_SLAB, ALMOND_TREE_STAIRS);
             content.addBefore(ALMOND_TREE_STAIRS, ALMOND_TREE_PLANKS);
-            content.addBefore(ALMOND_TREE_PLANKS, ALMOND_TREE_LOG);
+            content.addBefore(ALMOND_TREE_PLANKS, ALMOND_TREE_WOOD);
+            content.addBefore(ALMOND_TREE_WOOD, ALMOND_TREE_LOG);
         });
 
         ModItemGroups.getItemGroup("backroom_flora")
@@ -124,19 +120,62 @@ public class BackroomBlocks {
                     entries.add(LEVEL_0_DROPCEILING);
                     entries.add(LEVEL_0_LIGHT);
                     entries.add(LEVEL_0_YELLOW_CARPET);
-                    entries.add(PIPES_1);
-                    entries.add(PIPES_1_W_VERTICAL);
-                    entries.add(PIPES_2);
-                    entries.add(PIPES_3);
-                    entries.add(PIPES_4);
-                    entries.add(LARGE_PIPE_1);
-                    entries.add(LARGE_PIPE_2);
-                    entries.add(LARGE_PIPE_3);
+                    entries.add(LARGE_HORIZONTAL_PIPE);
                     entries.add(VERTICAL_PIPE);
-                    entries.add(VERTICAL_PIPE_CONNECTED);
+                    entries.add(CEILING_PIPE);
                     entries.add(BROKEN_BRICKS);
                     entries.add(WALL_LIGHT);
                     entries.add(BIOLOGICAL_PIPE);
                 });
+    }
+
+    static {
+        LEVEL_0_WALLPAPER = registerBlock("level_0_wallpaper",new Wallpaper(AbstractBlock.Settings.create().strength(3)));
+        LEVEL_0_YELLOW_CARPET = registerBlock("level_0_yellow_carpet",new YellowCarpet(AbstractBlock.Settings.create().strength(0.7f).sounds(
+                new BlockSoundGroup(
+                        1f,
+                        1f,
+                        SoundEvent.of(Identifier.tryParse("minecraft:block.wool.break")),
+                        ModSounds.SOGGY_STEPS,
+                        SoundEvent.of(Identifier.tryParse("minecraft:block.wool.place")),
+                        SoundEvent.of(Identifier.tryParse("minecraft:block.wool.hit")),
+                        SoundEvent.of(Identifier.tryParse("minecraft:block.wool.fall"))
+                )
+        )));
+        LEVEL_0_DROPCEILING = registerBlock("level_0_dropceiling", new Block(FabricBlockSettings.create()));
+        LEVEL_0_LIGHT = registerBlock("level_0_fluorescent_dropceiling", new FluorescentDropceiling(AbstractBlock.Settings.create()
+                .sounds(BlockSoundGroup.GLASS)
+                .luminance((value) -> value.get(FluorescentDropceiling.LIGHTING)))
+        );
+
+        // Level 2 Blocks
+        LARGE_HORIZONTAL_PIPE = registerBlock("large_horizontal_pipe", new LargeHorizontalPipeBlock(AbstractBlock.Settings.create().nonOpaque()));
+        VERTICAL_PIPE = registerBlock("vertical_pipe", new VerticalPipeBlock(AbstractBlock.Settings.create().nonOpaque()));
+        CEILING_PIPE = registerBlock("ceiling_pipe", new CeilingPipeBlock(AbstractBlock.Settings.create().nonOpaque()));
+
+        WALL_LIGHT = registerBlock("wall_light", new WallLightBlock(AbstractBlock.Settings.create().sounds(BlockSoundGroup.GLASS).nonOpaque().luminance(state -> 14).noCollision()));
+        // Universal Blocks
+        BROKEN_BRICKS = registerBlock("broken_bricks", new BrokenBricksBlock(AbstractBlock.Settings.create().nonOpaque()));
+        WHITE_BRICKS = registerBlock("white_bricks", new Block(FabricBlockSettings.create()));
+        //public static final Block CORRUPTED_BLOCK = registerBlock("corrupted_block",new Block(FabricBlockSettings.create().collidable(false)));
+        BIOLOGICAL_PIPE = registerBlock("biological_pipe", new BiologicalPipeBlock(AbstractBlock.Settings.create().slipperiness(0.98f)));
+        CORRUPTED_BLOCK = registerBlock("corrupted_block",new CorruptedBlock(AbstractBlock.Settings.create().noCollision().strength(-1.0f, 3600000.8F).dropsNothing()));
+
+        // Plants
+        ALMOND_TREE_SAPLING = registerBlock("almond_tree_sapling", new SaplingBlock(ModSaplingGenerator.ALMOND_TREE, FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)));
+
+        // Tree Groups
+        ALMOND_TREE_LOG = registerBlock("almond_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
+        ALMOND_TREE_WOOD = registerBlock("almond_tree_wood", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)));
+        ALMOND_TREE_LEAVES = registerBlock("almond_tree_leaves", Blocks.createLeavesBlock(BlockSoundGroup.GRASS));
+        ALMOND_TREE_PLANKS = registerBlock("almond_tree_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(4f)));
+        ALMOND_TREE_SLAB = registerBlock("almond_tree_slab", new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).strength(4f)));
+        ALMOND_TREE_STAIRS = registerBlock("almond_tree_stairs", createStairsBlock(ALMOND_TREE_PLANKS));
+        ALMOND_TREE_DOOR = registerBlock("almond_tree_door", new DoorBlock(BlockSetType.OAK ,FabricBlockSettings.copyOf(Blocks.OAK_DOOR).nonOpaque()));
+        ALMOND_TREE_TRAPDOOR = registerBlock("almond_tree_trapdoor", new TrapdoorBlock(BlockSetType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).nonOpaque()));
+        ALMOND_TREE_FENCE = registerBlock("almond_tree_fence", new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE)));
+        ALMOND_TREE_FENCE_GATE = registerBlock("almond_tree_fence_gate", new FenceGateBlock(WoodType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE)));
+        ALMOND_TREE_BUTTON = registerBlock("almond_tree_button", new ButtonBlock(BlockSetType.OAK, 35, FabricBlockSettings.copyOf(Blocks.OAK_BUTTON)));
+        ALMOND_TREE_PRESSURE_PLATE = registerBlock("almond_tree_pressure_plate", new PressurePlateBlock(BlockSetType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE)));
     }
 }

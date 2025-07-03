@@ -25,5 +25,14 @@ public class BackroomBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
         getOrCreateTagBuilder(BlockTags.LEAVES)
                 .add(BackroomBlocks.ALMOND_TREE_LEAVES);
+
+        getOrCreateTagBuilder(BlockTags.FENCES)
+                .add(BackroomBlocks.ALMOND_TREE_FENCE);
+
+        getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
+                .add(BackroomBlocks.ALMOND_TREE_FENCE);
+
+        getOrCreateTagBuilder(BlockTags.FENCE_GATES)
+                .add(BackroomBlocks.ALMOND_TREE_FENCE_GATE);
     }
 }

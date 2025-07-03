@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "project_backroom:block/almond_tree_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "project_backroom:block/almond_tree_wood"
+    },
+    "axis=z": {
+      "model": "project_backroom:block/almond_tree_wood",
+      "x": 90
+    }
+  }
+}

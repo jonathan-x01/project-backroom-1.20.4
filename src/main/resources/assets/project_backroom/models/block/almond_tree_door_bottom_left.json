@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "project_backroom:block/almond_tree_door_bottom",
+    "top": "project_backroom:block/almond_tree_door_top"
+  }
+}

@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"1": "project_backroom:block/pipe-ring",
-		"2": "project_backroom:block/pipes"
+		"2": "project_backroom:block/pipes",
+		"particle": "project_backroom:block/pipes"
 	},
 	"elements": [
 		{

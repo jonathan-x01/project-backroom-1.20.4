@@ -1,4 +1,5 @@
 {
+	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
 	"textures": {
 		"2": "project_backroom:block/pipes",
@@ -98,9 +99,17 @@
 		}
 	],
 	"display": {
+		"thirdperson_righthand": {
+			"translation": [-6.25, 4.5, 0]
+		},
+		"thirdperson_lefthand": {
+			"translation": [-6.25, 4.5, 0]
+		},
+		"firstperson_righthand": {
+			"translation": [-9, 0, 0]
+		},
 		"gui": {
 			"rotation": [22.6, 131, 0],
-			"translation": [-1.5, 0, 0],
 			"scale": [0.75, 0.75, 0.75]
 		}
 	},
@@ -109,7 +118,6 @@
 			"name": "Pipe",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"nbt": "{}",
 			"children": [0, 1, 2, 3, 4, 5, 6]
 		}
 	]
