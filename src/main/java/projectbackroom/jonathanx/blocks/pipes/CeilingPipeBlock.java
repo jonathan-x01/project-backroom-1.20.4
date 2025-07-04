@@ -33,8 +33,9 @@ public class CeilingPipeBlock extends PipeBlock implements TypedPipeSupport {
         BlockState newState = world.getBlockState(sourcePos);
         Block newBlock = newState.getBlock();
         if (newBlock == BackroomBlocks.VERTICAL_PIPE){
-            if (newState.get(VerticalPipeBlock.FACING) == Direction.EAST){
-                world.setBlockState(pos, state.with(CeilingPipeBlock.TYPE, CeilingPipeTypes.ONE_LAYER_VERTICAL_PIPE_CONNECTION).with(CeilingPipeBlock.FACING, Direction.EAST));
+            if (newState.get(VerticalPipeBlock.FACING) instanceof Direction){
+                Direction direction = newState.get(VerticalPipeBlock.FACING);
+                world.setBlockState(pos, state.with(CeilingPipeBlock.TYPE, CeilingPipeTypes.ONE_LAYER_VERTICAL_PIPE_CONNECTION).with(CeilingPipeBlock.FACING, direction.getOpposite()));
             }
         }
     }
