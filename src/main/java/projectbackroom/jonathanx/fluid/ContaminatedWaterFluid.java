@@ -2,34 +2,18 @@ package projectbackroom.jonathanx.fluid;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
-import net.minecraft.fluid.*;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
-import projectbackroom.jonathanx.particle.BackroomParticleTypes;
 
-public class AlmondWaterFluid extends BackroomsFlowableFluid {
-    public AlmondWaterFluid(){
+public class ContaminatedWaterFluid extends BackroomsFlowableFluid {
+    public ContaminatedWaterFluid() {
         super(SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS);
-    }
-
-    @Override
-    public Fluid getFlowing() {
-        return BackroomFluids.FLOWING_ALMOND_WATER;
-    }
-
-    @Override
-    public Fluid getStill() {
-        return BackroomFluids.ALMOND_WATER;
-    }
-
-    @Override
-    public Item getBucketItem() {
-        return null;
     }
 
     @Override
@@ -38,17 +22,26 @@ public class AlmondWaterFluid extends BackroomsFlowableFluid {
     }
 
     @Override
-    protected BlockState toBlockState(FluidState state) {
-        return BackroomBlocks.ALMOND_WATER_BLOCK.getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
+    public Fluid getFlowing() {
+        return BackroomFluids.FLOWING_CONTAMINATED_WATER;
     }
 
-    @Nullable
     @Override
-    public ParticleEffect getParticle() {
-        return BackroomParticleTypes.DRIPPING_ALMOND_WATER;
+    public Fluid getStill() {
+        return BackroomFluids.CONTAMINATED_WATER;
     }
 
-    public static class Flowing extends AlmondWaterFluid {
+    @Override
+    public Item getBucketItem() {
+        return null;
+    }
+
+    @Override
+    protected BlockState toBlockState(FluidState state) {
+        return BackroomBlocks.CONTAMINATED_WATER_BLOCK.getDefaultState().with(FluidBlock.LEVEL, getBlockStateLevel(state));
+    }
+
+    public static class Flowing extends ContaminatedWaterFluid {
         public Flowing() {
         }
 
@@ -66,7 +59,7 @@ public class AlmondWaterFluid extends BackroomsFlowableFluid {
         }
     }
 
-    public static class Still extends AlmondWaterFluid {
+    public static class Still extends ContaminatedWaterFluid {
         public Still() {
         }
 

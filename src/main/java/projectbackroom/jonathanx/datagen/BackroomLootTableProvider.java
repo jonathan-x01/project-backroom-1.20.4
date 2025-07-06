@@ -3,6 +3,7 @@ package projectbackroom.jonathanx.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.TableBonusLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
@@ -25,6 +26,10 @@ public class BackroomLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(BackroomBlocks.ALMOND_TREE_SAPLING);
         addDrop(BackroomBlocks.ALMOND_TREE_LOG);
         addDrop(BackroomBlocks.ALMOND_TREE_PLANKS);
+
+        addDrop(BackroomBlocks.LARGE_HORIZONTAL_PIPE, Items.IRON_NUGGET);
+        addDrop(BackroomBlocks.VERTICAL_PIPE, Items.IRON_NUGGET);
+        addDrop(BackroomBlocks.CEILING_PIPE, Items.IRON_NUGGET);
 
         addDrop(BackroomBlocks.ALMOND_TREE_LEAVES,
                 leavesDrops(

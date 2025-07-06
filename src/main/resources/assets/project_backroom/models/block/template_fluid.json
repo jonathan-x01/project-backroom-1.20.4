@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "layer0": "minecraft:block/water_still",
+    "layer1": "block/fluid_still_particles"
+  }
+}

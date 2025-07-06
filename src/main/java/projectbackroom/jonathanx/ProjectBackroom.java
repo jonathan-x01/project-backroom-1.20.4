@@ -67,6 +67,10 @@ public class ProjectBackroom implements ModInitializer {
 		return new Identifier(MOD_ID, path);
 	}
 
+	public static Identifier minecraftId(String path){
+		return new Identifier("minecraft", path);
+	}
+
 	public static final String ANSI_BLUE    = "\u001B[34m";
 	public static final String ANSI_YELLOW  = "\u001B[33m";
 	public static final String ANSI_CYAN    = "\u001B[36m";

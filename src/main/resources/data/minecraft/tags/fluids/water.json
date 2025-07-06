@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "project_backroom:almond_water",
+    "project_backroom:flowing_almond_water",
+    "project_backroom:contaminated_water",
+    "project_backroom:flowing_contaminated_water"
+  ]
+}

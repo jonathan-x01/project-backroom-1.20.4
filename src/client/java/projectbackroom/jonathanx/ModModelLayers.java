@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.fluid.BackroomFluids;
 import projectbackroom.jonathanx.registry.BackroomEntities;
 import projectbackroom.jonathanx.rendering.entities.DeathmothRenderer;
 import projectbackroom.jonathanx.rendering.entities.FacelingRenderer;
@@ -48,6 +49,8 @@ public class ModModelLayers implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(BackroomBlocks.ALMOND_TREE_SAPLING, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BackroomBlocks.ALMOND_TREE_DOOR, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BackroomBlocks.ALMOND_TREE_TRAPDOOR, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), BackroomFluids.ALMOND_WATER, BackroomFluids.FLOWING_ALMOND_WATER, BackroomFluids.CONTAMINATED_WATER, BackroomFluids.FLOWING_CONTAMINATED_WATER);
     }
 
     public <E extends Entity> void register(EntityType<? extends E> entityType, EntityRendererFactory<E> entityRendererFactory, EntityModelLayer modelLayer, EntityModelLayerRegistry.TexturedModelDataProvider provider){

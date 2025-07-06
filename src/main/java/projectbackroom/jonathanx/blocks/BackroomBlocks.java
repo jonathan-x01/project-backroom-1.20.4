@@ -4,6 +4,8 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -62,8 +64,10 @@ public class BackroomBlocks {
     public static final Block ALMOND_TREE_BUTTON;
     public static final Block ALMOND_TREE_PRESSURE_PLATE;
 
-    // Fluid
-    public static Block ALMOND_WATER_FLUID;
+    // Fluids
+    public static Block ALMOND_WATER_BLOCK;
+    public static Block CONTAMINATED_WATER_BLOCK;
+    public static Block BLACK_SLUDGE_BLOCK;
 
     /**
      * Registers a block with the Project Backrooms mod.
@@ -76,7 +80,26 @@ public class BackroomBlocks {
             pipeBlocks.add(block);
         }
         registerBlockItem(name,block);
+        return registerBlockWithoutItem(name, block);
+    }
+
+    public static Block registerBlockWithoutItem(String name, Block block){
         return Registry.register(Registries.BLOCK, ProjectBackroom.id(name),block);
+    }
+
+    public static Block registerFluidBlock(String name, FlowableFluid flowableFluid, int primaryColor){
+        return registerBlockWithoutItem(name + "_fluid", new BackroomFluidBlock(
+                flowableFluid,
+                FabricBlockSettings.create()
+                        .replaceable()
+                        .noCollision()
+                        .strength(100.0f)
+                        .pistonBehavior(PistonBehavior.DESTROY)
+                        .dropsNothing()
+                        .liquid()
+                        .sounds(BlockSoundGroup.INTENTIONALLY_EMPTY),
+                primaryColor
+        ));
     }
 
     public static Item registerBlockItem(String name, Block block){
@@ -91,7 +114,10 @@ public class BackroomBlocks {
     public static void registerModdedBlocks(){
         ProjectBackroom.displayRegisteredSectors(BackroomBlocks.class);
 
-        ALMOND_WATER_FLUID = registerBlock("almond_water_fluid", new FluidBlock(BackroomFluids.ALMOND_WATER, FabricBlockSettings.copyOf(Blocks.WATER).mapColor(MapColor.WHITE)));
+        ALMOND_WATER_BLOCK = registerFluidBlock("almond_water", BackroomFluids.ALMOND_WATER, 0xFFECB3);
+        CONTAMINATED_WATER_BLOCK = registerFluidBlock("contaminated_water", BackroomFluids.CONTAMINATED_WATER, 0x556B2F);
+        BLACK_SLUDGE_BLOCK = registerFluidBlock("black_sludge", BackroomFluids.BLACK_SLUDGE, 0x000000);
+
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
             content.addBefore(Items.BRICKS,WHITE_BRICKS);
             content.addBefore(Items.OAK_LOG, ALMOND_TREE_BUTTON);

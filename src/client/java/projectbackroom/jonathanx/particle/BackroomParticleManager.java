@@ -4,18 +4,15 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceReloader;
 import net.minecraft.util.profiler.Profiler;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
 public class BackroomParticleManager implements ResourceReloader {
@@ -25,8 +22,14 @@ public class BackroomParticleManager implements ResourceReloader {
     }
 
     public static void registerDefaultFactories(){
+        registerSplashFactory(BackroomParticleTypes.SPLASH, WaterSplashParticle.SplashFactory::new);
+        registerFactory(BackroomParticleTypes.CONTAMINATED_WATER_SPLASH, ContaminatedWaterSplash.Factory::new);
+        registerFactory(BackroomParticleTypes.ALMOND_WATER_BUBBLE, Bubble.AlmondWaterBubbleFactory::new);
+        registerFactory(BackroomParticleTypes.CONTAMINATED_WATER_BUBBLE, Bubble.ContaminatedWaterBubbleFactory::new);
+
         registerPipeLeakFactory(BackroomParticleTypes.DRIPPING_ALMOND_WATER, BackroomPipeLeakParticle::createDrippingAlmondWater);
         registerPipeLeakFactory(BackroomParticleTypes.FALLING_ALMOND_WATER, BackroomPipeLeakParticle::createFallingAlmondWater);
+        registerPipeLeakFactory(BackroomParticleTypes.LANDING_ALMOND_WATER, BackroomPipeLeakParticle::createLandingAlmondWater);
 
         registerPipeLeakFactory(BackroomParticleTypes.DRIPPING_BLACK_SLUDGE, BackroomPipeLeakParticle::createDrippingBlackSludge);
         registerPipeLeakFactory(BackroomParticleTypes.FALLING_BLACK_SLUDGE, BackroomPipeLeakParticle::createFallingBlackSludge);
@@ -34,9 +37,17 @@ public class BackroomParticleManager implements ResourceReloader {
 
         registerPipeLeakFactory(BackroomParticleTypes.DRIPPING_CONTAMINATED_WATER, BackroomPipeLeakParticle::createDrippingContaminatedWater);
         registerPipeLeakFactory(BackroomParticleTypes.FALLING_CONTAMINATED_WATER, BackroomPipeLeakParticle::createFallingContaminatedWater);
+        registerPipeLeakFactory(BackroomParticleTypes.LANDING_CONTAMINATED_WATER, BackroomPipeLeakParticle::createLandingContaminatedWater);
     }
 
-    public static <T extends ParticleEffect> void registerFactory(ParticleType<T> type, ParticleFactory<T> factory){
+    public static <T extends ParticleEffect> void registerFactory(
+            ParticleType<T> type,
+            Function<SpriteProvider, ParticleFactory<T>> factoryProvider
+    ) {
+        ParticleFactoryRegistry.getInstance().register(type, factoryProvider::apply);
+    }
+
+    public static <T extends ParticleEffect> void registerSplashFactory(ParticleType<T> type, ParticleFactoryRegistry.PendingParticleFactory<T> factory){
         ParticleFactoryRegistry.getInstance().register(type, factory);
     }
 
