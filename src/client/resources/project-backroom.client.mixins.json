@@ -3,6 +3,8 @@
   "package": "projectbackroom.jonathanx.mixin.client",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "BackgroundRendererMxin",
+    "CameraMixin",
     "ExampleClientMixin",
     "ParticleAccessor"
   ],

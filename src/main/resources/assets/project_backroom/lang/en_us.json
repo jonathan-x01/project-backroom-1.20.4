@@ -23,6 +23,8 @@
   "block.project_backroom.level_0_dropceiling": "Dropceiling (Level 0)",
   "block.project_backroom.level_0_fluorescent_dropceiling": "Fluorescent Dropceiling (Level 0)",
 
+  "block.project_backroom.pipe.cannot_collect": "You cannot collect the fluid",
+
   "block.project_backroom.large_horizontal_pipe": "Large Horizontal Pipe",
   "block.project_backroom.ceiling_pipe": "Ceiling Pipe",
   "block.project_backroom.vertical_pipe": "Vertical Pipe",

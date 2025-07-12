@@ -7,6 +7,7 @@ import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
@@ -18,6 +19,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
 
 public abstract class BackroomsFlowableFluid extends FlowableFluid {
     private final SoundEvent ambience;
@@ -28,7 +30,8 @@ public abstract class BackroomsFlowableFluid extends FlowableFluid {
         this.category = category;
     }
 
-    public abstract Item getBottleItem();
+    public abstract ItemStack getBottleItem();
+    public abstract BackroomFluidBlock getFluidBlock();
 
     @Override
     protected boolean isInfinite(World world) {

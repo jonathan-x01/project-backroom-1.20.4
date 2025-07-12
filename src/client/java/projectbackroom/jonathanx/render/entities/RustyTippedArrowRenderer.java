@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.rendering.entities;
+package projectbackroom.jonathanx.render.entities;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

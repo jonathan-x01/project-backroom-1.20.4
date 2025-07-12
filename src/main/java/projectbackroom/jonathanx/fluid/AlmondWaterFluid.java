@@ -4,12 +4,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.particle.BackroomParticleTypes;
 
 public class AlmondWaterFluid extends BackroomsFlowableFluid {
@@ -33,8 +35,13 @@ public class AlmondWaterFluid extends BackroomsFlowableFluid {
     }
 
     @Override
-    public Item getBottleItem() {
+    public ItemStack getBottleItem() {
         return null;
+    }
+
+    @Override
+    public BackroomFluidBlock getFluidBlock() {
+        return (BackroomFluidBlock) BackroomBlocks.ALMOND_WATER_BLOCK;
     }
 
     @Override

@@ -12,7 +12,12 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import projectbackroom.jonathanx.blocks.fluids.BlackSludgeFluidBlock;
+import projectbackroom.jonathanx.blocks.fluids.ContaminatedWaterBlock;
+import projectbackroom.jonathanx.blocks.fluids.FluidBlockFactory;
 import projectbackroom.jonathanx.blocks.level0.FluorescentDropceiling;
 import projectbackroom.jonathanx.blocks.level0.Wallpaper;
 import projectbackroom.jonathanx.blocks.level0.YellowCarpet;
@@ -87,37 +92,39 @@ public class BackroomBlocks {
         return Registry.register(Registries.BLOCK, ProjectBackroom.id(name),block);
     }
 
-    public static Block registerFluidBlock(String name, FlowableFluid flowableFluid, int primaryColor){
-        return registerBlockWithoutItem(name + "_fluid", new BackroomFluidBlock(
-                flowableFluid,
-                FabricBlockSettings.create()
-                        .replaceable()
-                        .noCollision()
-                        .strength(100.0f)
-                        .pistonBehavior(PistonBehavior.DESTROY)
-                        .dropsNothing()
-                        .liquid()
-                        .sounds(BlockSoundGroup.INTENTIONALLY_EMPTY),
-                primaryColor
-        ));
+    public static Block registerFluidBlock(String name, FlowableFluid flowableFluid, FluidBlockFactory factory, BackroomFluidBlock.Settings settings){
+        return registerBlockWithoutItem(
+                name + "_fluid",
+                factory.create(
+                        flowableFluid,
+                        FabricBlockSettings.create()
+                                .replaceable()
+                                .noCollision()
+                                .strength(100.0f)
+                                .pistonBehavior(PistonBehavior.DESTROY)
+                                .dropsNothing()
+                                .liquid()
+                                .sounds(BlockSoundGroup.INTENTIONALLY_EMPTY),
+                        settings
+                )
+        );
     }
 
     public static Item registerBlockItem(String name, Block block){
-        Item ITEM = Registry.register(Registries.ITEM, ProjectBackroom.id(name), new BlockItem(block,new FabricItemSettings()));
-        return ITEM;
+        return Registry.register(Registries.ITEM, ProjectBackroom.id(name), new BlockItem(block,new FabricItemSettings()));
     }
 
     private static Block createStairsBlock(Block base) {
         return new StairsBlock(base.getDefaultState(), AbstractBlock.Settings.copy(base));
     }
 
-    public static void registerModdedBlocks(){
+    public static void registerBackroomBlocks(){
         ProjectBackroom.displayRegisteredSectors(BackroomBlocks.class);
+        registerBackroomFluids();
+        registerItemGroups();
+    }
 
-        ALMOND_WATER_BLOCK = registerFluidBlock("almond_water", BackroomFluids.ALMOND_WATER, 0xFFECB3);
-        CONTAMINATED_WATER_BLOCK = registerFluidBlock("contaminated_water", BackroomFluids.CONTAMINATED_WATER, 0x556B2F);
-        BLACK_SLUDGE_BLOCK = registerFluidBlock("black_sludge", BackroomFluids.BLACK_SLUDGE, 0x000000);
-
+    public static void registerItemGroups(){
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
             content.addBefore(Items.BRICKS,WHITE_BRICKS);
             content.addBefore(Items.OAK_LOG, ALMOND_TREE_BUTTON);
@@ -153,6 +160,27 @@ public class BackroomBlocks {
                     entries.add(WALL_LIGHT);
                     entries.add(BIOLOGICAL_PIPE);
                 });
+    }
+
+    public static void registerBackroomFluids(){
+        ALMOND_WATER_BLOCK = registerFluidBlock("almond_water", BackroomFluids.ALMOND_WATER, BackroomFluidBlock::new,
+                BackroomFluidBlock.Settings.create()
+                        .setColor(0xFFECB3)
+        );
+
+        CONTAMINATED_WATER_BLOCK = registerFluidBlock("contaminated_water", BackroomFluids.CONTAMINATED_WATER, ContaminatedWaterBlock::new,
+                BackroomFluidBlock.Settings.create()
+                        .setColor(0x556B2F)
+        );
+
+        BLACK_SLUDGE_BLOCK = registerFluidBlock("black_sludge", BackroomFluids.BLACK_SLUDGE, BlackSludgeFluidBlock::new,
+                BackroomFluidBlock.Settings.create()
+                        .setColor(0x000000)
+                        .setSpeed(0.005f)
+                        .setDrag(new Vec3d(0.5, 0.4, 0.5))
+                        .setFogStart(0.25f)
+                        .setFogEnd(1.0f)
+        );
     }
 
     static {

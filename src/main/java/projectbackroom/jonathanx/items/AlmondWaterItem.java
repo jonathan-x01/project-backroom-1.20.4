@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import projectbackroom.jonathanx.registry.ModStatusEffects;
 
-public class AlmondWaterItem extends Item {
+public class AlmondWaterItem extends DrinkableItem {
     public AlmondWaterItem(Settings settings) {
         super(settings);
     }

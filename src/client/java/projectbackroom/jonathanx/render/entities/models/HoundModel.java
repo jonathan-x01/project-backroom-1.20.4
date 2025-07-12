@@ -2,7 +2,7 @@
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
 
-package projectbackroom.jonathanx.rendering.entities.models;
+package projectbackroom.jonathanx.render.entities.models;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -10,7 +10,7 @@ import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import projectbackroom.jonathanx.entity.hostile.HoundEntity;
-import projectbackroom.jonathanx.rendering.entities.animations.HoundAnimations;
+import projectbackroom.jonathanx.render.entities.animations.HoundAnimations;
 
 public class HoundModel<T extends HoundEntity> extends SinglePartEntityModel<T> {
 	private final ModelPart body;

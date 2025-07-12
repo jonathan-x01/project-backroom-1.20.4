@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.rendering.entities;
+package projectbackroom.jonathanx.render.entities;
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ModModelLayers;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.entity.hostile.DeathmothEntity;
-import projectbackroom.jonathanx.rendering.entities.models.DeathmothModel;
+import projectbackroom.jonathanx.render.entities.models.DeathmothModel;
 
 public class DeathmothRenderer extends MobEntityRenderer<DeathmothEntity, DeathmothModel<DeathmothEntity>> {
     // 0 = male

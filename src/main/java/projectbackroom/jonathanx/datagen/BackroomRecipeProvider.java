@@ -38,5 +38,14 @@ public class BackroomRecipeProvider extends FabricRecipeProvider {
                 .input('F', Items.FEATHER)
                 .criterion(hasItem(BackroomItems.RUSTY_SHARD), conditionsFromItem(BackroomItems.RUSTY_SHARD))
                 .offerTo(exporter, new Identifier(getRecipeName(BackroomItems.RUSTY_TIPPED_ARROW)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, BackroomItems.ALMOND_MILK_BUCKET, 1)
+                .pattern("AAA")
+                .pattern("AMA")
+                .pattern("AAA")
+                .input('A', BackroomItems.ALMOND_SEED)
+                .input('M', Items.MILK_BUCKET)
+                .criterion(hasItem(BackroomItems.ALMOND_SEED), conditionsFromItem(BackroomItems.ALMOND_SEED))
+                .offerTo(exporter, new Identifier(getRecipeName(BackroomItems.ALMOND_MILK_BUCKET)));
     }
 }

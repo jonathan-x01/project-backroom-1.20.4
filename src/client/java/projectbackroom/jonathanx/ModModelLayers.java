@@ -15,14 +15,14 @@ import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
 import projectbackroom.jonathanx.fluid.BackroomFluids;
 import projectbackroom.jonathanx.registry.BackroomEntities;
-import projectbackroom.jonathanx.rendering.entities.DeathmothRenderer;
-import projectbackroom.jonathanx.rendering.entities.FacelingRenderer;
-import projectbackroom.jonathanx.rendering.entities.HoundRenderer;
-import projectbackroom.jonathanx.rendering.entities.SmilerRenderer;
-import projectbackroom.jonathanx.rendering.entities.models.DeathmothModel;
-import projectbackroom.jonathanx.rendering.entities.models.FacelingModel;
-import projectbackroom.jonathanx.rendering.entities.models.HoundModel;
-import projectbackroom.jonathanx.rendering.entities.models.SmilerModel;
+import projectbackroom.jonathanx.render.entities.DeathmothRenderer;
+import projectbackroom.jonathanx.render.entities.FacelingRenderer;
+import projectbackroom.jonathanx.render.entities.HoundRenderer;
+import projectbackroom.jonathanx.render.entities.SmilerRenderer;
+import projectbackroom.jonathanx.render.entities.models.DeathmothModel;
+import projectbackroom.jonathanx.render.entities.models.FacelingModel;
+import projectbackroom.jonathanx.render.entities.models.HoundModel;
+import projectbackroom.jonathanx.render.entities.models.SmilerModel;
 
 @Environment(EnvType.CLIENT)
 public class ModModelLayers implements ClientModInitializer {

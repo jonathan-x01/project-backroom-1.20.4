@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.rendering.entities;
+package projectbackroom.jonathanx.render.entities;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;

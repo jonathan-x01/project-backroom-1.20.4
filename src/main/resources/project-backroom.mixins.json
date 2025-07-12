@@ -3,9 +3,11 @@
   "package": "projectbackroom.jonathanx.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "EntityMixin",
     "ExampleMixin",
     "FluidSplashMixin",
     "GlassBottleItemMixin",
+    "LivingEntityMixin",
     "PlayerDimensionChangeMixin",
     "PlayerEntityMixin"
   ],

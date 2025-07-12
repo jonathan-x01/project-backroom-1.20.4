@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.rendering.entities;
+package projectbackroom.jonathanx.render.entities;
 
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.rendering.entities.models.FacelingModel;
+import projectbackroom.jonathanx.render.entities.models.FacelingModel;
 import projectbackroom.jonathanx.ModModelLayers;
 import projectbackroom.jonathanx.entity.neutral.FacelingEntity;
 

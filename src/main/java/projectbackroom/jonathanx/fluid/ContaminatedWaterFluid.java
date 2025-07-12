@@ -5,11 +5,13 @@ import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import projectbackroom.jonathanx.items.BackroomItems;
 
 public class ContaminatedWaterFluid extends BackroomsFlowableFluid {
     public ContaminatedWaterFluid() {
@@ -17,8 +19,13 @@ public class ContaminatedWaterFluid extends BackroomsFlowableFluid {
     }
 
     @Override
-    public Item getBottleItem() {
-        return null;
+    public ItemStack getBottleItem() {
+        return new ItemStack(BackroomItems.CONTAMINATED_WATER);
+    }
+
+    @Override
+    public BackroomFluidBlock getFluidBlock() {
+        return (BackroomFluidBlock) BackroomBlocks.CONTAMINATED_WATER_BLOCK;
     }
 
     @Override

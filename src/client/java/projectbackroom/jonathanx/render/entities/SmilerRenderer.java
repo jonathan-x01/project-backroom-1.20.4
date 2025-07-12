@@ -1,4 +1,4 @@
-package projectbackroom.jonathanx.rendering.entities;
+package projectbackroom.jonathanx.render.entities;
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import projectbackroom.jonathanx.ModModelLayers;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.entity.hostile.SmilerEntity;
-import projectbackroom.jonathanx.rendering.entities.models.SmilerModel;
+import projectbackroom.jonathanx.render.entities.models.SmilerModel;
 
 public class SmilerRenderer extends MobEntityRenderer<SmilerEntity, SmilerModel<SmilerEntity>> {
     public static final Identifier TEXTURE = new Identifier(ProjectBackroom.MOD_ID,"textures/entity/smiler_face.png");

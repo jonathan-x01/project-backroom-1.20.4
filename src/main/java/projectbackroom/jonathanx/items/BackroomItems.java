@@ -13,9 +13,10 @@ import projectbackroom.jonathanx.registry.ModItemGroups;
 
 public class BackroomItems {
     // Misc items
-    public static Item ORIGINAL_ALMOND_WATER = registerFood("original_almond_water",new OriginalAlmondWater(new Item.Settings().food(new FoodComponent.Builder().alwaysEdible().build())));
-    public static Item LIQUID_PAIN = registerFood("liquid_pain",new LiquidPain(new Item.Settings().food(new FoodComponent.Builder().alwaysEdible().build())));
-    public static Item CONTAMINATED_WATER = registerFood("contaminated_bottle_water", new ContaminatedBottleWater(new Item.Settings().maxCount(1).food(new FoodComponent.Builder().hunger(1).alwaysEdible().build())));
+    public static Item ORIGINAL_ALMOND_WATER = registerFood("original_almond_water",new OriginalAlmondWaterItem(new Item.Settings().food(new FoodComponent.Builder().alwaysEdible().build())));
+    public static Item ALMOND_MILK_BUCKET = registerFood("almond_milk_bucket", new AlmondMilkBucketItem(new FabricItemSettings().food(new FoodComponent.Builder().alwaysEdible().build()).recipeRemainder(Items.BUCKET)));
+    public static Item LIQUID_PAIN = registerFood("liquid_pain",new LiquidPainItem(new Item.Settings().food(new FoodComponent.Builder().alwaysEdible().build())));
+    public static Item CONTAMINATED_WATER = registerFood("contaminated_bottle_water", new ContaminatedBottleWaterItem(new Item.Settings().maxCount(1).food(new FoodComponent.Builder().hunger(1).alwaysEdible().build())));
     public static Item ALMOND_SEED = registerFood("almond_seed", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(2).build())));
     public static Item ALMOND_HUSK = register("almond_husk", new Item(new FabricItemSettings()));
     public static Item ALMOND = register("almond", new Item(new FabricItemSettings().recipeRemainder(ALMOND_HUSK)));
@@ -52,6 +53,7 @@ public class BackroomItems {
                     entries.add(ORIGINAL_ALMOND_WATER);
                     entries.add(LIQUID_PAIN);
                     entries.add(CONTAMINATED_WATER);
+                    entries.add(ALMOND_MILK_BUCKET);
                     entries.add(ALMOND);
                     entries.add(ALMOND_HUSK);
                     entries.add(ALMOND_SEED);

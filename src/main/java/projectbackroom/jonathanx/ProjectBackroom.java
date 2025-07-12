@@ -2,14 +2,20 @@ package projectbackroom.jonathanx;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.entity.Entity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potions;
 import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import org.apache.http.annotation.Obsolete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,10 +43,11 @@ public class ProjectBackroom implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItemGroups.registerModdedItemGroups();
+		BackroomFluidTags.registerFluidTags();
 
 		BackroomFluids.registerFluid();
 		BackroomBlockEntities.initialize();
-		BackroomBlocks.registerModdedBlocks();
+		BackroomBlocks.registerBackroomBlocks();
 		ModSounds.registerModdedSounds();
 		BackroomItems.registerModdedItems();
 		ModStatusEffects.registerModdedStatusEffects();
@@ -61,14 +68,36 @@ public class ProjectBackroom implements ModInitializer {
 
 		BrewingRecipeRegistry.registerPotionRecipe(Potions.WATER, BackroomItems.ALMOND_SEED, BackroomPotions.HOMEMADE_ALMOND_WATER);
 		BrewingRecipeRegistry.craft(new ItemStack(BackroomItems.ALMOND_SEED), new ItemStack(BackroomItems.ORIGINAL_ALMOND_WATER));
+
+		this.initServerTicks();
+	}
+
+	private void initServerTicks(){
+		ServerTickEvents.END_SERVER_TICK.register(server -> {
+			for (ServerWorld world : server.getWorlds()){
+				for (Entity entity : world.iterateEntities()){
+					BlockPos pos = entity.getBlockPos();
+					BlockState state = world.getBlockState(pos);
+
+					FluidState fluidState = state.getFluidState();
+					if (fluidState.isOf(BackroomFluids.BLACK_SLUDGE) || fluidState.isOf(BackroomFluids.FLOWING_BLACK_SLUDGE)){
+						double height = fluidState.getHeight(world, pos);
+
+						if (height > 0.0){
+							/*Vec3d velocity = entity.getVelocity();
+
+							double sinkSpeed = -0.02;
+							entity.setVelocity(velocity.x * 0.9, Math.max(velocity.y, sinkSpeed), velocity.z * 0.9);
+							entity.velocityModified = true;*/
+						}
+					}
+				}
+			}
+		});
 	}
 
 	public static Identifier id(String path){
 		return new Identifier(MOD_ID, path);
-	}
-
-	public static Identifier minecraftId(String path){
-		return new Identifier("minecraft", path);
 	}
 
 	public static final String ANSI_BLUE    = "\u001B[34m";
@@ -113,6 +142,24 @@ public class ProjectBackroom implements ModInitializer {
 			}
 		}
 		LOGGER.warn(ANSI_YELLOW + "-- DEBUG END --");
+	}
+
+	/**
+	 * Displays a debug message every tick. Useful for methods that would run every tick, that way the IDE can handle it.
+	 * @param age = Simply get the age of the entity.
+	 * @param increment = How many times per tick the message will display. 20 ticks = 1 second
+	 * @param msg = The message to display/
+	 */
+	public static void debug(int age, int increment, Object msg){
+		if (age % increment == 0){
+			debug(msg);
+		}
+	}
+
+	public static void debug(int age, int increment, Object... msg){
+		if (age % increment == 0){
+			debug(msg);
+		}
 	}
 
 	@Obsolete

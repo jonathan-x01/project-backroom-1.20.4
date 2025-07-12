@@ -5,11 +5,16 @@ import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldView;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
 
 public class BlackSludgeFluid extends BackroomsFlowableFluid {
     public BlackSludgeFluid() {
@@ -17,8 +22,23 @@ public class BlackSludgeFluid extends BackroomsFlowableFluid {
     }
 
     @Override
-    public Item getBottleItem() {
+    public Vec3d getVelocity(BlockView world, BlockPos pos, FluidState state) {
+        return new Vec3d(0.0, -0.2, 0);
+    }
+
+    @Override
+    protected int getFlowSpeed(WorldView world) {
+        return 2;
+    }
+
+    @Override
+    public ItemStack getBottleItem() {
         return null;
+    }
+
+    @Override
+    public BackroomFluidBlock getFluidBlock() {
+        return (BackroomFluidBlock) BackroomBlocks.BLACK_SLUDGE_BLOCK;
     }
 
     @Override

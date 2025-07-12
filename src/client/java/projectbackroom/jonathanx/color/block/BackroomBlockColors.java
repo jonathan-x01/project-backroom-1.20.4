@@ -1,15 +1,12 @@
 package projectbackroom.jonathanx.color.block;
 
-import java.util.Iterator;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
-import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.blocks.BackroomBlocks;
-import projectbackroom.jonathanx.blocks.BackroomFluidBlock;
 
 @Environment(EnvType.CLIENT)
 public class BackroomBlockColors extends BlockColors {
