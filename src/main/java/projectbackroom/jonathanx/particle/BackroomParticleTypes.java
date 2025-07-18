@@ -29,7 +29,7 @@ public class BackroomParticleTypes {
     public static final DefaultParticleType SPLASH = register("splash", FabricParticleTypes.simple());
 
     private static DefaultParticleType register(String name, DefaultParticleType type){
-        return Registry.register(Registries.PARTICLE_TYPE, new Identifier(ProjectBackroom.MOD_ID,name), type);
+        return Registry.register(Registries.PARTICLE_TYPE, ProjectBackroom.id(name), type);
     }
 
     public static void registerParticles(){

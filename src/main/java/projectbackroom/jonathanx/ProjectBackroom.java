@@ -26,6 +26,8 @@ import projectbackroom.jonathanx.items.BackroomItems;
 import projectbackroom.jonathanx.particle.BackroomParticleTypes;
 import projectbackroom.jonathanx.registry.*;
 import projectbackroom.jonathanx.registry.ModStatusEffects;
+import projectbackroom.jonathanx.villager.BackroomVillager;
+import projectbackroom.jonathanx.villager.VillagerTrades;
 import projectbackroom.jonathanx.world.gen.chunk.Level1Generation;
 import projectbackroom.jonathanx.world.gen.chunk.WFCChunkGenerator;
 import projectbackroom.jonathanx.world.gen.chunk.PointMazeGenerator;
@@ -54,6 +56,9 @@ public class ProjectBackroom implements ModInitializer {
 		BackroomEntities.registerModdedEntities();
 		BackroomParticleTypes.registerParticles();
 
+		BackroomVillager.registerVillagers();
+		VillagerTrades.registerVillagerTrades();
+
 		initChunkGeneration();
 
 		ModItemGroups.buildAll();
@@ -68,32 +73,6 @@ public class ProjectBackroom implements ModInitializer {
 
 		BrewingRecipeRegistry.registerPotionRecipe(Potions.WATER, BackroomItems.ALMOND_SEED, BackroomPotions.HOMEMADE_ALMOND_WATER);
 		BrewingRecipeRegistry.craft(new ItemStack(BackroomItems.ALMOND_SEED), new ItemStack(BackroomItems.ORIGINAL_ALMOND_WATER));
-
-		this.initServerTicks();
-	}
-
-	private void initServerTicks(){
-		ServerTickEvents.END_SERVER_TICK.register(server -> {
-			for (ServerWorld world : server.getWorlds()){
-				for (Entity entity : world.iterateEntities()){
-					BlockPos pos = entity.getBlockPos();
-					BlockState state = world.getBlockState(pos);
-
-					FluidState fluidState = state.getFluidState();
-					if (fluidState.isOf(BackroomFluids.BLACK_SLUDGE) || fluidState.isOf(BackroomFluids.FLOWING_BLACK_SLUDGE)){
-						double height = fluidState.getHeight(world, pos);
-
-						if (height > 0.0){
-							/*Vec3d velocity = entity.getVelocity();
-
-							double sinkSpeed = -0.02;
-							entity.setVelocity(velocity.x * 0.9, Math.max(velocity.y, sinkSpeed), velocity.z * 0.9);
-							entity.velocityModified = true;*/
-						}
-					}
-				}
-			}
-		});
 	}
 
 	public static Identifier id(String path){

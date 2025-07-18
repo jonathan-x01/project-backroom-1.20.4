@@ -69,6 +69,8 @@ public class BackroomBlocks {
     public static final Block ALMOND_TREE_BUTTON;
     public static final Block ALMOND_TREE_PRESSURE_PLATE;
 
+    public static final Block CONSPIRACY_TABLE;
+
     // Fluids
     public static Block ALMOND_WATER_BLOCK;
     public static Block CONTAMINATED_WATER_BLOCK;
@@ -140,6 +142,10 @@ public class BackroomBlocks {
             content.addBefore(ALMOND_TREE_WOOD, ALMOND_TREE_LOG);
         });
 
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
+            content.addAfter(Items.LOOM, CONSPIRACY_TABLE);
+        });
+
         ModItemGroups.getItemGroup("backroom_flora")
                 .entries((displayContext, entries) -> {
                     entries.add(ALMOND_TREE_SAPLING);
@@ -201,6 +207,7 @@ public class BackroomBlocks {
                 .sounds(BlockSoundGroup.GLASS)
                 .luminance((value) -> value.get(FluorescentDropceiling.LIGHTING)))
         );
+        CONSPIRACY_TABLE = registerBlock("conspiracy_table", new Block(FabricBlockSettings.create()));
 
         // Level 2 Blocks
         LARGE_HORIZONTAL_PIPE = registerBlock("large_horizontal_pipe", new LargeHorizontalPipeBlock(AbstractBlock.Settings.create().nonOpaque()));

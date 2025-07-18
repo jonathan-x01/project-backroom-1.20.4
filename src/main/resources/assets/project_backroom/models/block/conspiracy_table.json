@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/oak_planks",
+    "east": "project_backroom:block/conspiracy_table_side",
+    "north": "project_backroom:block/conspiracy_table_front",
+    "particle": "project_backroom:block/conspiracy_table_front",
+    "south": "project_backroom:block/conspiracy_table_side",
+    "up": "project_backroom:block/conspiracy_table_top",
+    "west": "project_backroom:block/conspiracy_table_front"
+  }
+}

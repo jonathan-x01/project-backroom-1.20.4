@@ -17,7 +17,6 @@ public class BackroomBlockEntities {
 
     public static final BlockEntityType<PipeBlockEntity> PIPE_BLOCK_ENTITY = register(
             "pipe_block_entity",
-
             FabricBlockEntityTypeBuilder.create(PipeBlockEntity::new, BackroomBlocks.pipeBlocks.toArray(new Block[0])).build()
     );
 

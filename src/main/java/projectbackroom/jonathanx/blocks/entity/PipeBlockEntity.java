@@ -23,10 +23,6 @@ public class PipeBlockEntity extends BlockEntity {
         super(BackroomBlockEntities.PIPE_BLOCK_ENTITY, pos, state);
     }
 
-    public void setVarietyID(int id){
-        this.varietyID = id;
-    }
-
     public void setPipeVariety(LargeHorizontalPipeTypes pipeVariety){
         this.pipeVariety = pipeVariety;
     }
@@ -37,14 +33,6 @@ public class PipeBlockEntity extends BlockEntity {
         if (this.world != null && !this.world.isClient) {
             this.world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
         }
-    }
-
-    public int getVarietyID(){
-        return this.varietyID;
-    }
-
-    public LargeHorizontalPipeTypes getPipeVariety(){
-        return this.pipeVariety;
     }
 
     public Fluid getFluidContainer(){

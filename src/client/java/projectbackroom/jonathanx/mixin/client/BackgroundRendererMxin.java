@@ -19,7 +19,8 @@ import projectbackroom.jonathanx.util.ColorManager;
 
 @Environment(EnvType.CLIENT)
 @Mixin(BackgroundRenderer.class)
-public abstract class BackgroundRendererMxin {
+public abstract class
+BackgroundRendererMxin {
     @Shadow private static float red;
     @Shadow private static float green;
     @Shadow private static float blue;
