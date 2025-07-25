@@ -5,20 +5,23 @@
 package projectbackroom.jonathanx.render.entities.models;
 
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.util.math.MathHelper;
 import projectbackroom.jonathanx.render.entities.animations.FacelingAnimations;
-import projectbackroom.jonathanx.entity.neutral.FacelingEntity;
+import projectbackroom.jonathanx.render.entities.state.BackroomEntityRenderState;
 
-public class FacelingModel<T extends FacelingEntity> extends SinglePartEntityModel<T> {
+@SuppressWarnings("unused")
+public class FacelingModel extends EntityModel<BackroomEntityRenderState> {
 	private final ModelPart faceling;
 	private final ModelPart head;
+
 	public FacelingModel(ModelPart root) {
+		super(root);
 		this.faceling = root.getChild("faceling");
 		this.head = faceling.getChild("head");
 	}
+
+
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
@@ -39,12 +42,12 @@ public class FacelingModel<T extends FacelingEntity> extends SinglePartEntityMod
 	}
 
 	@Override
-	public void setAngles(FacelingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.getPart().traverse().forEach(ModelPart::resetTransform);
-		this.setHeadAngles(netHeadYaw, headPitch);
+	public void setAngles(BackroomEntityRenderState state) {
+		super.setAngles(state);
+		this.setHeadAngles(state.yawDegrees, state.pitch);
 
-		this.animateMovement(FacelingAnimations.FACELING_WALK, limbSwing, limbSwingAmount, 1.25f, 0.5f);
-		this.updateAnimation(FacelingEntity.idleAnimationState, FacelingAnimations.FACELING_IDLE, ageInTicks,2f);
+		this.animateWalking(FacelingAnimations.FACELING_WALK, state.limbFrequency, state.limbAmplitudeMultiplier, 2f, 2.5f);
+		this.animate(state.idleAnimationState, FacelingAnimations.FACELING_IDLE, state.age, 1f);
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch){
@@ -55,19 +58,6 @@ public class FacelingModel<T extends FacelingEntity> extends SinglePartEntityMod
 		this.head.pitch = headPitch * 0.017453292F;
 	}
 
-	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		/*Head.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-		Body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-		RightArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-		LeftArm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-		RightLeg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-		LeftLeg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-		bb_main.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);*/
-		faceling.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-	}
-
-	@Override
 	public ModelPart getPart() {
 		return faceling;
 	}

@@ -8,6 +8,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -23,14 +24,13 @@ public class TetanusStatusEffect extends StatusEffect {
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-        super.applyUpdateEffect(entity, amplifier);
+    public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
         int tickRandom = ThreadLocalRandom.current().nextInt(10, 30);
-        if (entity.age % tickRandom != 0) return;
+        if (entity.age % tickRandom != 0) return false;
 
         int percentage = ThreadLocalRandom.current().nextInt(0, 101);
         if (percentage < 10){
-            entity.damage(entity.getDamageSources().magic(), 2);
+            entity.damage(world, entity.getDamageSources().magic(), 2);
         } else if (percentage < 30){
             if (entity.isOnGround()){
                 entity.setVelocity(entity.getVelocity().add(0, 0.42D, 0));
@@ -45,5 +45,6 @@ public class TetanusStatusEffect extends StatusEffect {
         } else if (percentage < 80){
             entity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, tickRandom, amplifier, false, false));
         }
+        return super.applyUpdateEffect(world, entity, amplifier);
     }
 }

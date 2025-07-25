@@ -1,6 +1,7 @@
 package projectbackroom.jonathanx.world.gen.chunk;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -14,13 +15,12 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.Blender;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.noise.NoiseConfig;
-import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.world.gen.components.Level1LayoutGenerator;
 
 import java.util.*;
@@ -28,7 +28,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public class Level1Generation extends ChunkGenerator {
-    public static final Codec<Level1Generation> CODEC = RecordCodecBuilder.create(instance ->
+    public static final MapCodec<Level1Generation> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter(Level1Generation::getBiomeSource),
                     Codec.STRING.fieldOf("jigsaw_name").forGetter(Level1Generation::getName),
@@ -56,12 +56,12 @@ public class Level1Generation extends ChunkGenerator {
     }
 
     @Override
-    protected Codec<? extends ChunkGenerator> getCodec() {
+    protected MapCodec<? extends ChunkGenerator> getCodec() {
         return CODEC;
     }
 
     @Override
-    public void carve(ChunkRegion chunkRegion, long seed, NoiseConfig noiseConfig, BiomeAccess biomeAccess, StructureAccessor structureAccessor, Chunk chunk, GenerationStep.Carver carverStep) {
+    public void carve(ChunkRegion chunkRegion, long seed, NoiseConfig noiseConfig, BiomeAccess biomeAccess, StructureAccessor structureAccessor, Chunk chunk) {
 
     }
 
@@ -126,8 +126,6 @@ public class Level1Generation extends ChunkGenerator {
                     }
 
                     BlockState wall = isWallInRoom ? roomWall : hallwayWall;
-                    ProjectBackroom.debug(isWallInRoom);
-                    ProjectBackroom.debug(wall);
 
                     for (int y = BASE_Y + 1; y <= BASE_Y + 3; y++) {
                         pos.set(dx, y, dz);
@@ -156,7 +154,7 @@ public class Level1Generation extends ChunkGenerator {
     }
 
     @Override
-    public CompletableFuture<Chunk> populateNoise(Executor executor, Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
+    public CompletableFuture<Chunk> populateNoise(Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
         return CompletableFuture.completedFuture(chunk);
     }
 
@@ -181,7 +179,7 @@ public class Level1Generation extends ChunkGenerator {
     }
 
     @Override
-    public void getDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
+    public void appendDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
 
     }
 

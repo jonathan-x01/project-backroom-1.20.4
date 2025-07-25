@@ -34,11 +34,6 @@ public abstract class BackroomsFlowableFluid extends FlowableFluid {
     public abstract BackroomFluidBlock getFluidBlock();
 
     @Override
-    protected boolean isInfinite(World world) {
-        return false;
-    }
-
-    @Override
     protected void randomDisplayTick(World world, BlockPos pos, FluidState state, net.minecraft.util.math.random.Random random) {
         if (!state.isStill() && !(Boolean)state.get(FALLING)) {
             if (random.nextInt(64) == 0) {
@@ -60,11 +55,6 @@ public abstract class BackroomsFlowableFluid extends FlowableFluid {
     protected void beforeBreakingBlock(WorldAccess world, BlockPos pos, BlockState state) {
         BlockEntity blockEntity = state.hasBlockEntity() ? world.getBlockEntity(pos) : null;
         Block.dropStacks(state, world, pos, blockEntity);
-    }
-
-    @Override
-    protected int getFlowSpeed(WorldView world) {
-        return 4;
     }
 
     @Override

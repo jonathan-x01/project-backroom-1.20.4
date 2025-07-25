@@ -5,13 +5,13 @@
 package projectbackroom.jonathanx.render.entities.models;
 
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.util.math.MathHelper;
-import projectbackroom.jonathanx.entity.hostile.DeathmothEntity;
+import projectbackroom.jonathanx.render.entities.animations.DeathmothAnimations;
+import projectbackroom.jonathanx.render.entities.state.DeathmothEntityRenderState;
 
-public class DeathmothModel<T extends DeathmothEntity> extends SinglePartEntityModel<T> {
+@SuppressWarnings({"unused","FieldCanBeLocal"})
+public class DeathmothModel extends EntityModel<DeathmothEntityRenderState> {
 	private final ModelPart body;
 	private final ModelPart leftLegs;
 	private final ModelPart leftLowerLegs;
@@ -24,7 +24,9 @@ public class DeathmothModel<T extends DeathmothEntity> extends SinglePartEntityM
 	private final ModelPart upperAntenna;
 	private final ModelPart tail;
 	private final ModelPart lowerTail;
+
 	public DeathmothModel(ModelPart root) {
+        super(root);
 		this.body = root.getChild("body");
 
 		// Left legs
@@ -48,6 +50,7 @@ public class DeathmothModel<T extends DeathmothEntity> extends SinglePartEntityM
 		this.tail = this.body.getChild("tail");
 		this.lowerTail = this.tail.getChild("lowerTail");
 	}
+
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
@@ -86,17 +89,14 @@ public class DeathmothModel<T extends DeathmothEntity> extends SinglePartEntityM
 	}
 
 	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+	public void setAngles(DeathmothEntityRenderState state) {
+		super.setAngles(state);
+
+		this.animateWalking(DeathmothAnimations.FLY, state.limbFrequency, state.limbAmplitudeMultiplier, 2f, 2.5f);
+		// TODO: Create new animations and properly implement.
 	}
 
-	@Override
-	public ModelPart getPart() {
-		return this.body;
-	}
-
-	@Override
-	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+	private void setHeadAngles(float headYaw, float headPitch){
 		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
 		headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
 

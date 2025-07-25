@@ -16,11 +16,11 @@ import java.util.OptionalLong;
 
 public class ModdedDimensions {
     public static final RegistryKey<DimensionOptions> KAUPENDIM_KEY = RegistryKey.of(RegistryKeys.DIMENSION,
-            new Identifier(ProjectBackroom.MOD_ID, "kaupendim"));
+            ProjectBackroom.id("kaupendim"));
     public static final RegistryKey<World> KAUPENDIM_LEVEL_KEY = RegistryKey.of(RegistryKeys.WORLD,
-            new Identifier(ProjectBackroom.MOD_ID, "kaupendim"));
+            ProjectBackroom.id("kaupendim"));
     public static final RegistryKey<DimensionType> KAUPEN_DIM_TYPE = RegistryKey.of(RegistryKeys.DIMENSION_TYPE,
-            new Identifier(ProjectBackroom.MOD_ID, "kaupendim_type"));
+            ProjectBackroom.id("kaupendim_type"));
 
     public static void bootstrapType(Registerable<DimensionType> context) {
         context.register(KAUPEN_DIM_TYPE, new DimensionType(

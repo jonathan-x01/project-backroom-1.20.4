@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.5-SNAPSHOT'
+	id 'fabric-loom' version '1.11-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -58,8 +58,8 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20.4'
-	include 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20.4'
+	//modImplementation 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20.4'
+	//include 'net.kyrptonaught:customportalapi:0.0.1-beta64-1.20.4'
 
 	implementation 'eu.irzinfante:wfc4j:0.2.0'
 	implementation 'com.squidpony:squidlib-util:3.0.6'

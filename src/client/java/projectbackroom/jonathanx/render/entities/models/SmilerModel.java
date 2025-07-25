@@ -6,16 +6,21 @@ package projectbackroom.jonathanx.render.entities.models;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
-import projectbackroom.jonathanx.entity.hostile.SmilerEntity;
+import net.minecraft.util.math.MathHelper;
 import projectbackroom.jonathanx.render.entities.animations.SmilerAnimations;
 
-public class SmilerModel<T extends SmilerEntity> extends SinglePartEntityModel<T> {
-	private ModelPart face;
+@SuppressWarnings({"unused"})
+public class SmilerModel extends EntityModel<LivingEntityRenderState> {
+	private final ModelPart face;
+
 	public SmilerModel(ModelPart root) {
-		this.face = root.getChild("face");
+        super(root);
+        this.face = root.getChild("face");
 	}
+
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
@@ -25,20 +30,21 @@ public class SmilerModel<T extends SmilerEntity> extends SinglePartEntityModel<T
 		return TexturedModelData.of(modelData, 64, 64);
 	}
 
-	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		face.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-	}
-
-	@Override
 	public ModelPart getPart() {
 		return this.face;
 	}
 
 	@Override
-	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-		this.getPart().traverse().forEach(ModelPart::resetTransform);
+	public void setAngles(LivingEntityRenderState state) {
+		super.setAngles(state);
+		// TODO: Implement animations.
+	}
 
-		this.animateMovement(SmilerAnimations.SMILER_CASUAL,limbAngle,limbDistance, 2f, 2.5f);
+	private void setHeadAngles(float headYaw, float headPitch){
+		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
+		headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
+
+		this.face.yaw = headYaw * 0.017453292F;
+		this.face.pitch = headPitch * 0.017453292F;
 	}
 }

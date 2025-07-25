@@ -31,11 +31,11 @@ public class SmilerEntity extends HostileEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes(){
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH,50)
-                .add(EntityAttributes.GENERIC_MAX_ABSORPTION, 25)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 25f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.6f);
+                .add(EntityAttributes.MAX_HEALTH,50)
+                .add(EntityAttributes.MAX_ABSORPTION, 25)
+                .add(EntityAttributes.ATTACK_DAMAGE, 10)
+                .add(EntityAttributes.FOLLOW_RANGE, 25f)
+                .add(EntityAttributes.MOVEMENT_SPEED,0.6f);
     }
 
     @Override

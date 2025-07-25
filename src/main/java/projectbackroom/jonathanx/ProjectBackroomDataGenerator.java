@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
 import projectbackroom.jonathanx.datagen.*;
+import projectbackroom.jonathanx.world.biome.level0.Level0Biome;
 import projectbackroom.jonathanx.world.gen.features.ModPlacedFeature;
 import projectbackroom.jonathanx.world.gen.features.ModConfigureFeatures;
 

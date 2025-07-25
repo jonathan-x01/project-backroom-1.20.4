@@ -26,7 +26,7 @@ import java.util.Random;
 public class PipeBlock extends Block implements Waterloggable, BlockEntityProvider {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty LEAKING = BooleanProperty.of("leaking");
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
 
     public PipeBlock(Settings settings) {
         super(settings);

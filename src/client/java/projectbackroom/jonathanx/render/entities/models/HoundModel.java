@@ -5,14 +5,14 @@
 package projectbackroom.jonathanx.render.entities.models;
 
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.util.math.MathHelper;
-import projectbackroom.jonathanx.entity.hostile.HoundEntity;
+import org.apache.http.annotation.Obsolete;
 import projectbackroom.jonathanx.render.entities.animations.HoundAnimations;
 
-public class HoundModel<T extends HoundEntity> extends SinglePartEntityModel<T> {
+@SuppressWarnings({"unused","FieldCanBeLocal"})
+public class HoundModel extends EntityModel<LivingEntityRenderState> {
 	private final ModelPart body;
 	private final ModelPart head;
 	private final ModelPart backLegRight;
@@ -20,13 +20,15 @@ public class HoundModel<T extends HoundEntity> extends SinglePartEntityModel<T> 
 	private final ModelPart frontLegRight;
 	private final ModelPart frontLegLeft;
 	public HoundModel(ModelPart root) {
-		this.body = root.getChild("body");
+        super(root);
+        this.body = root.getChild("body");
 		this.head = this.body.getChild("head");
 		this.backLegRight = this.body.getChild("backLegRight");
 		this.backLegLeft = this.body.getChild("backLegLeft");
 		this.frontLegRight = this.body.getChild("frontLegRight");
 		this.frontLegLeft = this.body.getChild("frontLegLeft");
 	}
+
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
@@ -68,24 +70,18 @@ public class HoundModel<T extends HoundEntity> extends SinglePartEntityModel<T> 
 		return TexturedModelData.of(modelData, 64, 64);
 	}
 
-	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		this.body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-	}
-
-	@Override
 	public ModelPart getPart() {
 		return this.body;
 	}
 
 	@Override
-	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-		this.getPart().traverse().forEach(ModelPart::resetTransform);
-		this.setHeadAngles(headYaw, headPitch);
-
-		this.animateMovement(HoundAnimations.WALKING, limbAngle, limbDistance, 1.25f, 2.5f);
+	public void setAngles(LivingEntityRenderState state) {
+		super.setAngles(state);
+		// TODO: Implement animations.
+		this.animateWalking(HoundAnimations.WALKING, state.limbFrequency, state.limbAmplitudeMultiplier, 2f, 2.5f);
 	}
 
+	@Obsolete
 	private void setHeadAngles(float headYaw, float headPitch){
 		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
 		headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);

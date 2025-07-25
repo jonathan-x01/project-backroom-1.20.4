@@ -8,11 +8,18 @@
     "fog_color": 6184542,
     "water_color": 8211661,
     "water_fog_color": 329011,
+    "ambient_sound": "minecraft:ambient.warped_forest.loop",
     "music": {
       "sound": "project_backroom:level0_ambience",
       "min_delay": 10,
       "max_delay": 25,
       "replace_current_music": true
+    },
+    "particle": {
+      "options": {
+        "type": "minecraft:ash"
+      },
+      "probability": 0
     }
   },
   "spawners": {
@@ -32,6 +39,6 @@
     ]
   },
   "spawn_costs": {},
-  "carvers": {},
+  "carvers": [],
   "features": []
 }

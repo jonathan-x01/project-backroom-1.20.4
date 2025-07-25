@@ -2,23 +2,37 @@ package projectbackroom.jonathanx.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
+import net.minecraft.loot.condition.InvertedLootCondition;
+import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.condition.MatchToolLootCondition;
 import net.minecraft.loot.condition.TableBonusLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.Identifier;
+import projectbackroom.jonathanx.init.BackroomBlocks;
 import projectbackroom.jonathanx.items.BackroomItems;
+
+import java.util.concurrent.CompletableFuture;
 
 public class BackroomLootTableProvider extends FabricBlockLootTableProvider {
 
-    public BackroomLootTableProvider(FabricDataOutput dataOutput) {
-        super(dataOutput);
+    public BackroomLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override
     public void generate() {
+        RegistryWrapper.Impl<Enchantment> impl = this.registries.getOrThrow(RegistryKeys.ENCHANTMENT);
+
         addDrop(BackroomBlocks.BROKEN_BRICKS);
         addDrop(BackroomBlocks.WALL_LIGHT);
         addDrop(BackroomBlocks.WHITE_BRICKS);
@@ -39,7 +53,7 @@ public class BackroomLootTableProvider extends FabricBlockLootTableProvider {
                 .pool(LootPool.builder()
                         .rolls(
                                 ConstantLootNumberProvider.create(1.0f)
-                        ).conditionally(WITHOUT_SILK_TOUCH_NOR_SHEARS)
+                        ).conditionally(createWithoutShearsOrSilkTouchCondition())
                         .with(
                                 addSurvivesExplosionCondition(
                                     BackroomBlocks.ALMOND_TREE_LEAVES,
@@ -47,7 +61,7 @@ public class BackroomLootTableProvider extends FabricBlockLootTableProvider {
                                 )
                         ).conditionally(
                                 TableBonusLootCondition.builder(
-                                        Enchantments.FORTUNE,
+                                        impl.getOrThrow(Enchantments.FORTUNE),
                                         0.005F,
                                         0.0055555557F,
                                         0.00625F,

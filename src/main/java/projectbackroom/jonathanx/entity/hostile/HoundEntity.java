@@ -19,10 +19,10 @@ public class HoundEntity extends HostileEntity {
 
     public static DefaultAttributeContainer.Builder createAttribute(){
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH,30)
-                .add(EntityAttributes.GENERIC_MAX_ABSORPTION, 2)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.4);
+                .add(EntityAttributes.MAX_HEALTH,30)
+                .add(EntityAttributes.MAX_ABSORPTION, 2)
+                .add(EntityAttributes.ATTACK_DAMAGE, 4)
+                .add(EntityAttributes.MOVEMENT_SPEED,0.4);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package projectbackroom.jonathanx.world.gen.chunk;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import eu.irzinfante.wfc4j.enums.Side2D;
 import eu.irzinfante.wfc4j.exceptions.TileException;
@@ -25,7 +26,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public class WFCChunkGenerator extends ChunkGenerator {
-    public static final Codec<WFCChunkGenerator> CODEC = RecordCodecBuilder.create(instance ->
+    public static final MapCodec<WFCChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(instance ->
        instance.group(
                BiomeSource.CODEC.fieldOf("biome_source").forGetter(WFCChunkGenerator::getBiomeSource),
                Codec.STRING.fieldOf("jigsaw_name").forGetter(WFCChunkGenerator::getName),
@@ -52,12 +53,12 @@ public class WFCChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    protected Codec<? extends ChunkGenerator> getCodec() {
+    protected MapCodec<? extends ChunkGenerator> getCodec() {
         return CODEC;
     }
 
     @Override
-    public void carve(ChunkRegion chunkRegion, long seed, NoiseConfig noiseConfig, BiomeAccess biomeAccess, StructureAccessor structureAccessor, Chunk chunk, GenerationStep.Carver carverStep) {
+    public void carve(ChunkRegion chunkRegion, long seed, NoiseConfig noiseConfig, BiomeAccess biomeAccess, StructureAccessor structureAccessor, Chunk chunk) {
 
     }
 
@@ -236,7 +237,7 @@ public class WFCChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    public CompletableFuture<Chunk> populateNoise(Executor executor, Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
+    public CompletableFuture<Chunk> populateNoise(Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
         return CompletableFuture.completedFuture(chunk);
     }
 
@@ -261,7 +262,7 @@ public class WFCChunkGenerator extends ChunkGenerator {
     }
 
     @Override
-    public void getDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
+    public void appendDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
 
     }
 }

@@ -5,6 +5,7 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -14,9 +15,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.blocks.entity.CorruptedBlockEntity;
 import projectbackroom.jonathanx.state.property.DestinationProperty;
+
+import java.util.EnumSet;
+import java.util.Set;
 
 public class CorruptedBlock extends Block implements BlockEntityProvider {
     public static final DestinationProperty DESTINATION = DestinationProperty.of("destination");
@@ -27,16 +30,18 @@ public class CorruptedBlock extends Block implements BlockEntityProvider {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(DESTINATION);
+        //builder.add(DESTINATION);
     }
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!world.isClient() && entity instanceof ServerPlayerEntity player){
             ServerWorld overworld = player.getServer().getWorld(World.OVERWORLD);
-            BlockPos spawnPoint = overworld.getSpawnPos();
-            player.moveToWorld(overworld);
-            player.teleport(overworld, (double) spawnPoint.getX(), (double) spawnPoint.getY(), (double) spawnPoint.getZ(),player.getYaw(),player.getPitch());
+            if (overworld != null && player.getWorld() != overworld){
+                BlockPos spawnPoint = overworld.getSpawnPos();
+                Set<PositionFlag> flags = EnumSet.noneOf(PositionFlag.class);
+                player.teleport(overworld, spawnPoint.getX() + 0.5, spawnPoint.getY() + 0.5, spawnPoint.getZ() + 0.5, flags, player.getYaw(), player.getPitch(), false);
+            }
         }
     }
 

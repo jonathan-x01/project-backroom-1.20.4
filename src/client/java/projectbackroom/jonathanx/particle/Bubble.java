@@ -2,11 +2,11 @@ package projectbackroom.jonathanx.particle;
 
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import projectbackroom.jonathanx.particle.util.ParticleColorManagement;
 
 public class Bubble {
-    public static class AlmondWaterBubbleFactory implements ParticleFactory<DefaultParticleType> {
+    public static class AlmondWaterBubbleFactory implements ParticleFactory<SimpleParticleType> {
         private final SpriteProvider spriteProvider;
 
         public AlmondWaterBubbleFactory(SpriteProvider spriteProvider) {
@@ -14,7 +14,7 @@ public class Bubble {
         }
 
         @Override
-        public Particle createParticle(DefaultParticleType type, ClientWorld world, double x, double y, double z,
+        public Particle createParticle(SimpleParticleType type, ClientWorld world, double x, double y, double z,
                                        double velocityX, double velocityY, double velocityZ) {
             WaterBubbleParticle particle = new WaterBubbleParticle(world, x, y, z, velocityX, velocityY, velocityZ);
             particle.setColor(ParticleColorManagement.ALMOND_WATER[0], ParticleColorManagement.ALMOND_WATER[1], ParticleColorManagement.ALMOND_WATER[2]);
@@ -23,7 +23,7 @@ public class Bubble {
         }
     }
 
-    public static class ContaminatedWaterBubbleFactory implements ParticleFactory<DefaultParticleType> {
+    public static class ContaminatedWaterBubbleFactory implements ParticleFactory<SimpleParticleType> {
         private final SpriteProvider spriteProvider;
 
         public ContaminatedWaterBubbleFactory(SpriteProvider spriteProvider) {
@@ -31,7 +31,7 @@ public class Bubble {
         }
 
         @Override
-        public Particle createParticle(DefaultParticleType type, ClientWorld world, double x, double y, double z,
+        public Particle createParticle(SimpleParticleType type, ClientWorld world, double x, double y, double z,
                                        double velocityX, double velocityY, double velocityZ) {
             WaterBubbleParticle particle = new WaterBubbleParticle(world, x, y, z, velocityX, velocityY, velocityZ);
             float[] color = ParticleColorManagement.chooseRandomContaminatedWaterColors();

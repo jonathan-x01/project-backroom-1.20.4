@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -26,8 +27,8 @@ public class InsanityStatusEffect extends StatusEffect {
         BlockPos pos = entity.getBlockPos().down(1);
         BlockState blockState = world.getBlockState(pos);
         Block block = world.getBlockState(pos).getBlock();
-        SoundEvent blockStep = block.getSoundGroup(blockState).getStepSound();
-        entity.playSound(blockStep, SoundCategory.AMBIENT, 0.5f,1);
+        SoundEvent blockStep = blockState.getSoundGroup().getStepSound();
+        entity.playSound(blockStep, 0.5f,1);
     }
 
     public void playRandomMobSounds(PlayerEntity entity){
@@ -36,9 +37,9 @@ public class InsanityStatusEffect extends StatusEffect {
         Random random = new Random();
         double number = random.nextDouble();
         if (number < 0.5){
-            entity.playSound(creeper,SoundCategory.AMBIENT,1,1);
+            entity.playSound(creeper, 1,1);
         } else {
-            entity.playSound(zombie,SoundCategory.AMBIENT,1,1);
+            entity.playSound(zombie,1,1);
         }
     }
 
@@ -48,8 +49,7 @@ public class InsanityStatusEffect extends StatusEffect {
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-        super.applyUpdateEffect(entity, amplifier);
+    public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
         if (entity instanceof PlayerEntity){
             Random random = new Random();
             double percentage = random.nextDouble();
@@ -59,5 +59,6 @@ public class InsanityStatusEffect extends StatusEffect {
                 playRandomMobSounds((PlayerEntity) entity);
             }
         }
+        return super.applyUpdateEffect(world, entity, amplifier);
     }
 }

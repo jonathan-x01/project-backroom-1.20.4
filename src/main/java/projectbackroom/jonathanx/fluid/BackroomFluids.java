@@ -5,6 +5,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.util.DebugLogger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class BackroomFluids {
     }
 
     public static void registerFluid(){
-        ProjectBackroom.displayRegisteredSectors(BackroomFluids.class);
+        DebugLogger.displayRegisteredSectors(BackroomFluids.class);
 
         Map<String, FlowableFluid> almondWater = registerFluidTypes("almond_water", new AlmondWaterFluid.Flowing(), new AlmondWaterFluid.Still());
         FLOWING_ALMOND_WATER = almondWater.get("flowing");

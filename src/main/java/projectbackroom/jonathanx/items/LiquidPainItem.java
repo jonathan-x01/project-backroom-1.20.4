@@ -3,7 +3,7 @@ package projectbackroom.jonathanx.items;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.UseAction;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.world.World;
 
 public class LiquidPainItem extends Item {
@@ -19,7 +19,6 @@ public class LiquidPainItem extends Item {
 
     @Override
     public UseAction getUseAction(ItemStack itemStack){
-
         return UseAction.DRINK;
     }
 }

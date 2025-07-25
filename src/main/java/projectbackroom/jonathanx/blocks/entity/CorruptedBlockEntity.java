@@ -3,6 +3,7 @@ package projectbackroom.jonathanx.blocks.entity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
@@ -22,16 +23,16 @@ public class CorruptedBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
+        super.readNbt(nbt, registries);
         if (nbt.contains("Previous")) {
-            this.previousBlock = new Identifier(nbt.getString("previous_block"));
+            this.previousBlock = Identifier.of(nbt.getString("previous_block"));
         }
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
+        super.writeNbt(nbt, registries);
         if (this.previousBlock != null){
             nbt.putString("previous_block",this.previousBlock.toString());
         }

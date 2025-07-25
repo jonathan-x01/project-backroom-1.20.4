@@ -9,7 +9,7 @@ import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.color.block.BackroomBlockColors;
 import projectbackroom.jonathanx.color.item.BackroomItemColors;
 import projectbackroom.jonathanx.particle.BackroomParticleManager;
-import projectbackroom.jonathanx.registry.BackroomEntities;
+import projectbackroom.jonathanx.init.BackroomEntities;
 import projectbackroom.jonathanx.render.entities.RustyTippedArrowRenderer;
 
 public class ProjectBackroomClient implements ClientModInitializer {
@@ -33,10 +33,6 @@ public class ProjectBackroomClient implements ClientModInitializer {
                     )
             );
         }
-
-		RenderSystem.setShaderFogStart(0.0f);
-		RenderSystem.setShaderFogColor(0.0f,1.0f, 0.2f);
-		RenderSystem.setShaderFogEnd(30.0f);
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
 	}
 }

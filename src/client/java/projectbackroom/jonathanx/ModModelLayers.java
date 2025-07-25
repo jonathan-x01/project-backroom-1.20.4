@@ -12,9 +12,9 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
-import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.init.BackroomBlocks;
 import projectbackroom.jonathanx.fluid.BackroomFluids;
-import projectbackroom.jonathanx.registry.BackroomEntities;
+import projectbackroom.jonathanx.init.BackroomEntities;
 import projectbackroom.jonathanx.render.entities.DeathmothRenderer;
 import projectbackroom.jonathanx.render.entities.FacelingRenderer;
 import projectbackroom.jonathanx.render.entities.HoundRenderer;
@@ -27,21 +27,21 @@ import projectbackroom.jonathanx.render.entities.models.SmilerModel;
 @Environment(EnvType.CLIENT)
 public class ModModelLayers implements ClientModInitializer {
     public static final EntityModelLayer FACELING =
-            new EntityModelLayer(new Identifier(ProjectBackroom.MOD_ID, "faceling"),"main");
+            new EntityModelLayer(ProjectBackroom.id("faceling"), "main");
 
     public static final EntityModelLayer SMILER =
-            new EntityModelLayer(new Identifier(ProjectBackroom.MOD_ID, "smiler"),"main");
+            new EntityModelLayer(ProjectBackroom.id("smiler"), "main");
 
     public static final EntityModelLayer HOUND =
-            new EntityModelLayer(new Identifier(ProjectBackroom.MOD_ID, "hound"), "main");
+            new EntityModelLayer(ProjectBackroom.id("hound"), "main");
 
     public static final EntityModelLayer DEATHMOTH =
-            new EntityModelLayer(new Identifier(ProjectBackroom.MOD_ID, "deathmoth"), "main");
+            new EntityModelLayer(ProjectBackroom.id("deathmoth"), "main");
 
     @Override
     public void onInitializeClient() {
-        register(BackroomEntities.FACELINGS, FacelingRenderer::new, ModModelLayers.FACELING, FacelingModel::getTexturedModelData);
-        register(BackroomEntities.SMILERS, SmilerRenderer::new, ModModelLayers.SMILER, SmilerModel::getTexturedModelData);
+        register(BackroomEntities.FACELING, FacelingRenderer::new, ModModelLayers.FACELING, FacelingModel::getTexturedModelData);
+        register(BackroomEntities.SMILER, SmilerRenderer::new, ModModelLayers.SMILER, SmilerModel::getTexturedModelData);
         register(BackroomEntities.HOUND, HoundRenderer::new, ModModelLayers.HOUND, HoundModel::getTexturedModelData);
         register(BackroomEntities.DEATHMOTH, DeathmothRenderer::new, ModModelLayers.DEATHMOTH, DeathmothModel::getTexturedModelData);
 

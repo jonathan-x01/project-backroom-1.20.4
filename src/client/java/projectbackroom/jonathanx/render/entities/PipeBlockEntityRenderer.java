@@ -13,7 +13,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.blocks.entity.PipeBlockEntity;
+import projectbackroom.jonathanx.util.DebugLogger;
 
+@Deprecated
 public class PipeBlockEntityRenderer implements BlockEntityRenderer<PipeBlockEntity> {
 
     private final BakedModel largePipeModel;
@@ -22,7 +24,7 @@ public class PipeBlockEntityRenderer implements BlockEntityRenderer<PipeBlockEnt
         // Load the model from your mod resources
         MinecraftClient mc = MinecraftClient.getInstance();
         this.largePipeModel = mc.getBakedModelManager().getModel(ProjectBackroom.id("blocks/large_pipe_1"));
-        ProjectBackroom.debug(
+        DebugLogger.debug(
                 ProjectBackroom.id("blocks/large_pipe_1"),
                 this.largePipeModel
         );
@@ -31,12 +33,11 @@ public class PipeBlockEntityRenderer implements BlockEntityRenderer<PipeBlockEnt
     @Override
     public void render(PipeBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         //PipeType variety = entity.getPipeVariety();
-        ProjectBackroom.debug(this.largePipeModel);
         renderModel(this.largePipeModel, matrices, vertexConsumers, light, overlay);
     }
 
     private void renderModel(BakedModel model, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        ProjectBackroom.debug(model);
+        DebugLogger.debug(model);
         MinecraftClient mc = MinecraftClient.getInstance();
         // Get the vertex consumer for solid render layer (or whichever layer your model uses)
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getSolid());
@@ -44,12 +45,12 @@ public class PipeBlockEntityRenderer implements BlockEntityRenderer<PipeBlockEnt
         // Render all quads of the model facing all directions
         for (Direction direction : Direction.values()) {
             for (BakedQuad quad : model.getQuads(null, direction, Random.create())) {
-                vertexConsumer.quad(matrices.peek(), quad, 1f, 1f, 1f, light, overlay);
+                vertexConsumer.quad(matrices.peek(), quad, 1f, 1f, 1f, (float) light, overlay, 1);
             }
         }
         // Also render quads without specific direction
         for (BakedQuad quad : model.getQuads(null, null, Random.create())) {
-            vertexConsumer.quad(matrices.peek(), quad, 1f, 1f, 1f, light, overlay);
+            vertexConsumer.quad(matrices.peek(), quad, 1f, 1f, 1f, light, overlay, 1);
         }
     }
 }

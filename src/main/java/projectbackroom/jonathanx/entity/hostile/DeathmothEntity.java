@@ -17,8 +17,8 @@ public class DeathmothEntity extends HostileEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(GENDER, -1);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        this.dataTracker.set(GENDER, -1);
     }
 }

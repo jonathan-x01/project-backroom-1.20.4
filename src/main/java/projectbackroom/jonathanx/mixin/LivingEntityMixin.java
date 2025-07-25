@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.fluid.BackroomsFlowableFluid;
-import projectbackroom.jonathanx.registry.BackroomFluidTags;
+import projectbackroom.jonathanx.init.BackroomFluidTags;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {

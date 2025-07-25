@@ -11,12 +11,13 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.init.BackroomBlocks;
+import projectbackroom.jonathanx.util.DebugLogger;
 
 public class ModConfigureFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> ALMOND_TREE_KEY = registerKey("almond_tree");
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context){
-        ProjectBackroom.displayRegisteredSectors(ModConfigureFeatures.class);
+        DebugLogger.displayRegisteredSectors(ModConfigureFeatures.class);
         context.register(ALMOND_TREE_KEY, new ConfiguredFeature<>(
                 Feature.TREE, new TreeFeatureConfig.Builder(
                     BlockStateProvider.of(BackroomBlocks.ALMOND_TREE_LOG),
@@ -36,7 +37,7 @@ public class ModConfigureFeatures {
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, new Identifier(ProjectBackroom.MOD_ID, name));
+        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, ProjectBackroom.id(name));
     }
 
     private static <FC extends FeatureConfig, F extends Feature<FC>> void register(Registerable<ConfiguredFeature<?, ?>> context,

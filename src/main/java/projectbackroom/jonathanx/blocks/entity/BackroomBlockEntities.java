@@ -7,7 +7,8 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.init.BackroomBlocks;
+import projectbackroom.jonathanx.util.DebugLogger;
 
 public class BackroomBlockEntities {
     public static final BlockEntityType<CorruptedBlockEntity> CORRUPTED_BLOCK_ENTITY = register(
@@ -25,6 +26,6 @@ public class BackroomBlockEntities {
     }
 
     public static void initialize(){
-        ProjectBackroom.displayRegisteredSectors(BackroomBlockEntities.class);
+        DebugLogger.displayRegisteredSectors(BackroomBlockEntities.class);
     }
 }

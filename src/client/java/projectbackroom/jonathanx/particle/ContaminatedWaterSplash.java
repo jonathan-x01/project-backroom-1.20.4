@@ -2,11 +2,11 @@ package projectbackroom.jonathanx.particle;
 
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import projectbackroom.jonathanx.particle.util.ParticleColorManagement;
 
 public class ContaminatedWaterSplash {
-    public static class Factory implements ParticleFactory<DefaultParticleType> {
+    public static class Factory implements ParticleFactory<SimpleParticleType> {
         private final SpriteProvider spriteProvider;
 
         public Factory(SpriteProvider spriteProvider) {
@@ -14,7 +14,7 @@ public class ContaminatedWaterSplash {
         }
 
         @Override
-        public Particle createParticle(DefaultParticleType type, ClientWorld world, double x, double y, double z,
+        public Particle createParticle(SimpleParticleType type, ClientWorld world, double x, double y, double z,
                                        double velocityX, double velocityY, double velocityZ) {
             WaterSplashParticle particle = new WaterSplashParticle(world, x, y, z, velocityX, velocityY, velocityZ);
             float[] color = ParticleColorManagement.chooseRandomContaminatedWaterColors();

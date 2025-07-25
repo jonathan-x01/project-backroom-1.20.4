@@ -1,14 +1,11 @@
-package projectbackroom.jonathanx.registry;
+package projectbackroom.jonathanx.init;
 
 import net.minecraft.fluid.Fluid;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
-import org.apache.http.annotation.Obsolete;
 import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.util.DebugLogger;
+import projectbackroom.jonathanx.util.Initer;
 
 public class BackroomFluidTags {
     @Deprecated
@@ -19,7 +16,8 @@ public class BackroomFluidTags {
         return TagKey.of(RegistryKeys.FLUID, ProjectBackroom.id(id));
     }
 
+    @Deprecated
     public static void registerFluidTags(){
-        ProjectBackroom.displayRegisteredSectors(BackroomFluidTags.class);
+        DebugLogger.displayRegisteredSectors(BackroomFluidTags.class);
     }
 }

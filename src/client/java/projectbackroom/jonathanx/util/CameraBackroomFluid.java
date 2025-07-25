@@ -4,8 +4,7 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
-import org.spongepowered.asm.mixin.Unique;
-import projectbackroom.jonathanx.registry.BackroomFluidTags;
+import projectbackroom.jonathanx.init.BackroomFluidTags;
 
 public class CameraBackroomFluid {
     private static FluidState fluidState;

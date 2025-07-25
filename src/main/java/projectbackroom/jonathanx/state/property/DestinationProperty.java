@@ -9,10 +9,9 @@ import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class DestinationProperty extends EnumProperty<Destination> {
-
+public class DestinationProperty {
     protected DestinationProperty(String name, Collection<Destination> values) {
-        super(name, Destination.class, values);
+
     }
 
     public static DestinationProperty of(String name){

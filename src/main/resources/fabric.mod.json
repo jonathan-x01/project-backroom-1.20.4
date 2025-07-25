@@ -26,6 +26,15 @@
 		],
 		"fabric-datagen": [
 			"projectbackroom.jonathanx.ProjectBackroomDataGenerator"
+		],
+		"Initer": [
+			"projectbackroom.jonathanx.init.BackroomBlocks",
+			"projectbackroom.jonathanx.init.BackroomEntities",
+			"projectbackroom.jonathanx.init.BackroomFluidTags",
+			"projectbackroom.jonathanx.init.BackroomItemGroups",
+			"projectbackroom.jonathanx.init.BackroomPotions",
+			"projectbackroom.jonathanx.init.BackroomSounds",
+			"projectbackroom.jonathanx.init.BackroomStatusEffects"
 		]
 	},
 	"mixins": [
@@ -38,7 +47,7 @@
 	"accessWidener": "project-backroom.accesswidener",
 	"depends": {
 		"fabricloader": ">=0.15.7",
-		"minecraft": "~1.20.4",
+		"minecraft": "~1.21.3",
 		"java": ">=17",
 		"fabric-api": "*"
 	},

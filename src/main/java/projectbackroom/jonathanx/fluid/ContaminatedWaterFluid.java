@@ -6,10 +6,12 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
-import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import net.minecraft.world.WorldView;
+import projectbackroom.jonathanx.init.BackroomBlocks;
 import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.items.BackroomItems;
 
@@ -20,7 +22,8 @@ public class ContaminatedWaterFluid extends BackroomsFlowableFluid {
 
     @Override
     public ItemStack getBottleItem() {
-        return new ItemStack(BackroomItems.CONTAMINATED_WATER);
+        return null;
+        //return new ItemStack(BackroomItems.CONTAMINATED_WATER);
     }
 
     @Override
@@ -36,6 +39,16 @@ public class ContaminatedWaterFluid extends BackroomsFlowableFluid {
     @Override
     public Fluid getStill() {
         return BackroomFluids.CONTAMINATED_WATER;
+    }
+
+    @Override
+    protected boolean isInfinite(ServerWorld world) {
+        return false;
+    }
+
+    @Override
+    protected int getMaxFlowDistance(WorldView world) {
+        return 4;
     }
 
     @Override

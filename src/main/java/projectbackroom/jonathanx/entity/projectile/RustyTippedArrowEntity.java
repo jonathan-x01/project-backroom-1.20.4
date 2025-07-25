@@ -6,22 +6,26 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import projectbackroom.jonathanx.ProjectBackroom;
+import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.items.BackroomItems;
-import projectbackroom.jonathanx.registry.BackroomEntities;
-import projectbackroom.jonathanx.registry.ModStatusEffects;
+import projectbackroom.jonathanx.init.BackroomEntities;
+import projectbackroom.jonathanx.init.BackroomStatusEffects;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RustyTippedArrowEntity extends PersistentProjectileEntity {
     private static final ItemStack DEFAULT_STACK;
 
-    public RustyTippedArrowEntity(EntityType<RustyTippedArrowEntity> type, World world) {
-        super(type, world, DEFAULT_STACK);
+    public RustyTippedArrowEntity(EntityType<? extends RustyTippedArrowEntity> entityType, World world) {
+        super(entityType, world);
     }
 
-    public RustyTippedArrowEntity(World world, LivingEntity owner, ItemStack stack){
-        super(BackroomEntities.RUSTY_TIPPED_ARROW, owner, world, stack);
+    public RustyTippedArrowEntity(World world, LivingEntity owner, ItemStack stack, ItemStack shotFram){
+        super(BackroomEntities.RUSTY_TIPPED_ARROW, owner, world, stack, shotFram);
+    }
+
+    public RustyTippedArrowEntity(World world, double x, double y, double z, ItemStack stack, @Nullable ItemStack shotFrom) {
+        super(BackroomEntities.RUSTY_TIPPED_ARROW, x, y, z, world, stack, shotFrom);
     }
 
     @Override
@@ -29,8 +33,13 @@ public class RustyTippedArrowEntity extends PersistentProjectileEntity {
         super.onHit(target);
         int percentage = ThreadLocalRandom.current().nextInt(0, 101);
         if (percentage < 50){
-            target.addStatusEffect(new StatusEffectInstance(ModStatusEffects.TETANUS, 3600, 1));
+            target.addStatusEffect(new StatusEffectInstance(BackroomStatusEffects.TETANUS, 3600, 1));
         }
+    }
+
+    @Override
+    protected ItemStack getDefaultItemStack() {
+        return null;
     }
 
     static {

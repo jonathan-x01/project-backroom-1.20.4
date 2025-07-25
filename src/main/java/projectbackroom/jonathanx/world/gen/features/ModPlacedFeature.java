@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.init.BackroomBlocks;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class ModPlacedFeature  {
     }
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {
-        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(ProjectBackroom.MOD_ID, name));
+        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, ProjectBackroom.id(name));
     }
 
     private static void register(Registerable<PlacedFeature> context, RegistryKey<PlacedFeature> key, RegistryEntry<ConfiguredFeature<?, ?>> configuration,

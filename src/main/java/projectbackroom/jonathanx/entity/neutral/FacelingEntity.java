@@ -13,6 +13,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.entity.EntityBehaviourState;
@@ -36,10 +37,10 @@ public class FacelingEntity extends HostileEntity implements Angerable {
 
     public static DefaultAttributeContainer.Builder createAttribute(){
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH,30)
-                .add(EntityAttributes.GENERIC_MAX_ABSORPTION, 2)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.2);
+                .add(EntityAttributes.MAX_HEALTH,30)
+                .add(EntityAttributes.MAX_ABSORPTION, 2)
+                .add(EntityAttributes.ATTACK_DAMAGE, 2)
+                .add(EntityAttributes.MOVEMENT_SPEED,0.2);
     }
 
     @Override
@@ -55,15 +56,15 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(BABY,randomIsChild());
-        this.dataTracker.startTracking(TYPE, String.valueOf(getAState()));
-        this.dataTracker.startTracking(PROVOKED,false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        this.dataTracker.set(BABY,randomIsChild());
+        this.dataTracker.set(TYPE, String.valueOf(getAState()));
+        this.dataTracker.set(PROVOKED,false);
     }
 
     @Override
-    public boolean canBeLeashedBy(PlayerEntity player) {
+    public boolean canBeLeashed() {
         return getFacelingState().equals(EntityBehaviourState.FRIENDLY);
     }
 
@@ -103,7 +104,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     }
 
     @Override
-    public boolean damage(DamageSource source, float amount) {
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
         if (this.isBaby()){
             if (getFacelingState().equals(EntityBehaviourState.FRIENDLY)){
                 setFacelingState(EntityBehaviourState.SCARED);
@@ -117,7 +118,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
                 addScaredSpeed();
             }
         }
-        return super.damage(source, amount);
+        return super.damage(world, source, amount);
     }
 
     private static boolean randomIsChild(){
@@ -159,7 +160,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
     @Override
     protected void updateLimbs(float posDelta) {
         float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
+        this.limbAnimator.updateLimbs(f, 0.2f, 1);
     }
 
     private void setupAnimationStates(){
@@ -207,7 +208,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         public AttackPlayersGoal(FacelingEntity faceling, double speed){
             this.faceling = faceling;
             this.speed = speed;
-            this.followRange = faceling.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE);
+            this.followRange = faceling.getAttributeValue(EntityAttributes.FOLLOW_RANGE);
             this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
         }
 
@@ -246,7 +247,7 @@ public class FacelingEntity extends HostileEntity implements Angerable {
                 if (distanceToPlayer > this.faceling.getWidth() * this.faceling.getWidth() + 1) { // Ensure the entity gets really close
                     this.faceling.getNavigation().startMovingTo(targetPlayer, this.speed);
                 } else {
-                    this.faceling.tryAttack(targetPlayer); // Attempt to attack
+                    this.faceling.tryAttack(this.getServerWorld(this.faceling),targetPlayer); // Attempt to attack
                     this.faceling.getNavigation().stop();
                 }
             } else {

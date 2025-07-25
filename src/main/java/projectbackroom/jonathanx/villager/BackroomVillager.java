@@ -11,7 +11,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.poi.PointOfInterestType;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.init.BackroomBlocks;
+import projectbackroom.jonathanx.util.DebugLogger;
 
 public class BackroomVillager {
     public static final RegistryKey<PointOfInterestType> DETECTIVE_POI_KEY = poiKey("detective_poi");
@@ -33,6 +34,6 @@ public class BackroomVillager {
     }
 
     public static void registerVillagers() {
-        ProjectBackroom.displayRegisteredSectors(BackroomVillager.class);
+        DebugLogger.displayRegisteredSectors(BackroomVillager.class);
     }
 }

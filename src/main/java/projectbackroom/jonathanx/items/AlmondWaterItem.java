@@ -2,10 +2,9 @@ package projectbackroom.jonathanx.items;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import projectbackroom.jonathanx.registry.ModStatusEffects;
+import projectbackroom.jonathanx.init.BackroomStatusEffects;
 
 public class AlmondWaterItem extends DrinkableItem {
     public AlmondWaterItem(Settings settings) {
@@ -14,8 +13,8 @@ public class AlmondWaterItem extends DrinkableItem {
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        if (user.hasStatusEffect(ModStatusEffects.INSANITY)){
-            user.removeStatusEffect(ModStatusEffects.INSANITY);
+        if (user.hasStatusEffect(BackroomStatusEffects.INSANITY)){
+            user.removeStatusEffect(BackroomStatusEffects.INSANITY);
         }
 
         if (user instanceof PlayerEntity){

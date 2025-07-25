@@ -7,17 +7,23 @@ import projectbackroom.jonathanx.ModModelLayers;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.entity.hostile.HoundEntity;
 import projectbackroom.jonathanx.render.entities.models.HoundModel;
+import projectbackroom.jonathanx.render.entities.state.BackroomEntityRenderState;
 
-public class HoundRenderer extends MobEntityRenderer<HoundEntity, HoundModel<HoundEntity>> {
+public class HoundRenderer extends MobEntityRenderer<HoundEntity, BackroomEntityRenderState, HoundModel> {
 
-    public static final Identifier TEXTURE = new Identifier(ProjectBackroom.MOD_ID,"textures/entity/hound.png");
+    public static final Identifier TEXTURE = ProjectBackroom.id("textures/entity/hound.png");
 
     public HoundRenderer(EntityRendererFactory.Context context) {
-        super(context, new HoundModel<>(context.getPart(ModModelLayers.HOUND)), 0.5f);
+        super(context, new HoundModel(context.getPart(ModModelLayers.HOUND)), 0.5f);
     }
 
     @Override
-    public Identifier getTexture(HoundEntity entity) {
+    public BackroomEntityRenderState createRenderState() {
+        return new BackroomEntityRenderState();
+    }
+
+    @Override
+    public Identifier getTexture(BackroomEntityRenderState entity) {
         return TEXTURE;
     }
 }

@@ -16,11 +16,6 @@ import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
 public class BackroomParticleManager implements ResourceReloader {
-    @Override
-    public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager, Profiler prepareProfiler, Profiler applyProfiler, Executor prepareExecutor, Executor applyExecutor) {
-        return null;
-    }
-
     public static void registerDefaultFactories(){
         registerSplashFactory(BackroomParticleTypes.SPLASH, WaterSplashParticle.SplashFactory::new);
         registerFactory(BackroomParticleTypes.CONTAMINATED_WATER_SPLASH, ContaminatedWaterSplash.Factory::new);
@@ -60,5 +55,10 @@ public class BackroomParticleManager implements ResourceReloader {
                     }
                     return particle;
                 });
+    }
+
+    @Override
+    public CompletableFuture<Void> reload(Synchronizer synchronizer, ResourceManager manager, Executor prepareExecutor, Executor applyExecutor) {
+        return null;
     }
 }

@@ -6,6 +6,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -13,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
-import projectbackroom.jonathanx.blocks.BackroomBlocks;
+import projectbackroom.jonathanx.init.BackroomBlocks;
 import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
 
 public class BlackSludgeFluid extends BackroomsFlowableFluid {
@@ -24,11 +25,6 @@ public class BlackSludgeFluid extends BackroomsFlowableFluid {
     @Override
     public Vec3d getVelocity(BlockView world, BlockPos pos, FluidState state) {
         return new Vec3d(0.0, -0.2, 0);
-    }
-
-    @Override
-    protected int getFlowSpeed(WorldView world) {
-        return 2;
     }
 
     @Override
@@ -49,6 +45,16 @@ public class BlackSludgeFluid extends BackroomsFlowableFluid {
     @Override
     public Fluid getStill() {
         return BackroomFluids.BLACK_SLUDGE;
+    }
+
+    @Override
+    protected boolean isInfinite(ServerWorld world) {
+        return false;
+    }
+
+    @Override
+    protected int getMaxFlowDistance(WorldView world) {
+        return 4;
     }
 
     @Override
