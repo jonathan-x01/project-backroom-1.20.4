@@ -1,7 +1,7 @@
-// 1.20.4	2025-07-07T15:23:59.1341896	Project Backroom/Tags for minecraft:block
-b98ca7d7afc3e78b2759e75de669b2b42a6f2218 data\minecraft\tags\blocks\wooden_fences.json
-5435df7765414deeb115845a05679a3587649c12 data\minecraft\tags\blocks\leaves.json
-5b83da271b278d4602f0499fd68a39fe1ce95721 data\minecraft\tags\blocks\fence_gates.json
-b327332095f5cbe56f9cb919273ef7cfe288fafb data\minecraft\tags\blocks\logs.json
-b98ca7d7afc3e78b2759e75de669b2b42a6f2218 data\minecraft\tags\blocks\fences.json
-226bd18420627e561e6f836133628cffea6eebd2 data\minecraft\tags\blocks\logs_that_burn.json
+// 1.21.3	2025-07-26T00:02:35.9580774	Project Backroom/Tags for minecraft:block
+f5c24ea96f84a156124cecc560d2b6b2da502f56 data\minecraft\tags\block\fences.json
+6d08512d033348ee8dadfff2fcf17a29d4c66261 data\minecraft\tags\block\logs_that_burn.json
+5c9140d5137ca2f122877a8853c60a2d70c1408d data\minecraft\tags\block\logs.json
+ffc14a673aaf52e7bde90bcc0d5c179e5a4c1d9d data\minecraft\tags\block\fence_gates.json
+f5c24ea96f84a156124cecc560d2b6b2da502f56 data\minecraft\tags\block\wooden_fences.json
+774b05fd5c8a64dc6acb6fbc9f5dc770b912b67d data\minecraft\tags\block\leaves.json

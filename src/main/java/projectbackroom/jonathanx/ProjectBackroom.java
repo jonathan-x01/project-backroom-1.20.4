@@ -9,27 +9,21 @@ import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import org.apache.http.annotation.Obsolete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.init.BackroomBlocks;
-import projectbackroom.jonathanx.blocks.entity.BackroomBlockEntities;
-import projectbackroom.jonathanx.fluid.BackroomFluids;
-import projectbackroom.jonathanx.items.BackroomItems;
-import projectbackroom.jonathanx.particle.BackroomParticleTypes;
+import projectbackroom.jonathanx.init.BackroomBlockEntities;
+import projectbackroom.jonathanx.init.BackroomItems;
 import projectbackroom.jonathanx.init.*;
-import projectbackroom.jonathanx.init.BackroomStatusEffects;
 import projectbackroom.jonathanx.util.Initer;
-import projectbackroom.jonathanx.villager.BackroomVillager;
-import projectbackroom.jonathanx.villager.VillagerTrades;
+import projectbackroom.jonathanx.init.villager.BackroomVillager;
 import projectbackroom.jonathanx.world.gen.chunk.Level1Generation;
 import projectbackroom.jonathanx.world.gen.chunk.WFCChunkGenerator;
 import projectbackroom.jonathanx.world.gen.chunk.PointMazeGenerator;
 
-import java.util.Objects;
-
 public class ProjectBackroom implements ModInitializer {
 	public static String MOD_ID = "project_backroom";
+	@Deprecated
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	private static void initChunkGeneration(){
@@ -40,22 +34,7 @@ public class ProjectBackroom implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		//Initer.initialise();
-		BackroomItemGroups.registerModdedItemGroups();
-		BackroomFluidTags.registerFluidTags();
-
-		BackroomFluids.registerFluid();
-		BackroomBlockEntities.initialize();
-		BackroomBlocks.registerBackroomBlocks();
-		BackroomSounds.registerModdedSounds();
-		BackroomItems.registerModdedItems();
-		BackroomStatusEffects.registerModdedStatusEffects();
-		BackroomEntities.registerModdedEntities();
-		BackroomParticleTypes.registerParticles();
-		BackroomPotions.registerPotions();
-
-		BackroomVillager.registerVillagers();
-		VillagerTrades.registerVillagerTrades();
+		Initer.initialise();
 
 		initChunkGeneration();
 

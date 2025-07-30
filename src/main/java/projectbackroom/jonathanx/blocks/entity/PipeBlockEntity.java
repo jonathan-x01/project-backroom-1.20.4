@@ -14,6 +14,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.blocks.state.pipeTypes.LargeHorizontalPipeTypes;
+import projectbackroom.jonathanx.init.BackroomBlockEntities;
 
 public class PipeBlockEntity extends BlockEntity {
     private Identifier fluidContainer;

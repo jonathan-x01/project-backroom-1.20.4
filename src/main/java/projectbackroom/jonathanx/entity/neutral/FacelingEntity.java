@@ -55,6 +55,17 @@ public class FacelingEntity extends HostileEntity implements Angerable {
         this.targetSelector.add(2, new AttackPlayersGoal(this, 1.5f));
     }
 
+    // TODO: Fix error with init data for Faceling
+    // java.lang.NullPointerException: Cannot invoke "net.minecraft.entity.data.DataTracker.set(net.minecraft.entity.data.TrackedData, Object)" because "this.dataTracker" is null
+    // at knot/projectbackroom.jonathanx.entity.neutral.FacelingEntity.initDataTracker(FacelingEntity.java:61) ~[main/:?]
+    // at knot/net.minecraft.entity.Entity.<init>(Entity.java:406) ~[minecraft-common-36648bf514-1.21.3-net.fabricmc.yarn.1_21_3.1.21.3+build.2-v2.jar:?]
+    // at knot/net.minecraft.entity.LivingEntity.<init>(LivingEntity.java:277) ~[minecraft-common-36648bf514-1.21.3-net.fabricmc.yarn.1_21_3.1.21.3+build.2-v2.jar:?]
+    // at knot/net.minecraft.entity.mob.MobEntity.<init>(MobEntity.java:184) ~[minecraft-common-36648bf514-1.21.3-net.fabricmc.yarn.1_21_3.1.21.3+build.2-v2.jar:?]
+    // at knot/net.minecraft.entity.mob.PathAwareEntity.<init>(PathAwareEntity.java:20) ~[minecraft-common-36648bf514-1.21.3-net.fabricmc.yarn.1_21_3.1.21.3+build.2-v2.jar:?]
+    // at knot/net.minecraft.entity.mob.HostileEntity.<init>(HostileEntity.java:30) ~[minecraft-common-36648bf514-1.21.3-net.fabricmc.yarn.1_21_3.1.21.3+build.2-v2.jar:?]
+    // at knot/projectbackroom.jonathanx.entity.neutral.FacelingEntity.<init>(FacelingEntity.java:35) ~[main/:?]
+    // at knot/net.minecraft.entity.EntityType.create(EntityType.java:1431) ~[minecraft-common-36648bf514-1.21.3-net.fabricmc.yarn.1_21_3.1.21.3+build.2-v2.jar:?]
+
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);

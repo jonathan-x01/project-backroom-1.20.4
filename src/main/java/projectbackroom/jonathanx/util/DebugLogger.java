@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.ProjectBackroom;
 
+@SuppressWarnings("unused")
 public class DebugLogger {
     private static final String MOD_ID = ProjectBackroom.MOD_ID;
     private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -81,6 +82,6 @@ public class DebugLogger {
      * @param c The class that has loaded.
      */
     public static void displayRegisteredSectors(Class c){
-        LOGGER.info(ANSI_GREEN + "{ LOADED | " + ANSI_CYAN + MOD_ID + ANSI_GREEN + " } " + ANSI_BLUE + c.getSimpleName());
+        LOGGER.info(ANSI_GREEN + "{ INIT LOADED } " + ANSI_BLUE + c.getSimpleName());
     }
 }

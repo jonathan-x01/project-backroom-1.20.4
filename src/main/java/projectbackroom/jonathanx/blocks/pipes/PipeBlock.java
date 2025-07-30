@@ -15,10 +15,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.blocks.entity.PipeBlockEntity;
 import projectbackroom.jonathanx.blocks.state.pipeTypes.LargeHorizontalPipeTypes;
-import projectbackroom.jonathanx.fluid.BackroomFluids;
+import projectbackroom.jonathanx.init.BackroomFluids;
 
 import java.text.DecimalFormat;
 import java.util.Random;

@@ -28,13 +28,24 @@
 			"projectbackroom.jonathanx.ProjectBackroomDataGenerator"
 		],
 		"Initer": [
+			"projectbackroom.jonathanx.init.BackroomItems",
+			"projectbackroom.jonathanx.init.BackroomItemGroups",
 			"projectbackroom.jonathanx.init.BackroomBlocks",
+			"projectbackroom.jonathanx.init.BackroomFluids",
+			"projectbackroom.jonathanx.init.BackroomBlockEntities",
 			"projectbackroom.jonathanx.init.BackroomEntities",
 			"projectbackroom.jonathanx.init.BackroomFluidTags",
-			"projectbackroom.jonathanx.init.BackroomItemGroups",
-			"projectbackroom.jonathanx.init.BackroomPotions",
 			"projectbackroom.jonathanx.init.BackroomSounds",
-			"projectbackroom.jonathanx.init.BackroomStatusEffects"
+			"projectbackroom.jonathanx.init.BackroomStatusEffects",
+			"projectbackroom.jonathanx.init.BackroomParticleTypes",
+			"projectbackroom.jonathanx.init.BackroomPotions",
+			"projectbackroom.jonathanx.init.villager.BackroomVillager",
+			"projectbackroom.jonathanx.init.villager.VillagerTrades",
+			"projectbackroom.jonathanx.init.BackroomComponents",
+			"projectbackroom.jonathanx.networking.s2c.S2CPackets"
+		],
+		"IniterClient": [
+			"projectbackroom.jonathanx.networking.c2s.C2SPackets"
 		]
 	},
 	"mixins": [

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "project_backroom:almond"
+  ],
+  "result": {
+    "count": 1,
+    "id": "project_backroom:almond_seed"
+  }
+}

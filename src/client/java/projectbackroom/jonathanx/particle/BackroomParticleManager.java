@@ -8,7 +8,7 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceReloader;
-import net.minecraft.util.profiler.Profiler;
+import projectbackroom.jonathanx.init.BackroomParticleTypes;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;

@@ -7,15 +7,20 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import projectbackroom.jonathanx.fluid.BackroomFluids;
-import projectbackroom.jonathanx.particle.BackroomParticleTypes;
+import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import projectbackroom.jonathanx.fluid.BackroomsFlowableFluid;
+import projectbackroom.jonathanx.init.BackroomFluids;
+import projectbackroom.jonathanx.init.BackroomParticleTypes;
+
+import java.util.function.Predicate;
 
 @Mixin(Entity.class)
 public abstract class FluidSplashMixin {
@@ -31,42 +36,45 @@ public abstract class FluidSplashMixin {
     )
     private ParticleEffect redirectSplashParticle(ParticleEffect original) {
         Entity self = (Entity) (Object) this;
+        Fluid fluid = getTouchingFluid(self, f -> f instanceof BackroomsFlowableFluid);
 
-        if (original == ParticleTypes.SPLASH){
-            if (isInAlmondWater(self)){
-                return BackroomParticleTypes.LANDING_ALMOND_WATER;
-            } else if (isInContaminatedWater(self)){
-                return BackroomParticleTypes.CONTAMINATED_WATER_SPLASH;
-            }
-        } else if (original == ParticleTypes.BUBBLE){
-            if (isInAlmondWater(self)){
-                return BackroomParticleTypes.ALMOND_WATER_BUBBLE;
-            } else if (isInContaminatedWater(self)){
-                return BackroomParticleTypes.CONTAMINATED_WATER_BUBBLE;
+        if (fluid instanceof BackroomsFlowableFluid flowableFluid){
+            BackroomFluidBlock.Settings settings = flowableFluid.getFluidBlock().getFluidSettings();
+            BackroomFluidBlock.FluidSplashParticleManager splashParticle = settings.getSplashParticles();
+            if (original == ParticleTypes.SPLASH && splashParticle.getSplashParticle() != null){
+                return splashParticle.getSplashParticle();
+            } else if (original == ParticleTypes.BUBBLE && splashParticle.getBubbleParticle() != null){
+                return splashParticle.getBubbleParticle();
             }
         }
         return original;
     }
 
     @Unique
-    private boolean isInAlmondWater(Entity entity){
-        return isInFluidCollection(entity, BackroomFluids.ALMOND_WATER, BackroomFluids.FLOWING_ALMOND_WATER);
-    }
+    private Fluid getTouchingFluid(Entity entity, Predicate<Fluid> filter) {
+        Box box = entity.getBoundingBox().contract(0.001); // Slightly smaller to avoid edge noise
+        World world = entity.getWorld();
 
-    @Unique
-    private boolean isInContaminatedWater(Entity entity){
-        return isInFluidCollection(entity, BackroomFluids.CONTAMINATED_WATER, BackroomFluids.FLOWING_CONTAMINATED_WATER);
-    }
+        int minX = MathHelper.floor(box.minX);
+        int maxX = MathHelper.floor(box.maxX);
+        int minY = MathHelper.floor(box.minY);
+        int maxY = MathHelper.floor(box.maxY);
+        int minZ = MathHelper.floor(box.minZ);
+        int maxZ = MathHelper.floor(box.maxZ);
 
-    @Unique
-    private boolean isInFluidCollection(Entity entity, FlowableFluid fluid1, FlowableFluid fluid2){
-        return isInFluid(entity, fluid1) || isInFluid(entity, fluid2);
-    }
+        for (int x = minX; x <= maxX; ++x) {
+            for (int y = minY; y <= maxY; ++y) {
+                for (int z = minZ; z <= maxZ; ++z) {
+                    BlockPos pos = new BlockPos(x, y, z);
+                    FluidState state = world.getFluidState(pos);
+                    Fluid fluid = state.getFluid();
+                    if (!state.isEmpty() && filter.test(fluid)) {
+                        return fluid;
+                    }
+                }
+            }
+        }
 
-    @Unique
-    private boolean isInFluid(Entity entity, Fluid fluid) {
-        BlockPos pos = entity.getBlockPos();
-        FluidState fluidState = entity.getWorld().getFluidState(pos);
-        return fluidState.isOf(fluid);
+        return null;
     }
 }

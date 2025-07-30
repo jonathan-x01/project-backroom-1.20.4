@@ -7,7 +7,7 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import projectbackroom.jonathanx.items.BackroomItems;
+import projectbackroom.jonathanx.init.BackroomItems;
 import projectbackroom.jonathanx.init.BackroomEntities;
 import projectbackroom.jonathanx.init.BackroomStatusEffects;
 

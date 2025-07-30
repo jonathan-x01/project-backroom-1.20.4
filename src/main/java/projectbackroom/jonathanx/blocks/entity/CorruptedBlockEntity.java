@@ -6,6 +6,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import projectbackroom.jonathanx.init.BackroomBlockEntities;
 
 public class CorruptedBlockEntity extends BlockEntity {
     private Identifier previousBlock;

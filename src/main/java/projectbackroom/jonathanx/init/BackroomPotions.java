@@ -21,11 +21,7 @@ public class BackroomPotions implements Initer {
         return Registry.registerReference(Registries.POTION, potionKey, new Potion(name, effects));
     }
 
-    @Override
-    public void init() {
-        DebugLogger.displayRegisteredSectors(BackroomPotions.class);
-    }
-
+    @Deprecated
     public static void registerPotions(){
         DebugLogger.displayRegisteredSectors(BackroomPotions.class);
     }

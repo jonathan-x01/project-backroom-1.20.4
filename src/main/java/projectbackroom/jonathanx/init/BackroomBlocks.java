@@ -16,6 +16,7 @@ import org.apache.http.annotation.Obsolete;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.blocks.BackroomBlockSoundGroups;
 import projectbackroom.jonathanx.blocks.BrokenBricksBlock;
+import projectbackroom.jonathanx.blocks.ConspiracyTable;
 import projectbackroom.jonathanx.blocks.CorruptedBlock;
 import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.blocks.fluids.BlackSludgeFluidBlock;
@@ -29,8 +30,6 @@ import projectbackroom.jonathanx.blocks.pipes.CeilingPipeBlock;
 import projectbackroom.jonathanx.blocks.pipes.LargeHorizontalPipeBlock;
 import projectbackroom.jonathanx.blocks.pipes.PipeBlock;
 import projectbackroom.jonathanx.blocks.pipes.VerticalPipeBlock;
-import projectbackroom.jonathanx.fluid.BackroomFluids;
-import projectbackroom.jonathanx.particle.BackroomParticleTypes;
 import projectbackroom.jonathanx.util.DebugLogger;
 import projectbackroom.jonathanx.util.Initer;
 import projectbackroom.jonathanx.world.gen.tree.ModSaplingGenerator;
@@ -40,7 +39,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class BackroomBlocks {
+public class BackroomBlocks implements Initer {
     public static List<Block> pipeBlocks = new ArrayList<>();
     public static final Block LEVEL_0_WALLPAPER;
     public static final Block LEVEL_0_YELLOW_CARPET;
@@ -82,11 +81,21 @@ public class BackroomBlocks {
     public static Block CONTAMINATED_WATER_BLOCK;
     public static Block BLACK_SLUDGE_BLOCK;
 
+    @Override
+    public int order() {
+        return 1;
+    }
+
+    @Override
+    public void init() {
+        Initer.super.init();
+        registerItemGroups();
+        registerBackroomFluids();
+    }
+
     @Deprecated
     public static void registerBackroomBlocks(){
         DebugLogger.displayRegisteredSectors(BackroomBlocks.class);
-        registerItemGroups();
-        registerBackroomFluids();
     }
 
     private static void registerBackroomFluids(){
@@ -124,13 +133,6 @@ public class BackroomBlocks {
     }
 
     private static void registerItemGroups(){
-        DebugLogger.debug(
-                ALMOND_TREE_BUTTON,
-                ALMOND_TREE_BUTTON.asItem(),
-                "Vanilla",
-                Blocks.STONE,
-                Blocks.STONE.asItem()
-        );
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(content -> {
             content.addBefore(Items.BRICKS,WHITE_BRICKS);
             content.addBefore(Items.OAK_LOG, ALMOND_TREE_BUTTON);
@@ -253,7 +255,7 @@ public class BackroomBlocks {
                 .luminance((value) -> value.get(FluorescentDropceiling.LIGHTING)),
                 true
         );
-        CONSPIRACY_TABLE = register("conspiracy_table", Block::new, true);
+        CONSPIRACY_TABLE = register("conspiracy_table", ConspiracyTable::new, true);
 
         // Level 2 Blocks
         LARGE_HORIZONTAL_PIPE = register("large_horizontal_pipe", LargeHorizontalPipeBlock::new, AbstractBlock.Settings.create().nonOpaque(), true);

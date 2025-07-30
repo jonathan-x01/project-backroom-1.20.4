@@ -7,14 +7,13 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.items.BackroomItems;
 import projectbackroom.jonathanx.util.DebugLogger;
 import projectbackroom.jonathanx.util.Initer;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class BackroomItemGroups {
+public class BackroomItemGroups implements Initer {
     public static final Map<String, ItemGroup.Builder> ITEM_GROUPS_BUILDERS = new HashMap<>();
     public static final Map<String, ItemGroup> ITEM_GROUPS = new HashMap<>();
     public static void createNewItemGroup(String id_name, ItemStack icon){
@@ -33,12 +32,17 @@ public class BackroomItemGroups {
         });
     }
 
-    @Deprecated
-    public static void registerModdedItemGroups(){
-        DebugLogger.displayRegisteredSectors(BackroomItemGroups.class);
+    @Override
+    public void init() {
+        Initer.super.init();
         createNewItemGroup("backroom_blocks", new ItemStack(BackroomBlocks.LEVEL_0_WALLPAPER.asItem()));
         createNewItemGroup("backroom_items", BackroomItems.ORIGINAL_ALMOND_WATER.getDefaultStack());
         createNewItemGroup("backroom_flora", BackroomBlocks.ALMOND_TREE_SAPLING.asItem().getDefaultStack());
         createNewItemGroup("backroom_spawn_eggs", BackroomItems.SMILER_SPAWN_EGG.getDefaultStack());
+    }
+
+    @Deprecated
+    public static void registerModdedItemGroups(){
+        DebugLogger.displayRegisteredSectors(BackroomItemGroups.class);
     }
 }

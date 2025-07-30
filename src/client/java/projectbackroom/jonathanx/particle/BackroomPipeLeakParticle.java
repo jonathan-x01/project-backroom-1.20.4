@@ -7,7 +7,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.particle.SimpleParticleType;
-import net.minecraft.particle.SimpleParticleType;
+import projectbackroom.jonathanx.init.BackroomParticleTypes;
 import projectbackroom.jonathanx.particle.util.ParticleColorManagement;
 
 @Environment(EnvType.CLIENT)

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "project_backroom:almond_seed",
+    "M": "minecraft:milk_bucket"
+  },
+  "pattern": [
+    "AAA",
+    "AMA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "project_backroom:almond_milk_bucket"
+  }
+}
