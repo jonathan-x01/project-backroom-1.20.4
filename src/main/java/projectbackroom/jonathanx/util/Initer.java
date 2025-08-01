@@ -1,5 +1,6 @@
 package projectbackroom.jonathanx.util;
 
+import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import projectbackroom.jonathanx.ProjectBackroom;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface Initer {
     default void init() {
-        DebugLogger.displayRegisteredSectors(this.getClass());
+        DebugLogger.displayRegisteredSectors(EnvType.SERVER, this.getClass());
     }
 
     default int order(){return 0;}

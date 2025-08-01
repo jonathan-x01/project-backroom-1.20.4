@@ -1,8 +1,7 @@
-package projectbackroom.jonathanx.state.property;
+package projectbackroom.jonathanx.state;
 
 import com.google.common.collect.Lists;
-import net.minecraft.state.property.EnumProperty;
-import projectbackroom.jonathanx.state.util.Destination;
+import projectbackroom.jonathanx.util.state.Destination;
 
 import java.util.Arrays;
 import java.util.Collection;

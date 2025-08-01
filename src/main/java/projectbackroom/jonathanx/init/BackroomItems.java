@@ -94,9 +94,4 @@ public class BackroomItems implements Initer {
                     entries.add(DEATHMOTHS_SPAWN_EGG);
                 }));
     }
-
-    @Deprecated
-    public static void registerModdedItems(){
-        DebugLogger.displayRegisteredSectors(BackroomItems.class);
-    }
 }

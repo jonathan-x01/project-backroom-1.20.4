@@ -109,11 +109,6 @@ public class BackroomEntities implements Initer {
                     .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, ProjectBackroom.id(RUSTY_TIPPED_ARROW_KEY.getRegistry().getPath())))
     );
 
-    @Deprecated
-    public static void registerModdedEntities(){
-        DebugLogger.displayRegisteredSectors(BackroomEntities.class);
-    }
-
     @Override
     public void init() {
         Initer.super.init();

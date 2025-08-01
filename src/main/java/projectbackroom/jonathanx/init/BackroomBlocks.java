@@ -93,11 +93,6 @@ public class BackroomBlocks implements Initer {
         registerBackroomFluids();
     }
 
-    @Deprecated
-    public static void registerBackroomBlocks(){
-        DebugLogger.displayRegisteredSectors(BackroomBlocks.class);
-    }
-
     private static void registerBackroomFluids(){
         ALMOND_WATER_BLOCK = registerFluidBlock("almond_water", BackroomFluids.ALMOND_WATER, BackroomFluidBlock::new,
                 BackroomFluidBlock.Settings.create()

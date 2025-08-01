@@ -1,12 +1,13 @@
 package projectbackroom.jonathanx.util;
 
+import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.util.Comparator;
 
 public interface IniterClient {
     default void init() {
-        DebugLogger.displayRegisteredSectors(this.getClass());
+        DebugLogger.displayRegisteredSectors(EnvType.CLIENT, this.getClass());
     }
 
     default int order(){return 0;}

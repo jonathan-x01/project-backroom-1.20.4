@@ -18,9 +18,4 @@ public class BackroomStatusEffects implements Initer {
     public static RegistryEntry<StatusEffect> register(String name, StatusEffect effect){
         return Registry.registerReference(Registries.STATUS_EFFECT, ProjectBackroom.id(name), effect);
     }
-
-    @Deprecated
-    public static void registerModdedStatusEffects(){
-        DebugLogger.displayRegisteredSectors(BackroomStatusEffects.class);
-    }
 }

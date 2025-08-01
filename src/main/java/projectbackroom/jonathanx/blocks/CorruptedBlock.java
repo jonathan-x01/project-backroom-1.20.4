@@ -16,7 +16,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.blocks.entity.CorruptedBlockEntity;
-import projectbackroom.jonathanx.state.property.DestinationProperty;
+import projectbackroom.jonathanx.state.DestinationProperty;
 
 import java.util.EnumSet;
 import java.util.Set;

@@ -50,9 +50,4 @@ public class BackroomFluids implements Initer {
         FLOWING_BLACK_SLUDGE = blackSludge.get("flowing");
         BLACK_SLUDGE = blackSludge.get("still");
     }
-
-    @Deprecated
-    public static void registerFluid(){
-        DebugLogger.displayRegisteredSectors(BackroomFluids.class);
-    }
 }

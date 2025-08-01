@@ -21,11 +21,6 @@ public class BackroomPotions implements Initer {
         return Registry.registerReference(Registries.POTION, potionKey, new Potion(name, effects));
     }
 
-    @Deprecated
-    public static void registerPotions(){
-        DebugLogger.displayRegisteredSectors(BackroomPotions.class);
-    }
-
     static {
         HOMEMADE_ALMOND_WATER = register("homemade_almond_water", new StatusEffectInstance(StatusEffects.REGENERATION, 100));
     }

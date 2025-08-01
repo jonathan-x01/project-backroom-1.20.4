@@ -1,5 +1,6 @@
 package projectbackroom.jonathanx.util;
 
+import net.fabricmc.api.EnvType;
 import org.apache.http.annotation.Obsolete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,7 +82,11 @@ public class DebugLogger {
      * Displays a message to the Minecraft log to list sectors that was loaded from the mod.
      * @param c The class that has loaded.
      */
-    public static void displayRegisteredSectors(Class c){
-        LOGGER.info(ANSI_GREEN + "{ INIT LOADED } " + ANSI_BLUE + c.getSimpleName());
+    public static void displayRegisteredSectors(EnvType envType, Class c){
+        String networkName = EnvType.SERVER.toString();
+        if (envType.equals(EnvType.CLIENT)){
+            networkName = EnvType.CLIENT.toString();
+        }
+        LOGGER.info(ANSI_GREEN + "{ [" + networkName + "] INIT LOADED } " + ANSI_BLUE + c.getSimpleName());
     }
 }

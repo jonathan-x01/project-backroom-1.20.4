@@ -24,7 +24,6 @@ public class MissingPosterItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         String missingPosterName = stack.get(BackroomComponents.MISSING_POSTER_PLAYER_NAME);
-        DebugLogger.debug(missingPosterName);
         if (missingPosterName == null){
             missingPosterName = Text.translatable("missing_poster.unknown").getString();
             stack.set(BackroomComponents.MISSING_POSTER_PLAYER_NAME, missingPosterName);

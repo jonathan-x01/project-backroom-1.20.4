@@ -10,6 +10,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.*;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -25,7 +26,9 @@ import java.util.Random;
 public class PipeBlock extends Block implements Waterloggable, BlockEntityProvider {
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty LEAKING = BooleanProperty.of("leaking");
+    //public static final StringProperty FLUID = StringProperty.;
     public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
+    public static Property<Identifier> TEST;
 
     public PipeBlock(Settings settings) {
         super(settings);

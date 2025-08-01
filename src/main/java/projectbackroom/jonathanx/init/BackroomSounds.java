@@ -17,9 +17,4 @@ public class BackroomSounds implements Initer {
         Identifier ID = ProjectBackroom.id(name);
         return Registry.register(Registries.SOUND_EVENT, ID, SoundEvent.of(ID));
     }
-
-    @Deprecated
-    public static void registerModdedSounds(){
-        DebugLogger.displayRegisteredSectors(BackroomSounds.class);
-    }
 }

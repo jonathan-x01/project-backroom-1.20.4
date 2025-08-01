@@ -1,7 +1,6 @@
-package projectbackroom.jonathanx.state.util;
+package projectbackroom.jonathanx.util.state;
 
 import net.minecraft.util.StringIdentifiable;
-import net.minecraft.util.math.Direction;
 
 public enum Destination implements StringIdentifiable {
     LEVEL_NEG_1("level_neg_1"),

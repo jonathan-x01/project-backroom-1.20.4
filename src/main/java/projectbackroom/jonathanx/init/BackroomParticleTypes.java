@@ -33,9 +33,4 @@ public class BackroomParticleTypes implements Initer {
         // TODO: Use new registration method
         return Registry.register(Registries.PARTICLE_TYPE, ProjectBackroom.id(name), type);
     }
-
-    @Deprecated
-    public static void registerParticles(){
-        DebugLogger.displayRegisteredSectors(BackroomParticleTypes.class);
-    }
 }

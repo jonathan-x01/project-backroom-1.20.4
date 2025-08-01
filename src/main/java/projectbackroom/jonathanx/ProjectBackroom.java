@@ -1,7 +1,6 @@
 package projectbackroom.jonathanx;
 
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.ComposterBlock;
@@ -12,18 +11,16 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.init.BackroomBlocks;
-import projectbackroom.jonathanx.init.BackroomBlockEntities;
+import projectbackroom.jonathanx.init.BackroomItemGroups;
 import projectbackroom.jonathanx.init.BackroomItems;
-import projectbackroom.jonathanx.init.*;
+import projectbackroom.jonathanx.init.BackroomPotions;
 import projectbackroom.jonathanx.util.Initer;
-import projectbackroom.jonathanx.init.villager.BackroomVillager;
 import projectbackroom.jonathanx.world.gen.chunk.Level1Generation;
-import projectbackroom.jonathanx.world.gen.chunk.WFCChunkGenerator;
 import projectbackroom.jonathanx.world.gen.chunk.PointMazeGenerator;
+import projectbackroom.jonathanx.world.gen.chunk.WFCChunkGenerator;
 
 public class ProjectBackroom implements ModInitializer {
 	public static String MOD_ID = "project_backroom";
-	@Deprecated
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	private static void initChunkGeneration(){

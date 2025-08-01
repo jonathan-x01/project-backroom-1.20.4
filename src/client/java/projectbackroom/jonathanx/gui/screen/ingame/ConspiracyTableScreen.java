@@ -1,16 +1,20 @@
 package projectbackroom.jonathanx.gui.screen.ingame;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.lwjgl.glfw.GLFW;
 import projectbackroom.jonathanx.ProjectBackroom;
+import projectbackroom.jonathanx.networking.s2c.ConspiracyTableS2CPayload;
 import projectbackroom.jonathanx.screen.ConspiracyTableScreenHandler;
+import projectbackroom.jonathanx.util.DebugLogger;
 
 public class ConspiracyTableScreen extends HandledScreen<ConspiracyTableScreenHandler> {
     public static final Identifier TEXTURE = ProjectBackroom.id("textures/gui/conspiracy_table.png");
@@ -22,9 +26,23 @@ public class ConspiracyTableScreen extends HandledScreen<ConspiracyTableScreenHa
         this.backgroundHeight = 163;
     }
 
+    private void sendTextToServer(){
+        String text = textField.getText();
+        ClientPlayNetworking.send(new ConspiracyTableS2CPayload(text));
+    }
+
+    @Override
+    protected void onSlotChangedState(int slotId, int handlerId, boolean newState) {
+        super.onSlotChangedState(slotId, handlerId, newState);
+    }
+
     @Override
     protected void handledScreenTick() {
-        this.textField.setEditable(this.handler.getSlot(0).hasStack() && this.handler.getSlot(1).hasStack());
+        this.textField.setEditable(isSlotsFilled());
+    }
+
+    private boolean isSlotsFilled(){
+        return this.handler.getSlot(0).hasStack() && this.handler.getSlot(1).hasStack();
     }
 
     @Override
@@ -67,6 +85,16 @@ public class ConspiracyTableScreen extends HandledScreen<ConspiracyTableScreenHa
                 256,
                 0xFFFFFFFF
         );
+
+        
+    }
+
+    @Override
+    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
+        if (!textField.getText().isEmpty()){
+            sendTextToServer();
+        }
+        return super.keyReleased(keyCode, scanCode, modifiers);
     }
 
     @Override
@@ -76,20 +104,5 @@ public class ConspiracyTableScreen extends HandledScreen<ConspiracyTableScreenHa
         }
 
         return super.keyPressed(keyCode, scanCode, modifiers);
-    }
-
-    @Override
-    public void close() {
-        super.close();
-        if (this.client != null && this.client.player != null){
-            PlayerInventory playerInventory = this.client.player.getInventory();
-            if (this.handler.getSlot(0).hasStack()){
-                playerInventory.insertStack(this.handler.getSlot(0).getStack());
-            }
-
-            if (this.handler.getSlot(1).hasStack()){
-                playerInventory.insertStack(this.handler.getSlot(1).getStack());
-            }
-        }
     }
 }

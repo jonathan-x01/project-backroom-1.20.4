@@ -9,10 +9,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import projectbackroom.jonathanx.blocks.CorruptedBlock;
 import projectbackroom.jonathanx.blocks.entity.CorruptedBlockEntity;
-import projectbackroom.jonathanx.init.BackroomBlocks;
-import projectbackroom.jonathanx.state.util.Destination;
+import projectbackroom.jonathanx.util.state.Destination;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,6 @@
 package projectbackroom.jonathanx.world.gen.features;
 
+import net.fabricmc.api.EnvType;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -17,7 +18,7 @@ import projectbackroom.jonathanx.util.DebugLogger;
 public class ModConfigureFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> ALMOND_TREE_KEY = registerKey("almond_tree");
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context){
-        DebugLogger.displayRegisteredSectors(ModConfigureFeatures.class);
+        DebugLogger.displayRegisteredSectors(EnvType.SERVER, ModConfigureFeatures.class);
         context.register(ALMOND_TREE_KEY, new ConfiguredFeature<>(
                 Feature.TREE, new TreeFeatureConfig.Builder(
                     BlockStateProvider.of(BackroomBlocks.ALMOND_TREE_LOG),

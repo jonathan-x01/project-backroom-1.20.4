@@ -1,6 +1,6 @@
 package projectbackroom.jonathanx.blocks.level0;
 
-import projectbackroom.jonathanx.state.util.Destination;
+import projectbackroom.jonathanx.util.state.Destination;
 
 public class Wallpaper extends Level0Block {
     public Wallpaper(Settings settings) {

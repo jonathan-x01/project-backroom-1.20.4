@@ -40,9 +40,4 @@ public class BackroomItemGroups implements Initer {
         createNewItemGroup("backroom_flora", BackroomBlocks.ALMOND_TREE_SAPLING.asItem().getDefaultStack());
         createNewItemGroup("backroom_spawn_eggs", BackroomItems.SMILER_SPAWN_EGG.getDefaultStack());
     }
-
-    @Deprecated
-    public static void registerModdedItemGroups(){
-        DebugLogger.displayRegisteredSectors(BackroomItemGroups.class);
-    }
 }

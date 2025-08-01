@@ -9,10 +9,15 @@ import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
+import projectbackroom.jonathanx.init.BackroomComponents;
+import projectbackroom.jonathanx.init.BackroomItems;
 import projectbackroom.jonathanx.init.BackroomScreenHandlerType;
+import projectbackroom.jonathanx.util.DebugLogger;
+import projectbackroom.jonathanx.util.MojangUUIDFetcher;
 
 public class ConspiracyTableScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;
+    private String clientText = "";
 
     private final Inventory input = new SimpleInventory(2){
         @Override
@@ -54,6 +59,15 @@ public class ConspiracyTableScreenHandler extends ScreenHandler {
             public boolean canInsert(ItemStack stack) {
                 return false;
             }
+
+            @Override
+            public void onTakeItem(PlayerEntity player, ItemStack stack) {
+                super.onTakeItem(player, stack);
+                input.getStack(0).decrement(1);
+                input.getStack(1).decrement(1);
+
+                onUpdate();
+            }
         });
 
         int m;
@@ -70,6 +84,49 @@ public class ConspiracyTableScreenHandler extends ScreenHandler {
         // Hotbar
         for (m = 0; m < 9; ++m) {
             this.addSlot(new Slot(playerInventory, m, offsetX + m * 18, 141));
+        }
+    }
+
+
+
+    @Override
+    public void onContentChanged(Inventory inventory) {
+        super.onContentChanged(inventory);
+        onUpdate();
+    }
+
+    public void setClientText(String text){
+        this.clientText = text;
+
+        onUpdate();
+    }
+
+    private void onUpdate(){
+        ItemStack paper = this.input.getStack(0);
+        ItemStack blackDye = this.input.getStack(1);
+        ItemStack output = this.output.getStack(0);
+
+        boolean validInputs = !paper.isEmpty() && !blackDye.isEmpty()
+                && paper.isOf(Items.PAPER)
+                && blackDye.isOf(Items.BLACK_DYE);
+
+        DebugLogger.debug(
+                validInputs,
+                output.isEmpty(),
+                this.clientText.length() >= 3
+        );
+        if (validInputs && this.clientText.length() >= 3){
+            MojangUUIDFetcher.getUUID(this.clientText).thenAccept(opt -> {
+                ItemStack missingPoster = BackroomItems.MISSING_POSTER.getDefaultStack();
+                missingPoster.set(BackroomComponents.MISSING_POSTER_PLAYER_NAME, this.clientText);
+                opt.ifPresent(uuid -> missingPoster.set(BackroomComponents.MISSING_POSTER_PLAYER_UUID, uuid.toString()));
+                //this.handler.output.setStack(0, missingPoster);
+                this.output.setStack(0, missingPoster);
+                this.output.markDirty();
+            });
+        } else {
+            this.output.setStack(0, ItemStack.EMPTY);
+            this.output.markDirty();
         }
     }
 
@@ -110,5 +167,20 @@ public class ConspiracyTableScreenHandler extends ScreenHandler {
     @Override
     public boolean canUse(PlayerEntity player) {
         return true;
+    }
+
+    @Override
+    public void onClosed(PlayerEntity player) {
+        super.onClosed(player);
+        if (player != null){
+            PlayerInventory playerInventory = player.getInventory();
+            if (!this.input.getStack(0).isEmpty()){
+                playerInventory.insertStack(this.input.getStack(0));
+            }
+
+            if (!this.input.getStack(1).isEmpty()){
+                playerInventory.insertStack(this.input.getStack(1));
+            }
+        }
     }
 }

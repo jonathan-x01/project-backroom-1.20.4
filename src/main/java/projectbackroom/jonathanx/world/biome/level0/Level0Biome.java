@@ -1,5 +1,6 @@
 package projectbackroom.jonathanx.world.biome.level0;
 
+import net.fabricmc.api.EnvType;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -16,7 +17,7 @@ public class Level0Biome {
     public static final RegistryKey<Biome> LEVEL_0 = RegistryKey.of(RegistryKeys.BIOME, ProjectBackroom.id("level_0"));
 
     public static void boostrap(Registerable<Biome> context) {
-        DebugLogger.displayRegisteredSectors(Level0Biome.class);
+        DebugLogger.displayRegisteredSectors(EnvType.SERVER ,Level0Biome.class);
         //context.register(LEVEL_0, setBiome(context));
     }
 

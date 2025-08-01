@@ -10,7 +10,6 @@ import net.minecraft.util.Identifier;
 import projectbackroom.jonathanx.ProjectBackroom;
 import projectbackroom.jonathanx.init.BackroomComponents;
 import projectbackroom.jonathanx.init.BackroomItems;
-import projectbackroom.jonathanx.util.DebugLogger;
 
 import java.util.UUID;
 
