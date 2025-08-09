@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import projectbackroom.jonathanx.block.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.fluid.BackroomsFlowableFluid;
 import projectbackroom.jonathanx.init.BackroomFluidTags;
 

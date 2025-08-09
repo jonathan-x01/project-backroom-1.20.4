@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import projectbackroom.jonathanx.ProjectBackroom;
 
+import java.util.List;
+
 @SuppressWarnings("unused")
 public class DebugLogger {
     private static final String MOD_ID = ProjectBackroom.MOD_ID;
@@ -31,7 +33,13 @@ public class DebugLogger {
         if (msg == null){
             LOGGER.error(String.format(message, ANSI_RED, "", msg));
         } else {
-            LOGGER.info(String.format(message, ANSI_GREEN, ANSI_RESET, msg));
+            if (msg instanceof List<?> list){
+                list.forEach(o -> {
+                    LOGGER.info(String.format(message, ANSI_GREEN, ANSI_RESET, o));
+                });
+            } else {
+                LOGGER.info(String.format(message, ANSI_GREEN, ANSI_RESET, msg));
+            }
         }
         LOGGER.warn(ANSI_YELLOW + "-- DEBUG END --");
     }

@@ -9,6 +9,11 @@ import projectbackroom.jonathanx.util.Initer;
 
 public class VillagerTrades implements Initer {
     @Override
+    public int order() {
+        return 1;
+    }
+
+    @Override
     public void init() {
         Initer.super.init();
         TradeOfferHelper.registerVillagerOffers(BackroomVillager.DETECTIVE, 1,

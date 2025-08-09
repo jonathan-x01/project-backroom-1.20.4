@@ -22,8 +22,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import projectbackroom.jonathanx.blocks.entity.PipeBlockEntity;
-import projectbackroom.jonathanx.blocks.pipes.PipeBlock;
+import projectbackroom.jonathanx.block.entity.PipeBlockEntity;
+import projectbackroom.jonathanx.block.pipes.PipeBlock;
 import projectbackroom.jonathanx.fluid.BackroomsFlowableFluid;
 
 @Mixin(GlassBottleItem.class)

@@ -59,7 +59,14 @@
 
   "biome.project_backroom.level0": "Level 0",
 
+  "entity.minecraft.villager.detective": "Detective",
+
   "missing_poster.ownership": "%s's missing poster",
   "missing_poster.unknown": "Unknown",
-  "missing_poster.missing_title": "MISSING"
+  "missing_poster.missing_title": "MISSING",
+
+  "button.link.discord": "Discord",
+  "button.link.discord.desc": "Join the official Cubliminal Discord",
+
+  "container.conspiracy_table": "Conspiracy Table"
 }

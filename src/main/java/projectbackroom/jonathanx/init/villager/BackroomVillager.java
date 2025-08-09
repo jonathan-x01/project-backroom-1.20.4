@@ -16,21 +16,22 @@ import projectbackroom.jonathanx.util.DebugLogger;
 import projectbackroom.jonathanx.util.Initer;
 
 public class BackroomVillager implements Initer {
-    public static final RegistryKey<PointOfInterestType> DETECTIVE_POI_KEY = poiKey("detective_poi");
-    public static final PointOfInterestType DETECTIVE_POI = registerPoi("detective_poi", BackroomBlocks.CONSPIRACY_TABLE);
-    public static final VillagerProfession DETECTIVE = registerProfession("detective", DETECTIVE_POI_KEY);
+    public static final RegistryKey<PointOfInterestType> DETECTIVE_POI_KEY =
+            RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, ProjectBackroom.id("detective_poi"));
 
-    private static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> type) {
-        return Registry.register(Registries.VILLAGER_PROFESSION, ProjectBackroom.id(name),
-                new VillagerProfession(name, entry -> entry.matchesKey(type), entry -> entry.matchesKey(type),
-                        ImmutableSet.of(), ImmutableSet.of(), SoundEvents.ENTITY_VILLAGER_WORK_SHEPHERD));
-    }
+    public static final PointOfInterestType DETECTIVE_POI =
+            PointOfInterestHelper.register(ProjectBackroom.id("detective_poi"), 1, 1, BackroomBlocks.CONSPIRACY_TABLE);
 
-    private static PointOfInterestType registerPoi(String name, Block block) {
-        return PointOfInterestHelper.register(ProjectBackroom.id(name), 1, 1, block);
-    }
-
-    private static RegistryKey<PointOfInterestType> poiKey(String name) {
-        return RegistryKey.of(RegistryKeys.POINT_OF_INTEREST_TYPE, ProjectBackroom.id(name));
-    }
+    public static final VillagerProfession DETECTIVE = Registry.register(
+            Registries.VILLAGER_PROFESSION,
+            ProjectBackroom.id("detective"),
+            new VillagerProfession(
+                    "detective",
+                    entry -> entry.matchesKey(DETECTIVE_POI_KEY),
+                    entry -> entry.matchesKey(DETECTIVE_POI_KEY),
+                    ImmutableSet.of(),
+                    ImmutableSet.of(),
+                    SoundEvents.ENTITY_VILLAGER_WORK_CARTOGRAPHER
+            )
+    );
 }

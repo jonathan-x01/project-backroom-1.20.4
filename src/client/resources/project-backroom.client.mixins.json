@@ -6,7 +6,9 @@
     "BackgroundRendererMxin",
     "CameraMixin",
     "ExampleClientMixin",
-    "ParticleAccessor"
+    "ParticleAccessor",
+    "RotatingCubeMapRendererAccessor",
+    "TitleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

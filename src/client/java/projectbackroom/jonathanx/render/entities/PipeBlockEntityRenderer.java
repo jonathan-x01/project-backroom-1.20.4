@@ -12,7 +12,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.blocks.entity.PipeBlockEntity;
+import projectbackroom.jonathanx.block.entity.PipeBlockEntity;
 import projectbackroom.jonathanx.util.DebugLogger;
 
 @Deprecated

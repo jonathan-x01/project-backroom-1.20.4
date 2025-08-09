@@ -7,8 +7,8 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.blocks.entity.CorruptedBlockEntity;
-import projectbackroom.jonathanx.blocks.entity.PipeBlockEntity;
+import projectbackroom.jonathanx.block.entity.CorruptedBlockEntity;
+import projectbackroom.jonathanx.block.entity.PipeBlockEntity;
 import projectbackroom.jonathanx.util.Initer;
 
 public class BackroomBlockEntities implements Initer {

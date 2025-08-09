@@ -12,7 +12,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.world.WorldView;
 import projectbackroom.jonathanx.init.BackroomBlocks;
-import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import projectbackroom.jonathanx.block.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.init.BackroomFluids;
 
 public class ContaminatedWaterFluid extends BackroomsFlowableFluid {

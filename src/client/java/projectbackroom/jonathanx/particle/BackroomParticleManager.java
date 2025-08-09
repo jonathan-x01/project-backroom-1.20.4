@@ -9,13 +9,14 @@ import net.minecraft.particle.ParticleType;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceReloader;
 import projectbackroom.jonathanx.init.BackroomParticleTypes;
+import projectbackroom.jonathanx.util.IniterClient;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
-public class BackroomParticleManager implements ResourceReloader {
+public class BackroomParticleManager implements ResourceReloader, IniterClient {
     public static void registerDefaultFactories(){
         registerSplashFactory(BackroomParticleTypes.SPLASH, WaterSplashParticle.SplashFactory::new);
         registerFactory(BackroomParticleTypes.CONTAMINATED_WATER_SPLASH, ContaminatedWaterSplash.Factory::new);

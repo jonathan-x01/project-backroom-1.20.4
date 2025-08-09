@@ -9,10 +9,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import org.apache.http.annotation.Obsolete;
 import projectbackroom.jonathanx.ProjectBackroom;
-import projectbackroom.jonathanx.items.*;
-import projectbackroom.jonathanx.util.DebugLogger;
+import projectbackroom.jonathanx.item.*;
 import projectbackroom.jonathanx.util.Initer;
 
 import java.util.function.Function;

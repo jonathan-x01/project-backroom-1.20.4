@@ -6,9 +6,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundCategory;
@@ -19,7 +17,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import projectbackroom.jonathanx.block.fluids.BackroomFluidBlock;
 
 public abstract class BackroomsFlowableFluid extends FlowableFluid {
     private final SoundEvent ambience;

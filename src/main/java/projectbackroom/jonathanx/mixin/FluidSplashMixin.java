@@ -1,7 +1,6 @@
 package projectbackroom.jonathanx.mixin;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.particle.ParticleEffect;
@@ -15,10 +14,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import projectbackroom.jonathanx.block.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.fluid.BackroomsFlowableFluid;
-import projectbackroom.jonathanx.init.BackroomFluids;
-import projectbackroom.jonathanx.init.BackroomParticleTypes;
 
 import java.util.function.Predicate;
 

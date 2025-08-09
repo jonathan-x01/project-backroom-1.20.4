@@ -19,6 +19,10 @@ public class ConspiracyTableScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;
     private String clientText = "";
 
+    final Slot paperSlot;
+    final Slot blackDyeSlot;
+    final Slot outputSlot;
+
     private final Inventory input = new SimpleInventory(2){
         @Override
         public void markDirty() {
@@ -40,21 +44,21 @@ public class ConspiracyTableScreenHandler extends ScreenHandler {
     public ConspiracyTableScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context){
         super(BackroomScreenHandlerType.CONSPIRACY_TABLE, syncId);
         this.context = context;
-        this.addSlot(new Slot(input, 0, 60, 29){
+        this.paperSlot = this.addSlot(new Slot(input, 0, 65, 36){
             @Override
             public boolean canInsert(ItemStack stack) {
                 return stack.getItem() == Items.PAPER;
             }
         });
 
-        this.addSlot(new Slot(input, 1, 98, 29){
+        this.blackDyeSlot = this.addSlot(new Slot(input, 1, 65, 56){
             @Override
             public boolean canInsert(ItemStack stack) {
                 return stack.getItem() == Items.BLACK_DYE;
             }
         });
 
-        this.addSlot(new Slot(output, 0, 79, 53){
+        this.outputSlot = this.addSlot(new Slot(output, 0, 46, 53){
             @Override
             public boolean canInsert(ItemStack stack) {
                 return false;
@@ -110,11 +114,6 @@ public class ConspiracyTableScreenHandler extends ScreenHandler {
                 && paper.isOf(Items.PAPER)
                 && blackDye.isOf(Items.BLACK_DYE);
 
-        DebugLogger.debug(
-                validInputs,
-                output.isEmpty(),
-                this.clientText.length() >= 3
-        );
         if (validInputs && this.clientText.length() >= 3){
             MojangUUIDFetcher.getUUID(this.clientText).thenAccept(opt -> {
                 ItemStack missingPoster = BackroomItems.MISSING_POSTER.getDefaultStack();
@@ -182,5 +181,17 @@ public class ConspiracyTableScreenHandler extends ScreenHandler {
                 playerInventory.insertStack(this.input.getStack(1));
             }
         }
+    }
+
+    public Slot getPaperSlot(){
+        return this.paperSlot;
+    }
+
+    public Slot getBlackDyeSlot(){
+        return this.blackDyeSlot;
+    }
+
+    public Slot getOutputSlot() {
+        return this.outputSlot;
     }
 }

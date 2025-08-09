@@ -15,7 +15,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 import projectbackroom.jonathanx.init.BackroomBlocks;
-import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import projectbackroom.jonathanx.block.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.init.BackroomFluids;
 
 public class BlackSludgeFluid extends BackroomsFlowableFluid {

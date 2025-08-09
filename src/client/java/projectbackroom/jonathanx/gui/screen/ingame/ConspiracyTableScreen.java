@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.Items;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -17,6 +18,8 @@ import projectbackroom.jonathanx.screen.ConspiracyTableScreenHandler;
 import projectbackroom.jonathanx.util.DebugLogger;
 
 public class ConspiracyTableScreen extends HandledScreen<ConspiracyTableScreenHandler> {
+    public static final Identifier PAPER_SLOT_TEXTURE = ProjectBackroom.id("container/conspiracy_table/paper_slot");
+    public static final Identifier BLACK_DYE_SLOT_TEXTURE = ProjectBackroom.id("container/conspiracy_table/black_dye_slot");
     public static final Identifier TEXTURE = ProjectBackroom.id("textures/gui/conspiracy_table.png");
     private TextFieldWidget textField;
 
@@ -52,7 +55,7 @@ public class ConspiracyTableScreen extends HandledScreen<ConspiracyTableScreenHa
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
 
-        textField = new TextFieldWidget(textRenderer, x + 29, y + 6, 116, 16, Text.literal(""));
+        textField = new TextFieldWidget(textRenderer, x + 29, y + 19, 116, 13, Text.literal(""));
         textField.setMaxLength(16);
         textField.setEditable(true);
         textField.setDrawsBackground(true);
@@ -75,18 +78,33 @@ public class ConspiracyTableScreen extends HandledScreen<ConspiracyTableScreenHa
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         RenderSystem.setShaderTexture(0, TEXTURE);
 
+        int i = this.x;
+        int j = this.y;
+
         context.drawTexture(
                 RenderLayer::getGuiTextured,
                 TEXTURE,
-                this.x, this.y,
+                i, j,
                 1.0f, 1.0f,
                 this.backgroundWidth, this.backgroundHeight,
-                256,
-                256,
-                0xFFFFFFFF
+                256, 256
         );
 
-        
+        context.getMatrices().push();
+        context.getMatrices().translate(0.0F, 0.0F, 200.0F);
+
+        Slot slot = this.handler.getPaperSlot();
+        Slot slot2 = this.handler.getBlackDyeSlot();
+
+        if (!slot.hasStack()){
+            context.drawGuiTexture(RenderLayer::getGuiTextured, PAPER_SLOT_TEXTURE, i + slot.x, j + slot.y, 16, 16);
+        }
+
+        if (!slot2.hasStack()){
+            context.drawGuiTexture(RenderLayer::getGuiTextured, BLACK_DYE_SLOT_TEXTURE, i + slot2.x, j + slot2.y, 16, 16);
+        }
+
+        context.getMatrices().pop();
     }
 
     @Override

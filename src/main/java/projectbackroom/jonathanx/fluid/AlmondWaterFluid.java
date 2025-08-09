@@ -13,7 +13,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 import projectbackroom.jonathanx.init.BackroomBlocks;
-import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import projectbackroom.jonathanx.block.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.init.BackroomFluids;
 import projectbackroom.jonathanx.init.BackroomParticleTypes;
 

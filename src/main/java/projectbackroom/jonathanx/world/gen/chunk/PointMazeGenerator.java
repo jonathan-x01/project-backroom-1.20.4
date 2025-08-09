@@ -19,7 +19,7 @@ import net.minecraft.world.gen.chunk.Blender;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.noise.NoiseConfig;
-import projectbackroom.jonathanx.blocks.level0.FluorescentDropceiling;
+import projectbackroom.jonathanx.block.level0.FluorescentDropceiling;
 import projectbackroom.jonathanx.init.BackroomBlocks;
 
 import java.util.List;

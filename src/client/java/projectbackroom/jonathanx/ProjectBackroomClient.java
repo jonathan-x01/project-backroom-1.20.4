@@ -12,7 +12,8 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ModelTransformationMode;
-import projectbackroom.jonathanx.blocks.fluids.BackroomFluidBlock;
+import net.minecraft.server.MinecraftServer;
+import projectbackroom.jonathanx.block.fluids.BackroomFluidBlock;
 import projectbackroom.jonathanx.color.block.BackroomBlockColors;
 import projectbackroom.jonathanx.color.item.BackroomItemColors;
 import projectbackroom.jonathanx.gui.screen.ingame.ConspiracyTableScreen;
@@ -24,6 +25,7 @@ import projectbackroom.jonathanx.init.BackroomEntities;
 import projectbackroom.jonathanx.render.MissingPosterRenderState;
 import projectbackroom.jonathanx.render.MissingPosterRenderer;
 import projectbackroom.jonathanx.render.entities.RustyTippedArrowRenderer;
+import projectbackroom.jonathanx.util.DebugLogger;
 
 public class ProjectBackroomClient implements ClientModInitializer {
 	@Override
